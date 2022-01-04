@@ -1,0 +1,16 @@
+.container {
+  position: absolute;
+  inset: 0;
+}
+
+.mat-sidenav {
+  width: min(15rem, 100%);
+  padding: 2rem 1rem;
+
+  & button {
+    font-size: 1.250rem;
+    font-weight: 700;
+    width: 100%;
+    padding: .5rem 1rem;
+  }
+}
