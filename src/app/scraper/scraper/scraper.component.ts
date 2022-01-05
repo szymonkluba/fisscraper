@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScraperComponent implements OnInit {
 
+  links = ['single-race'];
+  activeLink = this.links[0];
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

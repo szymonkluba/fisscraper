@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { ScraperRoutingModule } from './scraper-routing.module';
 import { ScraperComponent } from './scraper/scraper.component';
+import { SingleRaceComponent } from './single-race/single-race.component';
+import { AngularMaterialModule } from "../angular-material/angular-material.module";
 
 
 @NgModule({
   declarations: [
-    ScraperComponent
+    ScraperComponent,
+    SingleRaceComponent
   ],
   imports: [
     CommonModule,
-    ScraperRoutingModule
+    ScraperRoutingModule,
+    AngularMaterialModule,
   ]
 })
 export class ScraperModule { }
