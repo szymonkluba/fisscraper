@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { routerPaths } from "../../models/routes.model";
 
 @Component({
@@ -6,15 +6,14 @@ import { routerPaths } from "../../models/routes.model";
   templateUrl: './scraper.component.html',
   styleUrls: ['./scraper.component.scss']
 })
-export class ScraperComponent implements OnInit {
+export class ScraperComponent {
 
   links = [
-    routerPaths.SINGLE_RACE
+    routerPaths.SINGLE_RACE,
+    routerPaths.MULTI_RACES,
   ];
-  activeLink = this.links[0].path;
+  activeLink: string = window.location.pathname;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 }

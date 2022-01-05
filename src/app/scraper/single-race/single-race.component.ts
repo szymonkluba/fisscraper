@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Race } from "../../models/race.model";
-import { FormControl, Validators } from "@angular/forms";
-import { InputErrorStateMatcher } from "../../../utils/InputErrorStateMatcher";
+import { Component } from '@angular/core';
+
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-single-race',
   templateUrl: './single-race.component.html',
   styleUrls: ['./single-race.component.scss']
 })
-export class SingleRaceComponent implements OnInit {
+export class SingleRaceComponent {
 
-  race: Race = {
-    fis_id: 0,
-    details: false
+  raceForm: FormGroup;
+  fisId: FormControl = new FormControl(0, [Validators.required, Validators.min(1), Validators.pattern('[0-9]*')]);
+  details: FormControl = new FormControl(false);
+
+  constructor(private formBuilder: FormBuilder) {
+    this.raceForm = this.formBuilder.group({
+      fis_id: this.fisId,
+      details: this.details
+    })
   }
 
-  fisIDFormControl = new FormControl('', [Validators.required, Validators.pattern(/\d*/mg)]);
-
-  matcher = new InputErrorStateMatcher();
-
-  constructor() { }
-
-  ngOnInit(): void {
+  submit() {
+    console.log(this.raceForm.value)
   }
-
 }
