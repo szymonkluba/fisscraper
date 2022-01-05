@@ -1,0 +1,30 @@
+<form class="range-races-form" [formGroup]="raceForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Initial FIS ID</mat-label>
+    <input matInput type="number" formControlName="start_fis_id">
+    <mat-error *ngIf="startFisId.hasError('min')">
+      Enter <strong>number</strong> greater than 0
+    </mat-error>
+    <mat-error *ngIf="startFisId.hasError('pattern')">
+      Enter <strong>number</strong>
+    </mat-error>
+    <mat-error *ngIf="startFisId.hasError('required')">
+      Initial FIS ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Final FIS ID</mat-label>
+    <input matInput type="number" formControlName="end_fis_id">
+    <mat-error *ngIf="endFisId.hasError('min')">
+      Enter <strong>number</strong> greater than 0
+    </mat-error>
+    <mat-error *ngIf="endFisId.hasError('pattern')">
+      Enter <strong>number</strong>
+    </mat-error>
+    <mat-error *ngIf="endFisId.hasError('required')">
+      Final FIS ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
+  <button class="range-races-form-submit" mat-raised-button color="primary">Scrap!</button>
+</form>

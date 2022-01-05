@@ -7,13 +7,15 @@ import { SingleRaceComponent } from './single-race/single-race.component';
 import { AngularMaterialModule } from "../angular-material/angular-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MultiRacesComponent } from './multi-races/multi-races.component';
+import { RangeRacesComponent } from './range-races/range-races.component';
 
 
 @NgModule({
   declarations: [
     ScraperComponent,
     SingleRaceComponent,
-    MultiRacesComponent
+    MultiRacesComponent,
+    RangeRacesComponent
   ],
   imports: [
     CommonModule,

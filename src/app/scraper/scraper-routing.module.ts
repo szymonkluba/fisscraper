@@ -4,6 +4,7 @@ import { ScraperComponent } from "./scraper/scraper.component";
 import { SingleRaceComponent } from "./single-race/single-race.component";
 import { routerPaths } from "../models/routes.model";
 import { MultiRacesComponent } from "./multi-races/multi-races.component";
+import { RangeRacesComponent } from "./range-races/range-races.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: routerPaths.MULTI_RACES.routerPath,
         component: MultiRacesComponent
+      },
+      {
+        path: routerPaths.RANGE_RACES.routerPath,
+        component: RangeRacesComponent
       }
     ]
   },
