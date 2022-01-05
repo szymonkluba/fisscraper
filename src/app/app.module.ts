@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from "./angular-material/angular-material.module";
 import { AppRoutingModule } from "./app-routing.module";
+import { StoreModule } from '@ngrx/store';
+import { filesReducer } from "./state/files.reducer";
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { AppRoutingModule } from "./app-routing.module";
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ files: filesReducer }, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
