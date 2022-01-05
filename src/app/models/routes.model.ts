@@ -24,6 +24,11 @@ export const routerPaths = {
     path: '/scraper/multi-races',
     label: 'Multiple races',
     routerPath: 'multi-races'
+  },
+  RANGE_RACES: {
+    path: '/scraper/range-races',
+    label: 'Range of races',
+    routerPath: 'range-races'
   }
 }
 

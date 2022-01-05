@@ -11,6 +11,7 @@ export class ScraperComponent {
   links = [
     routerPaths.SINGLE_RACE,
     routerPaths.MULTI_RACES,
+    routerPaths.RANGE_RACES
   ];
   activeLink: string = window.location.pathname;
 
