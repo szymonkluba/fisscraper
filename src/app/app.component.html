@@ -1,6 +1,6 @@
 <mat-sidenav-container class="container" (backdropClick)="close()">
   <mat-sidenav #sidenav (keydown.escape)="close()" disableClose>
-    <p><button mat-button (click)="close()">Scraper</button></p>
+    <p><button mat-button (click)="close()" routerLink="/scraper" routerLinkActive="active">Scraper</button></p>
     <p><button mat-button (click)="close()">Archive</button></p>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -9,7 +9,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span>FIS Scraper</span>
-      <router-outlet></router-outlet>
     </mat-toolbar>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
