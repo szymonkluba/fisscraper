@@ -1,18 +1,17 @@
-<form class="single-race-form">
+<form class="single-race-form" [formGroup]="raceForm">
   <mat-form-field appearance="fill">
     <mat-label>FIS ID</mat-label>
-    <input matInput type="number" [(ngModel)]="race.fis_id" [formControl]="fisIDFormControl"
-           [errorStateMatcher]="matcher">
-    <button *ngIf="race.fis_id" matSuffix mat-icon-button aria-label="Clear" (click)="race.fis_id=undefined">
-      <mat-icon>close</mat-icon>
-    </button>
-    <mat-error *ngIf="fisIDFormControl.hasError('pattern') && !fisIDFormControl.hasError('required')">
-      Please enter a number
+    <input matInput type="number" formControlName="fis_id">
+    <mat-error *ngIf="fisId.hasError('min')">
+      Enter <strong>number</strong> greater than 0
     </mat-error>
-    <mat-error *ngIf="fisIDFormControl.hasError('required')">
+    <mat-error *ngIf="fisId.hasError('pattern')">
+      Enter <strong>number</strong>
+    </mat-error>
+    <mat-error *ngIf="fisId.hasError('required')">
       FIS ID is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <mat-slide-toggle [(ngModel)]="race.details">Details</mat-slide-toggle>
-  <button mat-raised-button color="primary">Scrap!</button>
+  <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
+  <button class="single-race-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
 </form>

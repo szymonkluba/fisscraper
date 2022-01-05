@@ -6,19 +6,24 @@ export interface RouteInterface {
 
 export const routerPaths = {
   SCRAPER: {
-    path: 'scraper',
+    path: '/scraper',
     label: 'Scraper',
     routerPath: 'scraper',
   },
   ARCHIVE: {
-    path: 'archive',
+    path: '/archive',
     label: 'Archive',
     routerPath: 'archive',
   },
   SINGLE_RACE: {
-    path: 'scraper/single-race',
+    path: '/scraper/single-race',
     label: 'Single race',
     routerPath: 'single-race'
+  },
+  MULTI_RACES: {
+    path: '/scraper/multi-races',
+    label: 'Multiple races',
+    routerPath: 'multi-races'
   }
 }
 
