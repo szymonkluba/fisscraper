@@ -14,3 +14,15 @@
     padding: .5rem 1rem;
   }
 }
+
+router-outlet {
+  padding: 1rem;
+}
+
+.mat-toolbar {
+  &-content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 70rem;
+  }
+}

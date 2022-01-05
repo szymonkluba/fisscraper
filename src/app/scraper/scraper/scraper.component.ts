@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { routerPaths } from "../../models/routes.model";
 
 @Component({
   selector: 'app-scraper',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScraperComponent implements OnInit {
 
-  links = ['single-race'];
-  activeLink = this.links[0];
+  links = [
+    routerPaths.SINGLE_RACE
+  ];
+  activeLink = this.links[0].path;
 
   constructor() { }
 
