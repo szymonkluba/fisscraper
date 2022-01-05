@@ -1,1 +1,18 @@
-<p>single-race works!</p>
+<form class="single-race-form">
+  <mat-form-field appearance="fill">
+    <mat-label>FIS ID</mat-label>
+    <input matInput type="number" [(ngModel)]="race.fis_id" [formControl]="fisIDFormControl"
+           [errorStateMatcher]="matcher">
+    <button *ngIf="race.fis_id" matSuffix mat-icon-button aria-label="Clear" (click)="race.fis_id=undefined">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="fisIDFormControl.hasError('pattern') && !fisIDFormControl.hasError('required')">
+      Please enter a number
+    </mat-error>
+    <mat-error *ngIf="fisIDFormControl.hasError('required')">
+      FIS ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-slide-toggle [(ngModel)]="race.details">Details</mat-slide-toggle>
+  <button mat-raised-button color="primary">Scrap!</button>
+</form>
