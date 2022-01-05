@@ -7,6 +7,7 @@ import { AngularMaterialModule } from "./angular-material/angular-material.modul
 import { AppRoutingModule } from "./app-routing.module";
 import { StoreModule } from '@ngrx/store';
 import { filesReducer } from "./state/files.reducer";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { filesReducer } from "./state/files.reducer";
     BrowserAnimationsModule,
     AngularMaterialModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot({ files: filesReducer }, {})
   ],
   providers: [],
