@@ -4,13 +4,30 @@ mat-card {
   display: flex;
   flex-direction: column;
 
+  &-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
   &-subtitle {
     display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 
   & .mat-divider {
     display: block;
     margin: auto 0 0;
+  }
+}
+
+.file-icon {
+  display: flex;
+  align-items: center;
+
+  & .mat-icon {
+    margin-right: .5rem;
   }
 }

@@ -5,6 +5,7 @@ import { IFile } from "../models/file.model";
 import { Store } from "@ngrx/store";
 import { addFile } from "../state/files.actions";
 import { FileStatuses } from "../models/file-statuses.model";
+import { concat } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class ScraperService {
     this.store.dispatch(addFile({ file: tempFile }))
     const url = "http://127.0.0.1:8000/scrap_race/"
     return this.http.post<IFile>(url, data)
+  }
+
+  scrapMultipleRaces(data: Race[]) {
+    return concat(data.map((race) => this.scrapRace(race)))
   }
 }
