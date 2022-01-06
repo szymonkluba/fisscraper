@@ -33,6 +33,7 @@ export class AppComponent {
       .getFolders()
       .subscribe(
         (folders) => {
+          console.log(folders)
           return this.store.dispatch(retrievedFolderList({ folders }))
         }
       )

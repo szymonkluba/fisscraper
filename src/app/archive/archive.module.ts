@@ -5,11 +5,13 @@ import { ArchiveRoutingModule } from './archive-routing.module';
 import { ArchiveComponent } from './archive/archive.component';
 import { SharedModule } from "../shared/shared.module";
 import { AngularMaterialModule } from "../angular-material/angular-material.module";
+import { FolderContentsComponent } from './folder-contents/folder-contents.component';
 
 
 @NgModule({
   declarations: [
-    ArchiveComponent
+    ArchiveComponent,
+    FolderContentsComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-title>Archive directories:</mat-card-title>
+  <mat-divider inset></mat-divider>
   <mat-card-content *ngIf="folders$ | async as folders">
     <app-folder-entry *ngFor="let folder of folders" [folder]="folder"></app-folder-entry>
   </mat-card-content>
