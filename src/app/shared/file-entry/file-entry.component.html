@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-subtitle *ngIf="file.fis_id">{{ file.fis_id }}</mat-card-subtitle>
+  <mat-card-title>{{ file.name }}</mat-card-title>
+  <mat-card-actions align="end">
+    <button mat-button>
+      DOWNLOAD
+      <mat-icon>save_alt</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

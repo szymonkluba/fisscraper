@@ -1,0 +1,11 @@
+mat-card {
+  width: min(70rem, 100%);
+  margin: 0 auto;
+
+  &-content {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 2rem;
+  }
+}

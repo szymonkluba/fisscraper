@@ -1,8 +1,6 @@
-export interface IFile {
+export interface Folder {
   id: string;
-  fis_id?: number;
   name: string;
-  is_downloadable: boolean;
   path_lower: string;
   path_display: string;
 }
