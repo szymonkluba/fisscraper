@@ -14,7 +14,7 @@ export class DropboxService {
   }
 
   headers = {
-    "Authorization": `Bearer ${environment.dropboxApiKey}`,
+    "Authorization": `Bearer ${environment.dropbox.apiKey}`,
     "Content-Type": "application/json"
   };
 
