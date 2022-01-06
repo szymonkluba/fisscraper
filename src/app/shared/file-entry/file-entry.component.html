@@ -8,4 +8,18 @@
       <mat-icon>save_alt</mat-icon>
     </button>
   </mat-card-actions>
+  <mat-card-footer [ngSwitch]="file.status">
+    <div *ngSwitchCase="'in_progress'">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+    <div *ngSwitchCase="'success'">
+      <mat-progress-bar mode="determinate" [value]="100" color="accent"></mat-progress-bar>
+    </div>
+    <div *ngSwitchCase="'error'">
+      <mat-progress-bar mode="determinate" [value]="100" color="warn"></mat-progress-bar>
+    </div>
+    <div *ngSwitchDefault>
+      <mat-progress-bar mode="determinate" [value]="100"></mat-progress-bar>
+    </div>
+  </mat-card-footer>
 </mat-card>
