@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { selectFiles } from "../../state/files.selectors";
 import { Folder } from "../../models/folder.model";
 import { Observable } from "rxjs";
+import { selectFolders } from "../../state/folders.selectors";
 
 @Component({
   selector: 'app-archive',
@@ -16,7 +16,7 @@ export class ArchiveComponent implements OnInit {
   folders$!: Observable<readonly Folder[]>
 
   ngOnInit(): void {
-    this.folders$ = this.store.select(selectFiles)
+    this.folders$ = this.store.select(selectFolders)
   }
 
 }
