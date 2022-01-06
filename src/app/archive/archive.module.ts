@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ArchiveRoutingModule } from './archive-routing.module';
 import { ArchiveComponent } from './archive/archive.component';
+import { SharedModule } from "../shared/shared.module";
+import { AngularMaterialModule } from "../angular-material/angular-material.module";
 
 
 @NgModule({
@@ -11,6 +13,8 @@ import { ArchiveComponent } from './archive/archive.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
+    AngularMaterialModule,
     ArchiveRoutingModule
   ]
 })

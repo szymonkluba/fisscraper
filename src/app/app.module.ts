@@ -8,6 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { StoreModule } from '@ngrx/store';
 import { filesReducer } from "./state/files.reducer";
 import { HttpClientModule } from "@angular/common/http";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({ files: filesReducer }, {})
