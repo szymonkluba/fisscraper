@@ -1,10 +1,14 @@
 <mat-card>
-  <mat-card-title>
+  <mat-card-subtitle>
     <mat-icon>folder</mat-icon>
+    FOLDER
+  </mat-card-subtitle>
+  <mat-card-title>
     {{ folder.name }}
   </mat-card-title>
+  <mat-divider inset></mat-divider>
   <mat-card-actions align="end">
-    <button mat-button>
+    <button mat-button [routerLink]="folder.name">
       <mat-icon>folder_open</mat-icon>
       OPEN
     </button>

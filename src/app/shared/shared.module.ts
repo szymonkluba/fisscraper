@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FileEntryComponent } from './file-entry/file-entry.component';
 import { AngularMaterialModule } from "../angular-material/angular-material.module";
 import { FolderEntryComponent } from './folder-entry/folder-entry.component';
+import { RouterModule } from "@angular/router";
 
 
 
@@ -12,11 +13,13 @@ import { FolderEntryComponent } from './folder-entry/folder-entry.component';
     FolderEntryComponent
   ],
   exports: [
-    FolderEntryComponent
+    FolderEntryComponent,
+    FileEntryComponent
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    RouterModule
   ]
 })
 export class SharedModule { }
