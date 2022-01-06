@@ -11,6 +11,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 const exportedModules = [
   MatTabsModule,
@@ -23,6 +24,7 @@ const exportedModules = [
   MatSlideToggleModule,
   MatDividerModule,
   MatProgressSpinnerModule,
+  MatProgressBarModule,
 ]
 
 @NgModule({

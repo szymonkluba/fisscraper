@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IFile } from "../../models/file.model";
+import { FileStatuses } from "../../models/file-statuses.model";
 
 @Component({
   selector: 'app-file-entry',
@@ -9,6 +10,7 @@ import { IFile } from "../../models/file.model";
 export class FileEntryComponent implements OnInit {
 
   @Input() file!: IFile
+  fileStatuses = FileStatuses
 
   constructor() { }
 

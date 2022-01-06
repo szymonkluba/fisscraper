@@ -7,12 +7,12 @@ export const initialState: ReadonlyArray<IFile> = []
 export const filesReducer = createReducer(
   initialState,
   on(retrieveFilesList, (state, { files }) => files),
-  on(deleteFile, (state, { file }) => state.filter((fileInState) => fileInState.id !== file.id)),
+  on(deleteFile, (state, { file }) => state.filter((fileInState) => fileInState.fis_id !== file.fis_id)),
   on(addFile, (state, { file }) => {
-    if (state.findIndex((element) => element.id === file.id) > -1) {
-      return state;
+    if (state.findIndex((element) => element.fis_id === file.fis_id) > -1) {
+      console.log(state)
+      return [...state.filter((fileInState) => fileInState.fis_id !== file.fis_id), file];
     }
-
     return [...state, file];
   })
 );

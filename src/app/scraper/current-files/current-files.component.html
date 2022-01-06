@@ -1,0 +1,5 @@
+<mat-card *ngIf="files$ | async as files">
+  <mat-card-content>
+    <app-file-entry *ngFor="let file of files" [file]="file"></app-file-entry>
+  </mat-card-content>
+</mat-card>
