@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  dropbox: {
+    apiKey: "uMHq35uknPEAAAAAAAAAAdpMjglMdLfjL4SHuEqm_16A_KCLvN2sH8pycwpQyAWI"
+  }
 };
 
 /*
