@@ -20,9 +20,26 @@ router-outlet {
 }
 
 .mat-toolbar {
+
+  box-shadow: 0 5px 20px 5px rgba(0,0,0,0.2);;
+
   &-content {
     margin: 0 auto;
     width: 100%;
     max-width: 70rem;
+    display: flex;
+    align-items: center;
   }
+}
+
+.app-title {
+  margin: 0 auto;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.app-menu-title {
+  font-weight: 700;
+  font-size: 1.75rem;
 }
