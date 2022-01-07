@@ -48,8 +48,8 @@ export class MultiRacesComponent {
 
   submit() {
     const dataArray = this.races().value
-    this.scraperService.scrapMultipleRaces(dataArray).subscribe(results => results.forEach((result) => {
-
+    this.scraperService.scrapMultipleRaces(dataArray)
+      .subscribe(results => results.forEach((result) => {
       this.store.dispatch(addFile({ file: result }))
     }))
   }
