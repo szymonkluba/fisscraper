@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { range } from "../../utils/range";
-import { Race } from "../../models/race.model";
 import { ScraperService } from "../../services/scraper.service";
-import { Store } from "@ngrx/store";
-import { addFile } from "../../state/files.actions";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-range-races',
@@ -17,11 +14,11 @@ export class RangeRacesComponent implements OnInit {
   startFisId: FormControl = new FormControl(0, [Validators.required, Validators.min(1), Validators.pattern(/\d*/)]);
   endFisId: FormControl = new FormControl(0, [Validators.required, Validators.min(1), Validators.pattern(/\d*/)]);
   details: FormControl = new FormControl(false)
+  progress$?: Observable<number>;
 
   constructor(
     private formBuilder: FormBuilder,
     private scraperService: ScraperService,
-    private store: Store
   ) {
     this.raceForm = this.formBuilder.group({
       start_fis_id: this.startFisId,
@@ -33,14 +30,7 @@ export class RangeRacesComponent implements OnInit {
 
 
   submit(): void {
-    const data = this.raceForm.value
-    const races: Race[] = range(data.start_fis_id, data.end_fis_id, 1).map((fisId) => ({
-      fis_id: fisId,
-      details: data.details
-    }))
-    this.scraperService.scrapMultipleRaces(races).subscribe((results) => {
-      results.forEach((file) => this.store.dispatch(addFile({ file: file })))
-    })
+    this.progress$ = this.scraperService.scrapRangeOfRaces(this.raceForm.value)
   }
 
   ngOnInit(): void {

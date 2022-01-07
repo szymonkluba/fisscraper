@@ -5,6 +5,11 @@ export interface RouteInterface {
 }
 
 export const routerPaths = {
+  EMPTY: {
+    path: '',
+    label: '',
+    routerPath: '',
+  },
   SCRAPER: {
     path: '/scraper',
     label: 'Scraper',

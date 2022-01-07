@@ -5,6 +5,11 @@ import { routerPaths } from "./models/routes.model";
 
 const routes: Routes = [
   {
+    path: routerPaths.EMPTY.routerPath,
+    redirectTo: routerPaths.SCRAPER.routerPath,
+    pathMatch: 'full'
+  },
+  {
     path: routerPaths.SCRAPER.routerPath,
     loadChildren: () => import('./scraper/scraper.module').then(m => m.ScraperModule),
   },
