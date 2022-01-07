@@ -1,6 +1,7 @@
 <mat-sidenav-container class="container" (backdropClick)="close()">
   <mat-sidenav #sidenav (keydown.escape)="close()" disableClose>
-    <p *ngFor="let link of navLinks"><button mat-button (click)="close()" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</button></p>
+    <h2 class="app-menu-title">Menu:</h2>
+    <p *ngFor="let link of navLinks"><button mat-raised-button color="primary" (click)="close()" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</button></p>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -8,7 +9,7 @@
         <button mat-icon-button (click)="sidenav.open()">
           <mat-icon>menu</mat-icon>
         </button>
-        <span>FIS Scraper</span>
+        <h1 class="app-title">FIS Scraper</h1>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
