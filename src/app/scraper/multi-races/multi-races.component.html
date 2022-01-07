@@ -1,5 +1,6 @@
 <form [formGroup]="raceForm">
   <div class="multi-races-form" formArrayName="races">
+
     <div class="multi-races-form-group" *ngFor="let race of races().controls; let i = index;" [formGroupName]="i">
       <mat-form-field appearance="fill">
         <mat-label>FIS ID</mat-label>
@@ -16,14 +17,17 @@
       </mat-form-field>
       <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
     </div>
+
     <div class="multi-races-form-controls">
-      <button mat-mini-fab color="accent" (click)="addInput()">
+      <button mat-icon-button color="accent" (click)="addInput()">
         <mat-icon>exposure_plus_1</mat-icon>
       </button>
-      <button mat-mini-fab color="warn" (click)="removeInput()">
+      <button mat-icon-button color="warn" (click)="removeInput()">
         <mat-icon>exposure_neg_1</mat-icon>
       </button>
     </div>
+
     <button class="multi-races-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
+
   </div>
 </form>
