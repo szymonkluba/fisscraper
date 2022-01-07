@@ -1,9 +1,10 @@
 <mat-card>
+
   <mat-card-subtitle>
     <div *ngIf="file.fis_id">
       {{ file.fis_id }}
     </div>
-    <div class="file-icon" *ngIf="file.name">
+    <div class="file-icon" *ngIf="file.name && file.status !== fileStatuses.ERROR">
       <mat-icon *ngIf="file.name.slice(file.name.length - 4).toUpperCase() === '.ZIP'; else regularIcon">
         folder_special
       </mat-icon>
@@ -15,22 +16,29 @@
       {{ file.name.slice(file.name.length - 4).toUpperCase() }}
     </div>
   </mat-card-subtitle>
-  <mat-card-title>{{ file.name }}</mat-card-title>
+
+  <mat-card-title *ngIf="file.status !== fileStatuses.ERROR; else errorMessage">{{ file.name }}</mat-card-title>
+  <ng-template #errorMessage>
+    <mat-card-title class="error-message">{{ file.name }}</mat-card-title>
+  </ng-template>
+
   <mat-divider inset></mat-divider>
+
   <mat-card-actions align="end">
-    <button mat-button>
+    <button mat-button *ngIf="!file.status || file.status === fileStatuses.SUCCESS">
       DOWNLOAD
       <mat-icon>save_alt</mat-icon>
     </button>
   </mat-card-actions>
+
   <mat-card-footer [ngSwitch]="file.status">
-    <div *ngSwitchCase="'in_progress'">
+    <div *ngSwitchCase="fileStatuses.PROGRESS">
       <mat-progress-bar mode="query"></mat-progress-bar>
     </div>
-    <div *ngSwitchCase="'success'">
+    <div *ngSwitchCase="fileStatuses.SUCCESS">
       <mat-progress-bar mode="determinate" [value]="100" color="accent"></mat-progress-bar>
     </div>
-    <div *ngSwitchCase="'error'">
+    <div *ngSwitchCase="fileStatuses.ERROR">
       <mat-progress-bar mode="determinate" [value]="100" color="warn"></mat-progress-bar>
     </div>
     <div *ngSwitchDefault>

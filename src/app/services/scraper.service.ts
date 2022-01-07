@@ -5,7 +5,8 @@ import { IFile } from "../models/file.model";
 import { Store } from "@ngrx/store";
 import { addFile } from "../state/files.actions";
 import { FileStatuses } from "../models/file-statuses.model";
-import { concat } from "rxjs";
+import { catchError, concat, of } from "rxjs";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,16 @@ export class ScraperService {
   }
 
   scrapMultipleRaces(data: Race[]) {
-    return concat(data.map((race) => this.scrapRace(race)))
+    return concat(
+      data.map(
+        (race) => this.scrapRace(race)
+          .pipe(
+            catchError(err => of({
+              ...err.error,
+              name: getErrorMessage(err.status)
+            }))
+          )
+      )
+    )
   }
 }

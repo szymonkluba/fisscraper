@@ -4,7 +4,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { ScraperService } from "../../services/scraper.service";
 import { Store } from "@ngrx/store";
 import { addFile } from "../../state/files.actions";
-import { HttpErrorResponse } from "@angular/common/http";
+import { catchError, of } from "rxjs";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 @Component({
   selector: 'app-single-race',
@@ -29,18 +30,16 @@ export class SingleRaceComponent {
   }
 
   submit() {
-    this.scraperService.scrapRace(this.raceForm.value).subscribe(
+    this.scraperService.scrapRace(this.raceForm.value)
+      .pipe(
+        catchError(err => of({
+          ...err.error,
+          name: getErrorMessage(err.status),
+        }))
+      )
+      .subscribe(
       (file) => {
-        console.log(file)
-        return this.store.dispatch(addFile({ file })),
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log("An error occured:", err.error.message)
-            } else {
-              console.log("Backend returned status code:", err.status)
-              console.log("Response body:", err.error)
-            }
-          }
+        return this.store.dispatch(addFile({ file }))
       }
     )
   }
