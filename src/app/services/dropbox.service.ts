@@ -1,11 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map } from "rxjs";
+import { map, switchMap, tap } from "rxjs";
 import { IFile } from "../models/file.model";
 import { Folder } from "../models/folder.model";
 import { environment } from "../../environments/environment";
 import { download } from "../utils/download";
 import { Saver, SAVER } from "../providers/saver.provider";
+import { Store } from "@ngrx/store";
+import { selectFolderContent } from "../state/folderContents.selectors";
+import { retrievedFolderContent } from "../state/folderContents.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,7 @@ export class DropboxService {
 
   constructor(
     private http: HttpClient,
+    private store: Store,
     @Inject(SAVER) private save: Saver
   ) {
   }
@@ -42,7 +46,9 @@ export class DropboxService {
     return this.http
       .post<{ entries: IFile[] }>(url, body, { headers: this.headers })
       .pipe(
-        map((files) => files.entries || [])
+        map((files) => files.entries || []),
+        tap((files) => this.store.dispatch(retrievedFolderContent({ folderContents: files }))),
+        switchMap(_ => this.store.select(selectFolderContent)),
       );
   };
 
