@@ -7,6 +7,7 @@ import { addFile } from "../state/files.actions";
 import { FileStatuses } from "../models/file-statuses.model";
 import { catchError, concat, of } from "rxjs";
 import { getErrorMessage } from "../utils/getErrorMessage";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ScraperService {
     }
 
     this.store.dispatch(addFile({ file: tempFile }))
-    const url = "http://127.0.0.1:8000/scrap_race/"
+    const url = environment.scraperApi.scrapRaceURL
     return this.http.post<IFile>(url, data)
   }
 

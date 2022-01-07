@@ -25,7 +25,7 @@
   <mat-divider inset></mat-divider>
 
   <mat-card-actions align="end">
-    <button mat-button *ngIf="!file.status || file.status === fileStatuses.SUCCESS">
+    <button mat-button *ngIf="!file.status || file.status === fileStatuses.SUCCESS" (click)="download()">
       DOWNLOAD
       <mat-icon>save_alt</mat-icon>
     </button>
@@ -42,7 +42,11 @@
       <mat-progress-bar mode="determinate" [value]="100" color="warn"></mat-progress-bar>
     </div>
     <div *ngSwitchDefault>
-      <mat-progress-bar mode="determinate" [value]="100"></mat-progress-bar>
+      <mat-progress-bar *ngIf="download$ | async as download"
+                        [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
+                        [value]="download.progress"
+                        [color]="download.state === 'DONE' || download.state === 'IN_PROGRES' ? 'accent' : 'warn'">
+      </mat-progress-bar>
     </div>
   </mat-card-footer>
 </mat-card>
