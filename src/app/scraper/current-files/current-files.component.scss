@@ -1,5 +1,6 @@
 mat-card {
   width: min(70rem, 100%);
+  min-height: 15rem;
   margin: 2rem auto;
 
   &-content {
