@@ -1,13 +1,11 @@
 export interface RouteInterface {
-  path: string;
-  label: string;
+  path?: string;
+  label?: string;
   routerPath: string;
 }
 
 export const routerPaths = {
   EMPTY: {
-    path: '',
-    label: '',
     routerPath: '',
   },
   SCRAPER: {
@@ -34,6 +32,9 @@ export const routerPaths = {
     path: '/scraper/range-races',
     label: 'Range of races',
     routerPath: 'range-races'
+  },
+  FOLDER: {
+    routerPath: ":folder"
   }
 }
 

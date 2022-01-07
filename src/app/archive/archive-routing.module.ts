@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArchiveComponent } from "./archive/archive.component";
 import { FolderContentsComponent } from "./folder-contents/folder-contents.component";
+import { routerPaths } from "../models/routes.model";
 
 const routes: Routes = [
   {
-    path: '',
+    path: routerPaths.EMPTY.routerPath,
     component: ArchiveComponent,
   },
   {
-    path: ":folder",
+    path: routerPaths.FOLDER.routerPath,
     component: FolderContentsComponent,
   }
 ];
