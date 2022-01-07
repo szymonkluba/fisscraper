@@ -10,6 +10,7 @@ import { filesReducer } from "./state/files.reducer";
 import { HttpClientModule } from "@angular/common/http";
 import { SharedModule } from "./shared/shared.module";
 import { foldersReducer } from "./state/folders.reducer";
+import { getSaver, SAVER } from "./providers/saver.provider";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { foldersReducer } from "./state/folders.reducer";
     HttpClientModule,
     StoreModule.forRoot({ files: filesReducer, folders: foldersReducer }, {})
   ],
-  providers: [],
+  providers: [
+    {provide: SAVER, useFactory: getSaver}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
