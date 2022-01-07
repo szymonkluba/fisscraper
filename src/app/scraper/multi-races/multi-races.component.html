@@ -31,3 +31,4 @@
 
   </div>
 </form>
+<mat-progress-bar *ngIf="progress$ | async as progress" color="accent" [value]="progress" mode="buffer"></mat-progress-bar>

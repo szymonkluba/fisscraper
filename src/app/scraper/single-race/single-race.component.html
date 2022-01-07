@@ -15,3 +15,4 @@
   <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
   <button class="single-race-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
 </form>
+<mat-progress-bar *ngIf="progress$ | async as progress" color="accent" [value]="progress * 100" mode="buffer"></mat-progress-bar>

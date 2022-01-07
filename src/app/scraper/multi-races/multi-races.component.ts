@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ScraperService } from "../../services/scraper.service";
-import { Store } from "@ngrx/store";
-import { addFile } from "../../state/files.actions";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-multi-races',
@@ -14,11 +13,11 @@ export class MultiRacesComponent {
   raceForm: FormGroup;
   fisId: FormControl[] = [];
   details: FormControl = new FormControl(false);
+  progress$?: Observable<number>;
 
   constructor(
     private formBuilder: FormBuilder,
     private scraperService: ScraperService,
-    private store: Store,
   ) {
     this.raceForm = this.formBuilder.group({
       races: this.formBuilder.array([this.newRace()]),
@@ -47,11 +46,7 @@ export class MultiRacesComponent {
   }
 
   submit() {
-    const dataArray = this.races().value
-    this.scraperService.scrapMultipleRaces(dataArray)
-      .subscribe(results => results.forEach((result) => {
-      this.store.dispatch(addFile({ file: result }))
-    }))
+    this.progress$ = this.scraperService.scrapMultipleRaces(this.races().value);
   }
 
 }
