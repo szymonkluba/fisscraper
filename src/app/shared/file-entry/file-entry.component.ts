@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IFile } from "../../models/file.model";
 import { FileStatuses } from "../../models/file-statuses.model";
 import { DropboxService } from "../../services/dropbox.service";
@@ -8,7 +8,8 @@ import { Download } from "../../models/download.model";
 @Component({
   selector: 'app-file-entry',
   templateUrl: './file-entry.component.html',
-  styleUrls: ['./file-entry.component.scss']
+  styleUrls: ['./file-entry.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileEntryComponent implements OnInit {
 
@@ -25,6 +26,8 @@ export class FileEntryComponent implements OnInit {
   }
 
   download(): void {
-    this.download$ = this.dropbox.downloadFile(this.file.id!, this.file.name!)
+    console.log("in download", this.file);
+    this.download$ = this.dropbox.downloadFile(this.file);
+    this.file.fis_id && this.download$.subscribe()
   }
 }

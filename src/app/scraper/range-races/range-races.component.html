@@ -28,3 +28,4 @@
   <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
   <button class="range-races-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
 </form>
+<mat-progress-bar *ngIf="progress$ | async as progress" color="accent" [value]="progress" mode="buffer"></mat-progress-bar>

@@ -30,7 +30,7 @@ export class RangeRacesComponent implements OnInit {
 
 
   submit(): void {
-    this.progress$ = this.scraperService.scrapRangeOfRaces(this.raceForm.value)
+    this.progress$ = this.scraperService.scrapRangeOfRaces(this.raceForm.value);
   }
 
   ngOnInit(): void {

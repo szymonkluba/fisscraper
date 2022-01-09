@@ -21,6 +21,6 @@ export class FolderContentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.folder = this.route.snapshot.paramMap.get("folder")!
-    this.files$ = this.dropbox.getFiles(`/${this.folder}`)
+    this.files$ = this.dropbox.getFiles(this.folder)
   }
 }
