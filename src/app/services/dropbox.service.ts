@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { map, switchMap, tap } from "rxjs";
 import { IFile } from "../models/file.model";
 import { Folder } from "../models/folder.model";
@@ -22,29 +22,14 @@ export class DropboxService {
   ) {
   }
 
-  headers = new HttpHeaders({
-    "Authorization": `Bearer ${environment.dropbox.apiKey}`,
-    "Content-Type": "application/json"
-  });
-
-
+  apiUrl = environment.scraperApi;
 
   getFiles(folderPath: string) {
 
-    const url = environment.dropbox.listEntriesURL;
-
-    const body = {
-      "path": folderPath,
-      "recursive": false,
-      "include_media_info": false,
-      "include_deleted": false,
-      "include_has_explicit_shared_members": false,
-      "include_mounted_folders": true,
-      "include_non_downloadable_files": true
-    };
+    const url = `${this.apiUrl}/list_folder/${folderPath}`;
 
     return this.http
-      .post<{ entries: IFile[] }>(url, body, { headers: this.headers })
+      .get<{ entries: IFile[] }>(url)
       .pipe(
         map((files) => files.entries || []),
         tap((files) => this.store.dispatch(retrievedFolderContent({ folderContents: files }))),
@@ -53,56 +38,47 @@ export class DropboxService {
   };
 
   getFolders() {
-    const url = environment.dropbox.listEntriesURL;
-
-    const body = {
-      "path": "",
-      "recursive": false,
-      "include_media_info": false,
-      "include_deleted": false,
-      "include_has_explicit_shared_members": false,
-      "include_mounted_folders": true,
-      "include_non_downloadable_files": true
-    };
+    const url = `${this.apiUrl}/list_folder`;
 
     return this.http
-      .post<{ entries: Folder[] }>(url, body, { headers: this.headers })
+      .get<{ entries: Folder[] }>(url)
       .pipe(
-        map((folders) => folders.entries.filter((entry) => entry['.tag'] === "folder") || [])
+        map((folders) => folders.entries || [])
       );
   };
 
-  downloadFile(filePath: string, fileName: string) {
-    const url = environment.dropbox.downloadFile;
+  downloadFile(file: IFile) {
+    console.log("in downloadFile", file)
 
-    const headers = new HttpHeaders({
-      "Authorization": `Bearer ${environment.dropbox.apiKey}`,
-      "Dropbox-API-Arg": `{"path": "${filePath}"}`
-    });
+    const url = `${this.apiUrl}/download/file`;
 
-    return this.http.post(url, null ,{
-      headers,
+    return this.http.post(url, file, {
       observe: "events",
       responseType: "blob",
     }).pipe(
-      download(blob => this.save(blob, fileName))
+      download(blob => this.save(blob, file.name))
     );
-  }
+  };
 
-  downloadFolder(folderPath: string, fileName: string) {
-    const url = environment.dropbox.downloadZip;
+  downloadFolder(folder: Folder) {
+    const url = `${this.apiUrl}/download/folder`;
 
-    const headers = new HttpHeaders({
-      "Authorization": `Bearer ${environment.dropbox.apiKey}`,
-      "Dropbox-API-Arg": `{"path": "${folderPath}"}`
-    });
-
-    return this.http.post(url, null, {
-      headers,
+    return this.http.post(url, folder, {
       observe: "events",
       responseType: "blob",
     }).pipe(
-      download(blob => this.save(blob, `${fileName}.zip`))
+      download(blob => this.save(blob, `${folder.name}.zip`))
     );
-  }
+  };
+
+  downloadCurrentFiles(entries: readonly IFile[]) {
+    const url = `${this.apiUrl}/download/current`;
+
+    return this.http.post(url, { entries }, {
+      observe: "events",
+      responseType: "blob"
+    }).pipe(
+      download(blob => this.save(blob, "current.zip"))
+    );
+  };
 }

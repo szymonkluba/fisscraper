@@ -22,7 +22,7 @@ export class FolderEntryComponent implements OnInit {
   }
 
   download() {
-    this.download$ = this.dropbox.downloadFolder(this.folder.id, this.folder.name)
+    this.download$ = this.dropbox.downloadFolder(this.folder)
   }
 
 }

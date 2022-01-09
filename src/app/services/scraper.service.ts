@@ -28,7 +28,9 @@ export class ScraperService {
     }
 
     this.store.dispatch(addFile({ file: tempFile }))
-    const url = environment.scraperApi.scrapRaceURL
+
+    const url = `${environment.scraperApi}/scrap_race`
+
     return this.http.post<IFile>(url, data)
       .pipe(
         catchError(
@@ -43,14 +45,15 @@ export class ScraperService {
   }
 
   scrapMultipleRaces(data: Race[]): Observable<number> {
-    const step = Math.ceil(100 / data.length)
+    const step = Math.ceil(100 / data.length);
+
     return merge(
       ...data.map(
         (race) => this.scrapRace(race)
       )
     ).pipe(
       scan((progress: number, current: number) => progress + current * step, 0)
-    )
+    );
   }
 
   scrapRangeOfRaces(data: {
@@ -61,7 +64,8 @@ export class ScraperService {
     const races: Race[] = range(data.start_fis_id, data.end_fis_id, 1).map((fisId) => ({
       fis_id: fisId,
       details: data.details
-    }))
-    return this.scrapMultipleRaces(races)
+    }));
+
+    return this.scrapMultipleRaces(races);
   }
 }
