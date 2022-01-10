@@ -12,6 +12,9 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const exportedModules = [
   MatTabsModule,
@@ -25,6 +28,9 @@ const exportedModules = [
   MatDividerModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  MatMenuModule,
+  MatBadgeModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

@@ -1,0 +1,17 @@
+.notifications {
+  position: fixed;
+  inset: auto 3rem 3rem auto;
+}
+
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+  width: max-content;
+  padding: 1rem;
+  max-height: 70vh;
+}
+
+::ng-deep.mat-menu-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
