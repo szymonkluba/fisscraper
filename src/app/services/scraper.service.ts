@@ -7,9 +7,7 @@ import { addFile } from "../state/files.actions";
 import { catchError, map, merge, Observable, of, scan, tap } from "rxjs";
 import { environment } from "../../environments/environment";
 import { range } from "../utils/range";
-import { addNotification } from "../state/notifications.actions";
-import { NotificationColors, NotificationIcons } from "../models/notification.model";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { NotificationsService } from "./notifications.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +17,7 @@ export class ScraperService {
   constructor(
     private http: HttpClient,
     private store: Store,
-    private snackBar: MatSnackBar,
+    private notificationService: NotificationsService
   ) {}
 
   scrapRace(data: Race): Observable<number> {
@@ -29,33 +27,14 @@ export class ScraperService {
       .pipe(
         catchError(
           err => {
-
-            const notification = {
-              id: Math.random().toString(16).substring(2, 8),
-              message: err.name,
-              icon: NotificationIcons.ERROR,
-              color: NotificationColors.ERROR
-            }
-            this.store.dispatch(addNotification({ notification }))
-            this.snackBar.open(notification.message, 'Close', {
-              duration: 2000
-            })
+            this.notificationService.handleErrorNotification(err)
             return of(null)
           }
         ),
         tap(file => {
           if (file) {
             this.store.dispatch(addFile({ file }))
-            const notification = {
-              id: Math.random().toString(16).substring(2, 8),
-              message: `${file.name} is ready`,
-              icon: NotificationIcons.SUCCESS,
-              color: NotificationColors.SUCCESS
-            }
-            this.store.dispatch(addNotification({ notification }));
-            this.snackBar.open(notification.message, 'Close', {
-              duration: 2000
-            });
+            this.notificationService.handleFileReadyNotification(file.name!)
           }
         }),
         map(_ => 1)

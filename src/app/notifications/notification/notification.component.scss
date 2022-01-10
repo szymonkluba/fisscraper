@@ -1,5 +1,6 @@
 mat-card {
-  width: min(20rem, 100%);
+  width: 100%;
+  min-width: 20rem;
 
   & + & {
     margin-block: .5rem;
