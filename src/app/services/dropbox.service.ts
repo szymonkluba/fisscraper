@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { map, switchMap, tap } from "rxjs";
+import { catchError, map, of, switchMap, tap } from "rxjs";
 import { IFile } from "../models/file.model";
 import { Folder } from "../models/folder.model";
 import { environment } from "../../environments/environment";
@@ -9,6 +9,7 @@ import { Saver, SAVER } from "../providers/saver.provider";
 import { Store } from "@ngrx/store";
 import { selectFolderContent } from "../state/folderContents.selectors";
 import { retrievedFolderContent } from "../state/folderContents.actions";
+import { NotificationsService } from "./notifications.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class DropboxService {
   constructor(
     private http: HttpClient,
     private store: Store,
+    private notificationService: NotificationsService,
     @Inject(SAVER) private save: Saver
   ) {
   }
@@ -31,7 +33,13 @@ export class DropboxService {
     return this.http
       .get<{ entries: IFile[] }>(url)
       .pipe(
-        map((files) => files.entries || []),
+        catchError(
+          err => {
+            this.notificationService.handleErrorNotification(err)
+            return of(null)
+          }
+        ),
+        map((files) => (files && files.entries) || []),
         tap((files) => this.store.dispatch(retrievedFolderContent({ folderContents: files }))),
         switchMap(_ => this.store.select(selectFolderContent)),
       );
@@ -43,13 +51,17 @@ export class DropboxService {
     return this.http
       .get<{ entries: Folder[] }>(url)
       .pipe(
-        map((folders) => folders.entries || [])
+        catchError(
+          err => {
+            this.notificationService.handleErrorNotification(err)
+            return of(null)
+          }
+        ),
+        map((folders) => (folders && folders.entries) || [])
       );
   };
 
   downloadFile(file: IFile) {
-    console.log("in downloadFile", file)
-
     const url = `${this.apiUrl}/download/file`;
 
     return this.http.post(url, file, {

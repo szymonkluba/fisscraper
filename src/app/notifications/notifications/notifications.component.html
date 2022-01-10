@@ -1,8 +1,12 @@
 <div class="notifications" *ngIf="notifications$ | async as notifications">
-  <button mat-fab [matMenuTriggerFor]="notificationsContainer" [matBadge]="notifications.length > 0 ? notifications.length : null" matBadgePosition="after">
+  <button mat-fab
+          *ngIf="notifications.length > 0"
+          [matMenuTriggerFor]="notificationsContainer"
+          [matBadge]="notifications.length > 0 ? notifications.length : null"
+          matBadgePosition="after">
     <mat-icon>notifications</mat-icon>
   </button>
   <mat-menu #notificationsContainer xPosition="before" yPosition="above">
-      <app-notification *ngFor="let notification of notifications" [notification]="notification"></app-notification>
+    <app-notification *ngFor="let notification of notifications" [notification]="notification"></app-notification>
   </mat-menu>
 </div>
