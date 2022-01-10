@@ -17,9 +17,9 @@
     </div>
   </mat-card-subtitle>
 
-  <mat-card-title *ngIf="file.status !== fileStatuses.ERROR; else errorMessage">{{ file.name }}</mat-card-title>
+  <mat-card-content *ngIf="file.status !== fileStatuses.ERROR; else errorMessage">{{ file.name }}</mat-card-content>
   <ng-template #errorMessage>
-    <mat-card-title class="error-message">{{ file.name }}</mat-card-title>
+    <mat-card-content class="error-message">{{ file.name }}</mat-card-content>
   </ng-template>
 
   <mat-divider inset></mat-divider>

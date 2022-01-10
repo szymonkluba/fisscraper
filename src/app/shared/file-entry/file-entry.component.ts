@@ -28,6 +28,6 @@ export class FileEntryComponent implements OnInit {
   download(): void {
     console.log("in download", this.file);
     this.download$ = this.dropbox.downloadFile(this.file);
-    this.file.fis_id && this.download$.subscribe()
+    this.file.fis_id && this.download$.subscribe();
   }
 }

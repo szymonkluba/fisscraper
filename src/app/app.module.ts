@@ -14,6 +14,8 @@ import { foldersReducer } from "./state/folders.reducer";
 import { folderContentReducer } from "./state/folderContents.reducer";
 
 import { getSaver, SAVER } from "./providers/saver.provider";
+import { NotificationsModule } from "./notifications/notifications.module";
+import { notificationsReducer } from "./state/notifications.reducer";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,13 @@ import { getSaver, SAVER } from "./providers/saver.provider";
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ files: filesReducer, folders: foldersReducer, folderContents: folderContentReducer }, {})
+    NotificationsModule,
+    StoreModule.forRoot({
+      files: filesReducer,
+      folders: foldersReducer,
+      folderContents: folderContentReducer,
+      notifications: notificationsReducer
+    }, {})
   ],
   providers: [
     {provide: SAVER, useFactory: getSaver}
