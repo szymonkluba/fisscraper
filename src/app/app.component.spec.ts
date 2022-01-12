@@ -16,10 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'fis-scraper-frontend'`, () => {
+  it(`should have as title 'FIS Scraper'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('fis-scraper-frontend');
+    expect(app.title).toEqual('FIS Scraper');
   });
 
   it('should render title', () => {

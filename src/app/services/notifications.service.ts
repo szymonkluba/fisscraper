@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { NotificationColors, NotificationIcons } from "../models/notification.model";
 import { addNotification, removeNotification } from "../state/notifications.actions";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Store } from "@ngrx/store";
+import { Subject, takeUntil } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationsService {
+export class NotificationsService implements OnDestroy {
+
+  subscriptionEndSubject = new Subject();
+  subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -27,7 +31,9 @@ export class NotificationsService {
       duration: 4000,
       data: notification.id
     });
-    snackbar.onAction().subscribe(() => {
+    snackbar.onAction()
+      .pipe(takeUntil(this.subscriptionEnd$))
+      .subscribe(() => {
       this.store.dispatch(removeNotification({ notification }))
     })
   }
@@ -44,8 +50,15 @@ export class NotificationsService {
       duration: 2000,
       data: notification.id
     });
-    snackbar.onAction().subscribe(() => {
+    snackbar.onAction()
+      .pipe(takeUntil(this.subscriptionEnd$))
+      .subscribe(() => {
       this.store.dispatch(removeNotification({ notification }))
     })
+  }
+
+  ngOnDestroy() {
+    this.subscriptionEndSubject.next(null);
+    this.subscriptionEndSubject.complete()
   }
 }
