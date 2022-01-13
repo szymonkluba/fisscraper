@@ -25,7 +25,7 @@
   <mat-divider inset></mat-divider>
 
   <mat-card-actions align="end">
-    <button mat-button *ngIf="!file.status || file.status === fileStatuses.SUCCESS" (click)="download()">
+    <button mat-button *ngIf="!file.status || file.status === fileStatuses.SUCCESS" (click)="download()" [matTooltip]="'Download ' + file.name">
       DOWNLOAD
       <mat-icon>save_alt</mat-icon>
     </button>
