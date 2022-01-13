@@ -8,11 +8,11 @@
   </mat-card-title>
   <mat-divider inset></mat-divider>
   <mat-card-actions align="end">
-    <button mat-button (click)="download()">
+    <button mat-button (click)="download()" [matTooltip]="'Download ' + folder.name + ' folder as .zip file'">
       <mat-icon>save_alt</mat-icon>
       DOWNLOAD
     </button>
-    <button mat-button [routerLink]="folder.name">
+    <button mat-button [routerLink]="folder.name" [matTooltip]="'Open ' + folder.name + ' folder.'">
       <mat-icon>folder_open</mat-icon>
       OPEN
     </button>
