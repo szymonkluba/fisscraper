@@ -6,5 +6,6 @@ export interface AppState {
   files: ReadonlyArray<IFile>,
   folders: ReadonlyArray<Folder>,
   folderContents: ReadonlyArray<IFile>,
-  notifications: ReadonlyArray<Notification>
+  notifications: ReadonlyArray<Notification>,
+  spinner: boolean
 }
