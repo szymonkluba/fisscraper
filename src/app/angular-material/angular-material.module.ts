@@ -15,6 +15,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 const exportedModules = [
   MatTabsModule,
@@ -30,7 +31,8 @@ const exportedModules = [
   MatProgressBarModule,
   MatMenuModule,
   MatBadgeModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
 ]
 
 @NgModule({

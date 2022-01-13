@@ -1,5 +1,8 @@
 <mat-card *ngIf="files$ | async as files; else loader">
-  <mat-card-title *ngIf="folder">{{ folder }}</mat-card-title>
+  <mat-card-title *ngIf="folder">
+    <app-back-button></app-back-button>
+    {{ folder }}
+  </mat-card-title>
   <mat-divider inset></mat-divider>
   <mat-card-content>
     <app-file-entry *ngFor="let file of files" [file]="file"></app-file-entry>

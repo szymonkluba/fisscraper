@@ -16,6 +16,7 @@ import { folderContentReducer } from "./state/folderContents.reducer";
 import { getSaver, SAVER } from "./providers/saver.provider";
 import { NotificationsModule } from "./notifications/notifications.module";
 import { notificationsReducer } from "./state/notifications.reducer";
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,18 @@ import { notificationsReducer } from "./state/notifications.reducer";
     }, {})
   ],
   providers: [
-    {provide: SAVER, useFactory: getSaver}
+    { provide: SAVER,
+      useFactory: getSaver
+    },
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: {
+        showDelay: 500,
+        hideDelay: 200,
+        touchendHideDelay: 200,
+        position: "after"
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

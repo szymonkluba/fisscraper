@@ -4,17 +4,20 @@ import { FileEntryComponent } from './file-entry/file-entry.component';
 import { AngularMaterialModule } from "../angular-material/angular-material.module";
 import { FolderEntryComponent } from './folder-entry/folder-entry.component';
 import { RouterModule } from "@angular/router";
+import { BackButtonComponent } from './back-button/back-button.component';
 
 
 
 @NgModule({
   declarations: [
     FileEntryComponent,
-    FolderEntryComponent
+    FolderEntryComponent,
+    BackButtonComponent
   ],
   exports: [
     FolderEntryComponent,
-    FileEntryComponent
+    FileEntryComponent,
+    BackButtonComponent
   ],
   imports: [
     CommonModule,

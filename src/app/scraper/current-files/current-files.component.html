@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title>Current files:</mat-card-title>
     <mat-card-actions *ngIf="files.length > 1" align="end">
-      <button mat-button (click)="downloadAll(files)">
+      <button mat-button (click)="downloadAll(files)" matTooltip="Download all files as .zip">
         DOWNLOAD ALL
         <mat-icon>
           save_alt
