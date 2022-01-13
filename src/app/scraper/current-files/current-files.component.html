@@ -17,6 +17,7 @@
     <mat-divider inset></mat-divider>
     <mat-card-content>
       <app-file-entry *ngFor="let file of files" [file]="file"></app-file-entry>
+      <app-file-spinner *ngIf="spinnerState$ | async"></app-file-spinner>
     </mat-card-content>
   </mat-card>
 </ng-container>
