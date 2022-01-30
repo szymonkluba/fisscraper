@@ -5,6 +5,7 @@ import { AngularMaterialModule } from "../angular-material/angular-material.modu
 import { FolderEntryComponent } from './folder-entry/folder-entry.component';
 import { RouterModule } from "@angular/router";
 import { BackButtonComponent } from './back-button/back-button.component';
+import { FileSpinnerComponent } from './file-spinner/file-spinner.component';
 
 
 
@@ -12,12 +13,14 @@ import { BackButtonComponent } from './back-button/back-button.component';
   declarations: [
     FileEntryComponent,
     FolderEntryComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    FileSpinnerComponent
   ],
   exports: [
     FolderEntryComponent,
     FileEntryComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    FileSpinnerComponent
   ],
   imports: [
     CommonModule,

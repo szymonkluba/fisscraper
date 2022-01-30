@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { retrievedFolderList } from "./state/folders.actions";
 import { Folder } from "./models/folder.model";
 import { Subject, takeUntil } from "rxjs";
+import { ScraperService } from "./services/scraper.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { Subject, takeUntil } from "rxjs";
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  title = "FIS Scraper"
+  title = "FIS Scraper";
+  spinnerState: boolean = true;
 
   subscriptionEndSubject = new Subject();
   subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
@@ -31,11 +33,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private dropboxService: DropboxService,
+    private scraperService: ScraperService,
     private store: Store
   ) {
   }
 
   ngOnInit() {
+
     this.dropboxService
       .getFolders()
       .pipe(takeUntil(this.subscriptionEnd$))
@@ -44,6 +48,9 @@ export class AppComponent implements OnInit, OnDestroy {
           return this.store.dispatch(retrievedFolderList({ folders }))
         }
       )
+    this.scraperService.wakeUpServer().subscribe(_ => {
+      this.spinnerState = false;
+    })
   }
 
   ngOnDestroy() {

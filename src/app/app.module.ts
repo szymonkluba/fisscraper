@@ -17,6 +17,7 @@ import { getSaver, SAVER } from "./providers/saver.provider";
 import { NotificationsModule } from "./notifications/notifications.module";
 import { notificationsReducer } from "./state/notifications.reducer";
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from "@angular/material/tooltip";
+import { spinnerReducer } from "./state/spinner.reducer";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MAT_TOOLTIP_DEFAULT_OPTIONS } from "@angular/material/tooltip";
       files: filesReducer,
       folders: foldersReducer,
       folderContents: folderContentReducer,
-      notifications: notificationsReducer
+      notifications: notificationsReducer,
+      spinner: spinnerReducer
     }, {})
   ],
   providers: [

@@ -22,20 +22,17 @@ export class NotificationsService implements OnDestroy {
   handleErrorNotification(error: HttpErrorResponse) {
     const notification = {
       id: Math.random().toString(16).substring(2, 8),
-      message: error.error.detail,
+      message: error.error.detail || error.statusText,
       icon: NotificationIcons.ERROR,
       color: NotificationColors.ERROR
     }
     this.store.dispatch(addNotification({ notification }))
     const snackbar = this.snackBar.open(notification.message, 'Close', {
-      duration: 4000,
       data: notification.id
     });
     snackbar.onAction()
       .pipe(takeUntil(this.subscriptionEnd$))
-      .subscribe(() => {
-      this.store.dispatch(removeNotification({ notification }))
-    })
+      .subscribe()
   }
 
   handleFileReadyNotification(fileName: string) {

@@ -4,10 +4,11 @@ import { Race } from "../models/race.model";
 import { IFile } from "../models/file.model";
 import { Store } from "@ngrx/store";
 import { addFile } from "../state/files.actions";
-import { catchError, map, merge, Observable, of, scan, tap } from "rxjs";
+import { catchError, filter, map, merge, Observable, of, scan, tap } from "rxjs";
 import { environment } from "../../environments/environment";
 import { range } from "../utils/range";
 import { NotificationsService } from "./notifications.service";
+import { disableSpinner, enableSpinner } from "../state/spinner.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -18,24 +19,27 @@ export class ScraperService {
     private http: HttpClient,
     private store: Store,
     private notificationService: NotificationsService
-  ) {}
+  ) {
+  }
 
   scrapRace(data: Race): Observable<number> {
-    const url = `${environment.scraperApi}/scrap_race`
+    const url = `${environment.scraperApi}/scrap_race`;
+    this.store.dispatch(enableSpinner());
 
     return this.http.post<IFile>(url, data)
       .pipe(
         catchError(
           err => {
-            this.notificationService.handleErrorNotification(err)
-            return of(null)
+            this.notificationService.handleErrorNotification(err);
+            this.store.dispatch(disableSpinner())
+            return of(null);
           }
         ),
+        filter(Boolean),
         tap(file => {
-          if (file) {
-            this.store.dispatch(addFile({ file }))
-            this.notificationService.handleFileReadyNotification(file.name!)
-          }
+          this.store.dispatch(addFile({ file }));
+          this.notificationService.handleFileReadyNotification(file.name!);
+          this.store.dispatch(disableSpinner());
         }),
         map(_ => 1)
       )
@@ -64,5 +68,10 @@ export class ScraperService {
     }));
 
     return this.scrapMultipleRaces(races);
+  }
+
+  wakeUpServer() {
+    const url = `${environment.scraperApi}/wakie-wakie`;
+    return this.http.get(url);
   }
 }

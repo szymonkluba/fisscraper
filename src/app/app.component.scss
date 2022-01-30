@@ -3,6 +3,24 @@
   inset: 0;
 }
 
+.loading {
+
+  &-spinner {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+
+  }
+
+  &-text {
+    color: black;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 .mat-sidenav {
   width: min(15rem, 100%);
   padding: 2rem 1rem;
