@@ -69,4 +69,9 @@ export class ScraperService {
 
     return this.scrapMultipleRaces(races);
   }
+
+  wakeUpServer() {
+    const url = `${environment.scraperApi}/wakie-wakie`;
+    return this.http.get(url);
+  }
 }
