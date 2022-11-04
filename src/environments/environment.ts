@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  scraperApi: "https://fis-scraper-api.herokuapp.com"
+  scraperApi: "http://fisscraper.pythonanywhere.com/wakie-wakie"
 };
 
 /*
