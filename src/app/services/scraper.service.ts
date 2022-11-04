@@ -10,6 +10,12 @@ import { range } from "../utils/range";
 import { NotificationsService } from "./notifications.service";
 import { disableSpinner, enableSpinner } from "../state/spinner.actions";
 
+const options: {
+  responseType: 'json'
+} = {
+  responseType: 'json'
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +32,7 @@ export class ScraperService {
     const url = `${environment.scraperApi}/scrap_race`;
     this.store.dispatch(enableSpinner());
 
-    return this.http.post<IFile>(url, data)
+    return this.http.post<IFile>(url, data, options)
       .pipe(
         catchError(
           err => {
@@ -72,6 +78,6 @@ export class ScraperService {
 
   wakeUpServer() {
     const url = `${environment.scraperApi}/wakie-wakie`;
-    return this.http.get(url);
+    return this.http.get(url, options);
   }
 }
