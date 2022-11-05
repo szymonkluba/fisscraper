@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  scraperApi: "http://fisscraper.pythonanywhere.com"
+  scraperApi: "//fisscraper.pythonanywhere.com"
 };
 
 /*
