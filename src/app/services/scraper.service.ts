@@ -29,7 +29,7 @@ export class ScraperService {
   }
 
   scrapRace(data: Race): Observable<number> {
-    const url = `${environment.scraperApi}/scrap_race`;
+    const url = `${environment.scraperApi}/scrap_race/`;
     this.store.dispatch(enableSpinner());
 
     return this.http.post<IFile>(url, data, options)
@@ -77,7 +77,7 @@ export class ScraperService {
   }
 
   wakeUpServer() {
-    const url = `${environment.scraperApi}/wakie-wakie`;
+    const url = `${environment.scraperApi}/wakie-wakie/`;
     return this.http.get(url, options);
   }
 }

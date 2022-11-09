@@ -28,7 +28,7 @@ export class DropboxService {
 
   getFiles(folderPath: string) {
 
-    const url = `${this.apiUrl}/list_folder/${folderPath}`;
+    const url = `${this.apiUrl}/folder/${folderPath}/`;
 
     return this.http
       .get<{ entries: IFile[] }>(url)
@@ -46,7 +46,7 @@ export class DropboxService {
   };
 
   getFolders() {
-    const url = `${this.apiUrl}/list_folder`;
+    const url = `${this.apiUrl}/folder/`;
 
     return this.http
       .get<{ entries: Folder[] }>(url)
@@ -62,7 +62,7 @@ export class DropboxService {
   };
 
   downloadFile(file: IFile) {
-    const url = `${this.apiUrl}/download/file`;
+    const url = `${this.apiUrl}/download/file/`;
 
     return this.http.post(url, file, {
       observe: "events",
@@ -73,7 +73,7 @@ export class DropboxService {
   };
 
   downloadFolder(folder: Folder) {
-    const url = `${this.apiUrl}/download/folder`;
+    const url = `${this.apiUrl}/download/folder/`;
 
     return this.http.post(url, folder, {
       observe: "events",
@@ -84,7 +84,7 @@ export class DropboxService {
   };
 
   downloadCurrentFiles(entries: readonly IFile[]) {
-    const url = `${this.apiUrl}/download/current`;
+    const url = `${this.apiUrl}/download/current/`;
 
     return this.http.post(url, { entries }, {
       observe: "events",
