@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  scraperApi: "http://www.fisscraper.online/api"
+  scraperApi: "//www.fisscraper.online/api"
 };
 
 /*
