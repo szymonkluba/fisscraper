@@ -4,6 +4,8 @@
 /dist
 /tmp
 /out-tsc
+/.angular
+/src
 # Only exists if Bazel was run
 /bazel-out
 
@@ -46,3 +48,14 @@ testem.log
 .DS_Store
 Thumbs.db
 /.env
+
+404.html
+angular.json
+karma.conf.js
+package.json
+package-lock.json
+README.md
+server.js
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
