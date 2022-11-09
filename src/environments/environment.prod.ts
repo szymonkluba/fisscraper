@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  scraperApi: "http://fisscraper.online/api"
+  scraperApi: "http://www.fisscraper.online/api"
 };
