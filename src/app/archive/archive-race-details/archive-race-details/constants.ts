@@ -3,7 +3,7 @@ export const JUMPER_TABLE_COLUMNS = [
   'bib',
   'jumper-name',
   'jumper-fis_code',
-  'jumper-nation',
+  'jumper-nation-name',
   'jumper-born',
   'jump_1-distance',
   'jump_1-distance_points',
@@ -20,6 +20,7 @@ export const JUMPER_TABLE_COLUMNS = [
   'jump_1-wind_points',
   'jump_1-total_points',
   'jump_1-rank',
+  'jump_2-distance',
   'jump_2-distance_points',
   'jump_2-speed',
   'jump_2-judge_a',
@@ -39,4 +40,4 @@ export const JUMPER_TABLE_COLUMNS = [
   'disqualified',
 ];
 
-export const COUNTRY_TABLE_COLUMNS = ['rank', 'nation', 'total_points'];
+export const COUNTRY_TABLE_COLUMNS = ['rank', 'nation-name', 'total_points'];

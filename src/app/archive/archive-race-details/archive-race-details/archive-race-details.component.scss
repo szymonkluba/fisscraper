@@ -1,0 +1,52 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+.loader {
+  margin: 2rem auto;
+  display: inline-block;
+}
+
+.table-container {
+  overflow: auto;
+  height: 30rem;
+  width: 60rem;
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  font-size: .6rem;
+  font-weight: 800;
+}
+
+td.mat-cell {
+  min-width: 2.5rem;
+  font-size: .6rem;
+}
+
+th.cdk-column-jumper,
+th.cdk-column-jump1,
+th.cdk-column-jumper-born,
+th.cdk-column-jump_1-rank,
+td.cdk-column-jumper-born,
+td.cdk-column-jump_1-rank {
+  border-right: rgba(255, 255, 255, 0.12) solid 1px;
+}
+
+th.cdk-column-summary,
+th.cdk-column-total_points,
+td.cdk-column-total_points {
+  border-left: rgba(255, 255, 255, 0.12) solid 1px;
+}
+
+th.cdk-column-rank,
+th.cdk-column-bib {
+  width: fit-content;
+}
+
+.mat-icon {
+  height: 1.125rem;
+}

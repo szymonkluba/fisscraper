@@ -21,25 +21,21 @@ export const routerPaths = {
   SINGLE_RACE: {
     path: '/scraper/single-race',
     label: 'Single race',
-    routerPath: 'single-race'
+    routerPath: 'single-race',
   },
   MULTI_RACES: {
     path: '/scraper/multi-races',
     label: 'Multiple races',
-    routerPath: 'multi-races'
+    routerPath: 'multi-races',
   },
   RANGE_RACES: {
     path: '/scraper/range-races',
     label: 'Range of races',
-    routerPath: 'range-races'
+    routerPath: 'range-races',
   },
   RAW_DATA: {
     path: '/scraper/raw-data',
     label: 'Raw data',
-    routerPath: 'raw-data'
+    routerPath: 'raw-data',
   },
-  FOLDER: {
-    routerPath: ":folder"
-  }
-}
-
+};

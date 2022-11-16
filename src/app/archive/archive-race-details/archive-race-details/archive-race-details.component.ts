@@ -2,19 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
+  OnChanges,
   OnInit,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { ScraperService } from '../../../services/scraper.service';
-import { Subject, takeUntil } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
-import {
-  Participant,
-  ParticipantCountry,
-  RaceDetails,
-} from '../../../models/race.model';
+import { Observable } from 'rxjs';
+import { RaceDetails } from '../../../models/race.model';
 import { COUNTRY_TABLE_COLUMNS, JUMPER_TABLE_COLUMNS } from './constants';
-import * as assert from 'assert';
+import { MatTable } from '@angular/material/table';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-archive-race-details',
@@ -22,43 +21,52 @@ import * as assert from 'assert';
   styleUrls: ['./archive-race-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArchiveRaceDetailsComponent implements OnInit, OnDestroy {
+export class ArchiveRaceDetailsComponent implements OnChanges, OnInit {
+  @ViewChild(MatTable) table?: MatTable<any>;
+
   @Input() uuid!: string;
 
   readonly countriesColumns = COUNTRY_TABLE_COLUMNS;
   readonly jumpersColumns = JUMPER_TABLE_COLUMNS;
 
-  private readonly subscriptionEndSubject = new Subject();
-  private readonly subscriptionEnd$ =
-    this.subscriptionEndSubject.asObservable();
+  raceData$?: Observable<RaceDetails>;
+  prefixRegex = new RegExp(/[a-z]*-|jump_\d/gm);
 
-  readonly countriesTableDataSource: MatTableDataSource<ParticipantCountry> =
-    new MatTableDataSource<ParticipantCountry>();
-  readonly jumpersTableDataSource: MatTableDataSource<Participant> =
-    new MatTableDataSource<Participant>();
+  constructor(
+    private readonly scraperService: ScraperService,
+    private readonly iconRegistry: MatIconRegistry,
+    private readonly sanitizer: DomSanitizer
+  ) {}
 
-  constructor(private readonly scraperService: ScraperService) {}
-
-  ngOnInit(): void {
-    this.scraperService
-      .getRaceDetails(this.uuid)
-      .pipe(takeUntil(this.subscriptionEnd$))
-      .subscribe((raceDetails: RaceDetails) => {
-        this.countriesTableDataSource.data =
-          raceDetails.participantcountry_set || [];
-        this.jumpersTableDataSource.data = raceDetails.participant_set || [];
-      });
+  ngAfterViewChecked(): void {
+    if (this.table) {
+      this.table.updateStickyColumnStyles();
+    }
   }
 
-  ngOnDestroy(): void {
-    this.subscriptionEndSubject.next(null);
-    this.subscriptionEndSubject.complete();
+  ngOnInit(): void {
+    this.iconRegistry.addSvgIcon(
+      'finished',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/finished.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'disqualified',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/disqualified.svg')
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['uuid']) {
+      this.raceData$ = this.scraperService.getRaceDetails(this.uuid);
+    }
   }
 
   getNestedValue(item: object, path: string) {
-    return path.split('-').reduce((obj, key) => {
-      assert(hasProperty(obj, key));
-      return obj[key];
+    return path.split('-').reduce((obj: object, key: string) => {
+      if (hasProperty(obj, key)) {
+        return obj[key];
+      }
+      return obj;
     }, item);
   }
 }

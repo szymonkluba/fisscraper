@@ -2,9 +2,28 @@ mat-card {
   width: min(70rem, 100%);
   min-height: 15rem;
   margin: 2rem auto;
+
+  &-title {
+    display: inline-block;
+  }
+
+  &-actions {
+    display: inline-block;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+}
+
+.header {
+  display: flex;
 }
 
 .option {
   display: flex;
   justify-content: space-between;
+}
+
+:host ::ng-deep .mat-selection-list > .mat-list-option.mat-list-item:only-child .mat-pseudo-checkbox::after,
+:host ::ng-deep .mat-selection-list > .mat-list-option.mat-list-item:only-child .mat-pseudo-checkbox {
+  visibility: hidden;
 }

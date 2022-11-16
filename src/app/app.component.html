@@ -13,12 +13,24 @@
     </p>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div class="mat-toolbar-content">
+    <mat-toolbar class="title mat-elevation-z8" color="primary">
+      <div class="title-content">
         <button mat-icon-button (click)="sidenav.open()" matTooltip="Open menu">
           <mat-icon>menu</mat-icon>
         </button>
         <h1 class="app-title">FIS Scraper</h1>
+      </div>
+    </mat-toolbar>
+    <mat-toolbar class="mat-elevation-z8" color="primary">
+      <div class="menu-content">
+        <button
+          *ngFor="let link of navLinks"
+          mat-button
+          (click)="close()"
+          [routerLink]="link.path"
+          routerLinkActive="active">
+          {{ link.label }}
+        </button>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

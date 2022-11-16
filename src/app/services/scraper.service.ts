@@ -131,7 +131,7 @@ export class ScraperService {
 
   getRaceDetails(uuid: string): Observable<RaceDetails> {
     const url = `${environment.scraperApi}/race/${uuid}/`;
-    return this.http.get<RaceDetails>(url, options).pipe(filter(Boolean));
+    return this.http.get<RaceDetails>(url, options);
   }
 
   downloadFile(race: RaceDetails): Observable<Download> {
