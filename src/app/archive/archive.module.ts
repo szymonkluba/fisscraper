@@ -3,21 +3,24 @@ import { CommonModule } from '@angular/common';
 
 import { ArchiveRoutingModule } from './archive-routing.module';
 import { ArchiveComponent } from './archive/archive.component';
-import { SharedModule } from "../shared/shared.module";
-import { AngularMaterialModule } from "../angular-material/angular-material.module";
-import { FolderContentsComponent } from './folder-contents/folder-contents.component';
+import { SharedModule } from '../shared/shared.module';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ArchiveRaceDetailsComponent } from './archive-race-details/archive-race-details/archive-race-details.component';
+import { CapitalizeModule } from '../utils/capitalize/capitalize.module';
 
 @NgModule({
-  declarations: [
-    ArchiveComponent,
-    FolderContentsComponent
-  ],
+  declarations: [ArchiveComponent, ArchiveRaceDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,
     AngularMaterialModule,
-    ArchiveRoutingModule
-  ]
+    ArchiveRoutingModule,
+    MatTableModule,
+    MatExpansionModule,
+    CapitalizeModule,
+  ],
 })
-export class ArchiveModule { }
+export class ArchiveModule {}

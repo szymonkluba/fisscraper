@@ -5,7 +5,6 @@
 /tmp
 /out-tsc
 /.angular
-/src
 # Only exists if Bazel was run
 /bazel-out
 

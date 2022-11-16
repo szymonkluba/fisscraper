@@ -1,7 +1,6 @@
+import { RaceDetails } from "./race.model";
+
 export interface Folder {
-  ".tag": string
-  id: string;
-  name: string;
-  path_lower: string;
-  path_display: string;
+  name: string
+  entries: Array<RaceDetails>
 }

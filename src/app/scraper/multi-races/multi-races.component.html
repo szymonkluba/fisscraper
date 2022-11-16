@@ -1,10 +1,12 @@
 <form [formGroup]="raceForm">
   <div class="multi-races-form" formArrayName="races">
-
-    <div class="multi-races-form-group" *ngFor="let race of races().controls; let i = index;" [formGroupName]="i">
+    <div
+      class="multi-races-form-group"
+      *ngFor="let race of races().controls; let i = index"
+      [formGroupName]="i">
       <mat-form-field appearance="fill">
         <mat-label>FIS ID</mat-label>
-        <input matInput type="number" formControlName="fis_id">
+        <input matInput type="number" formControlName="fis_id" />
         <mat-error *ngIf="fisId[i].hasError('min')">
           Enter <strong>number</strong> greater than 0
         </mat-error>
@@ -27,8 +29,17 @@
       </button>
     </div>
 
-    <button class="multi-races-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
-
+    <button
+      class="multi-races-form-submit"
+      mat-raised-button
+      color="primary"
+      (click)="submit()">
+      Scrap!
+    </button>
   </div>
 </form>
-<mat-progress-bar *ngIf="progress$ | async as progress" color="accent" [value]="progress" mode="buffer"></mat-progress-bar>
+<mat-progress-bar
+  *ngIf="progress$ | async as progress"
+  color="accent"
+  [value]="progress"
+  mode="buffer"></mat-progress-bar>

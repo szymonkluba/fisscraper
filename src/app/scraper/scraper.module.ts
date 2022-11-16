@@ -10,6 +10,8 @@ import { MultiRacesComponent } from './multi-races/multi-races.component';
 import { RangeRacesComponent } from './range-races/range-races.component';
 import { CurrentFilesComponent } from './current-files/current-files.component';
 import { SharedModule } from "../shared/shared.module";
+import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';
+import { MatListModule } from "@angular/material/list";
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { SharedModule } from "../shared/shared.module";
     SingleRaceComponent,
     MultiRacesComponent,
     RangeRacesComponent,
-    CurrentFilesComponent
+    CurrentFilesComponent,
+    UnprocessedDataComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { SharedModule } from "../shared/shared.module";
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    MatListModule,
   ]
 })
 export class ScraperModule { }

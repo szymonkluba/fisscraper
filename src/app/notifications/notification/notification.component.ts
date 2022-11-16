@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Notification } from "../../models/notification.model";
 import { Store } from "@ngrx/store";
 import { removeNotification } from "../../state/notifications.actions";
@@ -6,18 +6,16 @@ import { removeNotification } from "../../state/notifications.actions";
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss']
+  styleUrls: ['./notification.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
 
   @Input() notification?: Notification
 
   constructor(
     private store: Store
   ) { }
-
-  ngOnInit(): void {
-  }
 
   close(event: MouseEvent) {
     event.preventDefault();

@@ -2,11 +2,9 @@ mat-card {
   width: min(70rem, 100%);
   min-height: 15rem;
   margin: 2rem auto;
+}
 
-  &-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    grid-auto-rows: 12rem;
-    gap: 2rem;
-  }
+.option {
+  display: flex;
+  justify-content: space-between;
 }

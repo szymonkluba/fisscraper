@@ -1,7 +1,7 @@
 <form class="range-races-form" [formGroup]="raceForm">
   <mat-form-field appearance="fill">
     <mat-label>Initial FIS ID</mat-label>
-    <input matInput type="number" formControlName="start_fis_id">
+    <input matInput type="number" formControlName="start_fis_id" />
     <mat-error *ngIf="startFisId.hasError('min')">
       Enter <strong>number</strong> greater than 0
     </mat-error>
@@ -14,7 +14,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Final FIS ID</mat-label>
-    <input matInput type="number" formControlName="end_fis_id">
+    <input matInput type="number" formControlName="end_fis_id" />
     <mat-error *ngIf="endFisId.hasError('min')">
       Enter <strong>number</strong> greater than 0
     </mat-error>
@@ -26,6 +26,16 @@
     </mat-error>
   </mat-form-field>
   <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
-  <button class="range-races-form-submit" mat-raised-button color="primary" (click)="submit()">Scrap!</button>
+  <button
+    class="range-races-form-submit"
+    mat-raised-button
+    color="primary"
+    (click)="submit()">
+    Scrap!
+  </button>
 </form>
-<mat-progress-bar *ngIf="progress$ | async as progress" color="accent" [value]="progress" mode="buffer"></mat-progress-bar>
+<mat-progress-bar
+  *ngIf="progress$ | async as progress"
+  color="accent"
+  [value]="progress"
+  mode="buffer"></mat-progress-bar>

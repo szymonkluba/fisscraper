@@ -5,13 +5,15 @@
     "ng": "ng",
     "start": "node server.js",
     "serve": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href 'https://www.fisscraper.online/'",
+    "postbuild": "copyfiles --up 1 ./docs/* /home/szymon/PycharmProjects/fis-scraper-api/static",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "engines": {
-    "node": "16.11.0",
-    "npm": "8.0.0"
+    "node": "16.11.1",
+    "npm": "8.12.1"
   },
   "private": true,
   "dependencies": {
@@ -35,20 +37,34 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.1.2",
+    "@angular-devkit/build-angular": "^14.2.9",
+    "@angular-eslint/builder": "13.5.0",
+    "@angular-eslint/eslint-plugin": "13.5.0",
+    "@angular-eslint/eslint-plugin-template": "13.5.0",
+    "@angular-eslint/schematics": "13.5.0",
+    "@angular-eslint/template-parser": "13.5.0",
     "@angular/cli": "^13.1.2",
     "@angular/compiler-cli": "~13.1.0",
     "@types/file-saver": "^2.0.4",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
     "angular-cli-ghpages": "^1.0.3",
+    "assert": "^2.0.0",
+    "core-js": "^3.26.1",
     "enhanced-resolve": "^5.8.3",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "^2.7.1",
+    "prettier-eslint": "^15.0.1",
     "typescript": "~4.5.2"
   }
 }

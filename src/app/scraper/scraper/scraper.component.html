@@ -1,10 +1,14 @@
 <mat-card>
   <nav mat-tab-nav-bar>
-    <a mat-tab-link *ngFor="let link of links"
-       (click)="activeLink = link.path"
-       [active]="activeLink == link.path"
-       [routerLink]="link.routerPath"
-       [routerLinkActive]="link.path === activeLink ? 'active' : ''"> {{link.label}} </a>
+    <a
+      mat-tab-link
+      *ngFor="let link of links"
+      (click)="activeLink = link.path"
+      [active]="activeLink === link.path"
+      [routerLink]="link.routerPath"
+      [routerLinkActive]="link.path === activeLink ? 'active' : ''">
+      {{ link.label }}
+    </a>
   </nav>
   <router-outlet></router-outlet>
 </mat-card>

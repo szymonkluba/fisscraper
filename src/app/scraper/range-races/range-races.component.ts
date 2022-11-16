@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ScraperService } from "../../services/scraper.service";
 import { Observable } from "rxjs";
@@ -6,9 +6,10 @@ import { Observable } from "rxjs";
 @Component({
   selector: 'app-range-races',
   templateUrl: './range-races.component.html',
-  styleUrls: ['./range-races.component.scss']
+  styleUrls: ['./range-races.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RangeRacesComponent implements OnInit {
+export class RangeRacesComponent {
 
   raceForm: FormGroup
   startFisId: FormControl = new FormControl(0, [Validators.required, Validators.min(1), Validators.pattern(/\d*/)]);
@@ -27,13 +28,7 @@ export class RangeRacesComponent implements OnInit {
     })
   }
 
-
-
   submit(): void {
     this.progress$ = this.scraperService.scrapRangeOfRaces(this.raceForm.value);
   }
-
-  ngOnInit(): void {
-  }
-
 }

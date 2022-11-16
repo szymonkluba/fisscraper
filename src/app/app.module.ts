@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from "@angular/common/http";
 import { SharedModule } from "./shared/shared.module";
 
-import { filesReducer } from "./state/files.reducer";
+import { racesReducer } from "./state/races.reducer";
 import { foldersReducer } from "./state/folders.reducer";
 import { folderContentReducer } from "./state/folderContents.reducer";
 
@@ -32,7 +32,7 @@ import { spinnerReducer } from "./state/spinner.reducer";
     HttpClientModule,
     NotificationsModule,
     StoreModule.forRoot({
-      files: filesReducer,
+      races: racesReducer,
       folders: foldersReducer,
       folderContents: folderContentReducer,
       notifications: notificationsReducer,

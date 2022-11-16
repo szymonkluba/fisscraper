@@ -1,0 +1,28 @@
+<form class="raw-data-form" [formGroup]="raceForm">
+  <mat-form-field appearance="fill">
+    <mat-label>FIS ID</mat-label>
+    <input matInput type="number" formControlName="fis_id" />
+    <mat-error *ngIf="fisId.hasError('min')">
+      Enter <strong>number</strong> greater than 0
+    </mat-error>
+    <mat-error *ngIf="fisId.hasError('pattern')">
+      Enter <strong>number</strong>
+    </mat-error>
+    <mat-error *ngIf="fisId.hasError('required')">
+      FIS ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
+  <button
+    class="raw-data-form-submit"
+    mat-raised-button
+    color="primary"
+    (click)="submit()">
+    Scrap!
+  </button>
+</form>
+<mat-progress-bar
+  *ngIf="progress$ | async as progress"
+  color="accent"
+  [value]="progress * 100"
+  mode="buffer"></mat-progress-bar>

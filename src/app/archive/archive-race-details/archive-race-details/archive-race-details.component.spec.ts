@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FolderContentsComponent } from './folder-contents.component';
+import { ArchiveRaceDetailsComponent } from './archive-race-details.component';
 
-describe('FolderContentsComponent', () => {
-  let component: FolderContentsComponent;
-  let fixture: ComponentFixture<FolderContentsComponent>;
+describe('ArchiveRaceDetailsComponent', () => {
+  let component: ArchiveRaceDetailsComponent;
+  let fixture: ComponentFixture<ArchiveRaceDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FolderContentsComponent ]
+      declarations: [ ArchiveRaceDetailsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FolderContentsComponent);
+    fixture = TestBed.createComponent(ArchiveRaceDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

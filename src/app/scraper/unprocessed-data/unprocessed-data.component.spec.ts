@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FolderEntryComponent } from './folder-entry.component';
+import { UnprocessedDataComponent } from './unprocessed-data.component';
 
-describe('FolderEntryComponent', () => {
-  let component: FolderEntryComponent;
-  let fixture: ComponentFixture<FolderEntryComponent>;
+describe('UnprocessedDataComponent', () => {
+  let component: UnprocessedDataComponent;
+  let fixture: ComponentFixture<UnprocessedDataComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FolderEntryComponent ]
+      declarations: [ UnprocessedDataComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FolderEntryComponent);
+    fixture = TestBed.createComponent(UnprocessedDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

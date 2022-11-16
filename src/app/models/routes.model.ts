@@ -33,6 +33,11 @@ export const routerPaths = {
     label: 'Range of races',
     routerPath: 'range-races'
   },
+  RAW_DATA: {
+    path: '/scraper/raw-data',
+    label: 'Raw data',
+    routerPath: 'raw-data'
+  },
   FOLDER: {
     routerPath: ":folder"
   }

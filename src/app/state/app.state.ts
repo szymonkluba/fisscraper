@@ -1,11 +1,10 @@
-import { IFile } from "../models/file.model";
 import { Folder } from "../models/folder.model";
 import { Notification } from "../models/notification.model";
+import { RaceDetails } from "../models/race.model";
 
 export interface AppState {
-  files: ReadonlyArray<IFile>,
   folders: ReadonlyArray<Folder>,
-  folderContents: ReadonlyArray<IFile>,
   notifications: ReadonlyArray<Notification>,
-  spinner: boolean
+  spinner: boolean,
+  races: ReadonlyArray<RaceDetails>
 }

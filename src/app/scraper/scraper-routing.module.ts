@@ -5,6 +5,7 @@ import { SingleRaceComponent } from "./single-race/single-race.component";
 import { routerPaths } from "../models/routes.model";
 import { MultiRacesComponent } from "./multi-races/multi-races.component";
 import { RangeRacesComponent } from "./range-races/range-races.component";
+import { UnprocessedDataComponent } from "./unprocessed-data/unprocessed-data.component";
 
 const routes: Routes = [
   {
@@ -17,16 +18,20 @@ const routes: Routes = [
     children: [
       {
         path: routerPaths.SINGLE_RACE.routerPath,
-        component: SingleRaceComponent
+        component: SingleRaceComponent,
       },
       {
         path: routerPaths.MULTI_RACES.routerPath,
-        component: MultiRacesComponent
+        component: MultiRacesComponent,
       },
       {
         path: routerPaths.RANGE_RACES.routerPath,
-        component: RangeRacesComponent
-      }
+        component: RangeRacesComponent,
+      },
+      {
+        path: routerPaths.RAW_DATA.routerPath,
+        component: UnprocessedDataComponent,
+      },
     ]
   },
 ];
