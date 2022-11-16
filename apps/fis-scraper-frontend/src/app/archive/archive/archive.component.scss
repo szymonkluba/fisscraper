@@ -1,0 +1,65 @@
+mat-card {
+  width: min(70rem, 100%);
+  margin: 0 auto;
+
+  &-content {
+    margin-top: 1rem;
+    min-height: 10rem;
+  }
+}
+
+.accordion .mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.accordion .mat-expansion-panel-header-title {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+}
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.detail-content {
+  overflow: hidden;
+  display: flex;
+}
+
+td.mat-column-expand {
+  max-width: 2rem;
+  text-align: center;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td.mat-cell:not(td.mat-column-expand) {
+  text-align: center;
+  min-width: 3rem;
+}
+
+.loader {
+  display: inline-block;
+  height: 10rem;
+}
