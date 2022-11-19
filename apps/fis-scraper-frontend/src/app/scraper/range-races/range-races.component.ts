@@ -41,6 +41,10 @@ export class RangeRacesComponent {
   }
 
   submit(): void {
-    this.progress$ = this.scraperService.scrapRangeOfRaces(this.raceForm.value);
+    if (this.raceForm.valid) {
+      this.progress$ = this.scraperService.scrapRangeOfRaces(
+        this.raceForm.value
+      );
+    }
   }
 }

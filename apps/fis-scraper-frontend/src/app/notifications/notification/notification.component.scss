@@ -1,8 +1,8 @@
 mat-card {
-  width: 100%;
-  min-width: 20rem;
+  width: 15rem;
+  margin: .5rem;
 
-  & + & {
-    margin-block: 0.5rem;
+  &-content {
+    font-size: 0.9rem;
   }
 }

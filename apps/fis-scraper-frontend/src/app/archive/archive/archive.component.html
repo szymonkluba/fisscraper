@@ -1,9 +1,8 @@
 <mat-card>
-  <mat-card-title>
-    <app-back-button></app-back-button>
-    Archive directories:
-  </mat-card-title>
-  <mat-divider inset></mat-divider>
+  <mat-card-header>
+    <mat-card-title> Archive directories: </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
   <mat-card-content>
     <ng-container *ngIf="folders$ | async as folders; else loader">
       <mat-accordion class="accordion" multi>

@@ -12,6 +12,7 @@ export class ScraperComponent {
     routerPaths.MULTI_RACES,
     routerPaths.RANGE_RACES,
     routerPaths.RAW_DATA,
+    routerPaths.SCRAP_TABLE,
   ];
   activeLink: string = window.location.pathname;
 

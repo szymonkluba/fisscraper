@@ -57,6 +57,10 @@ export class MultiRacesComponent {
   }
 
   submit() {
-    this.progress$ = this.scraperService.scrapMultipleRaces(this.races().value);
+    if (this.raceForm.valid) {
+      this.progress$ = this.scraperService.scrapMultipleRaces(
+        this.raceForm.value
+      );
+    }
   }
 }

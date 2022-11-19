@@ -1,5 +1,6 @@
 <form class="single-race-form" [formGroup]="raceForm">
-  <mat-form-field appearance="fill">
+  <h2>Scrap single race</h2>
+  <mat-form-field appearance="outline">
     <mat-label>FIS ID</mat-label>
     <input matInput type="number" formControlName="fis_id" />
     <mat-error *ngIf="fisId.hasError('min')">
@@ -17,7 +18,8 @@
     class="single-race-form-submit"
     mat-raised-button
     color="primary"
-    (click)="submit()">
+    (click)="submit()"
+    [disabled]="!raceForm.valid">
     Scrap!
   </button>
 </form>

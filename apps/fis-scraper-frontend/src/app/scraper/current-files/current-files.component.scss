@@ -3,6 +3,10 @@ mat-card {
   min-height: 15rem;
   margin: 2rem auto;
 
+  &-header {
+    display: flex;
+  }
+
   &-title {
     display: inline-block;
   }
@@ -14,16 +18,16 @@ mat-card {
   }
 }
 
-.header {
+mat-selection-list {
   display: flex;
+  flex-flow: row wrap;
 }
 
-.option {
-  display: flex;
-  justify-content: space-between;
+mat-list-option {
+  width: calc(100% - 5rem);
 }
 
-:host ::ng-deep .mat-selection-list > .mat-list-option.mat-list-item:only-child .mat-pseudo-checkbox::after,
-:host ::ng-deep .mat-selection-list > .mat-list-option.mat-list-item:only-child .mat-pseudo-checkbox {
-  visibility: hidden;
+button {
+  margin: auto;
 }
+

@@ -21,16 +21,27 @@
         <h1 class="app-title">FIS Scraper</h1>
       </div>
     </mat-toolbar>
-    <mat-toolbar class="mat-elevation-z8" color="primary">
+    <mat-toolbar color="primary">
       <div class="menu-content">
-        <button
-          *ngFor="let link of navLinks"
-          mat-button
-          (click)="close()"
-          [routerLink]="link.path"
-          routerLinkActive="active">
-          {{ link.label }}
-        </button>
+        <nav
+          mat-tab-nav-bar
+          class="menu-content"
+          [tabPanel]="mainNavPanel"
+          color="primary"
+          backgroundColor="primary">
+          <a
+            *ngFor="let link of navLinks"
+            mat-tab-link
+            (click)="activeLink = link"
+            [routerLink]="link.path"
+            [active]="activeLink === link"
+            routerLinkActive="active">
+            {{ link.label }}
+          </a>
+        </nav>
+        <mat-tab-nav-panel
+          class="menu-content"
+          #mainNavPanel></mat-tab-nav-panel>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

@@ -35,6 +35,8 @@ export class SingleRaceComponent {
   }
 
   submit() {
-    this.progress$ = this.scraperService.scrapRace(this.raceForm.value);
+    if (this.raceForm.valid) {
+      this.progress$ = this.scraperService.scrapRace(this.raceForm.value);
+    }
   }
 }

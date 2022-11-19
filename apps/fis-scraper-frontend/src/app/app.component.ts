@@ -22,6 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
 
   navLinks: RouteInterface[] = [routerPaths.SCRAPER, routerPaths.ARCHIVE];
+  activeLink: RouteInterface = this.navLinks[0];
 
   close() {
     this.sidenav.close();

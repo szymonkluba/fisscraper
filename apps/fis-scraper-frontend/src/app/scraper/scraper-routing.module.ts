@@ -6,6 +6,7 @@ import { routerPaths } from '../models/routes.model';
 import { MultiRacesComponent } from './multi-races/multi-races.component';
 import { RangeRacesComponent } from './range-races/range-races.component';
 import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';
+import { ScrapTableComponent } from './scrap-table/scrap-table.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: routerPaths.RAW_DATA.routerPath,
         component: UnprocessedDataComponent,
+      },
+      {
+        path: routerPaths.SCRAP_TABLE.routerPath,
+        component: ScrapTableComponent,
       },
     ],
   },

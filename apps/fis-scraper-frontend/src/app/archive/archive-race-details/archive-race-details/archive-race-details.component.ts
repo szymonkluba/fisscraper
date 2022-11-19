@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ScraperService } from '../../../services/scraper.service';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { RaceDetails } from '../../../models/race.model';
 import { COUNTRY_TABLE_COLUMNS, JUMPER_TABLE_COLUMNS } from './constants';
 import { MatTable } from '@angular/material/table';
@@ -32,7 +32,8 @@ export class ArchiveRaceDetailsComponent
   @Input() uuid!: string;
 
   readonly countriesColumns = COUNTRY_TABLE_COLUMNS;
-  readonly jumpersColumns = JUMPER_TABLE_COLUMNS;
+  jumpersColumns = JUMPER_TABLE_COLUMNS;
+  wideColumns = ['jumper', 'jump1', 'jump2', 'summary'];
 
   raceData$?: Observable<RaceDetails>;
   prefixRegex = new RegExp(/[a-z]*-|jump_\d/gm);
@@ -70,6 +71,29 @@ export class ArchiveRaceDetailsComponent
           if (!raceDetails) {
             return this.scraperService.getRaceDetails(this.uuid);
           } else return of(raceDetails);
+        }),
+        tap((raceDetails: RaceDetails) => {
+          if (raceDetails.no_jump_1 && raceDetails.no_jump_2) {
+            this.wideColumns = [];
+          }
+
+          if (raceDetails.no_jump_1) {
+            this.jumpersColumns = this.jumpersColumns.filter(
+              column => !column.includes('jump_1')
+            );
+            this.wideColumns = this.wideColumns.filter(
+              column => column !== 'jump1'
+            );
+          }
+
+          if (raceDetails.no_jump_2) {
+            this.jumpersColumns = this.jumpersColumns.filter(
+              column => !column.includes('jump_2')
+            );
+            this.wideColumns = this.wideColumns.filter(
+              column => column !== 'jump2'
+            );
+          }
         })
       );
     }

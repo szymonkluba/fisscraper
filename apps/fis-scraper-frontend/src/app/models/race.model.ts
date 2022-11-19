@@ -35,7 +35,9 @@ interface Nation {
 export interface Participant {
   id: number;
   jump_1: Jump;
+  jump_1_empty?: boolean;
   jump_2: Jump;
+  jump_2_empty?: boolean;
   jumper: Jumper;
   rank: number;
   bib: number;
@@ -64,6 +66,8 @@ export interface RaceDetails {
   hill_size: string;
   details: boolean;
   participant_set?: Array<Participant>;
+  no_jump_1?: boolean;
+  no_jump_2?: boolean;
   participantcountry_set?: Array<ParticipantCountry>;
 }
 

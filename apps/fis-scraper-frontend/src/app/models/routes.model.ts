@@ -38,4 +38,9 @@ export const routerPaths = {
     label: 'Raw data',
     routerPath: 'raw-data',
   },
+  SCRAP_TABLE: {
+    path: '/scraper/scrap-table',
+    label: 'Scrap table',
+    routerPath: 'scrap-table',
+  },
 };

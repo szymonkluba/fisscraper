@@ -60,7 +60,11 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  downloadFile(race: RaceDetails) {
+  downloadFile(event: MouseEvent, race: RaceDetails) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    event.preventDefault();
+
     this.scraperService
       .downloadFile(race)
       .pipe(takeUntil(this.destroy$))

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Race, RaceDetails } from '../models/race.model';
 import { Store } from '@ngrx/store';
 import {
@@ -39,6 +39,21 @@ export class ScraperService {
     private notificationService: NotificationsService,
     @Inject(SAVER) private save: Saver
   ) {}
+
+  private processFileResponse(
+    response: Observable<HttpEvent<Blob>>,
+    filename?: string
+  ): Observable<Download> {
+    return response.pipe(
+      catchError(err => {
+        this.notificationService.handleErrorNotification(err);
+        this.store.dispatch(disableSpinner());
+        return of(null);
+      }),
+      filter(Boolean),
+      download(blob => this.save(blob, filename))
+    );
+  }
 
   scrapRace(data: Race): Observable<number> {
     const url = `${environment.scraperApi}/scrap_race/`;
@@ -89,15 +104,23 @@ export class ScraperService {
     const url = `${environment.scraperApi}/scrap_race/raw_data/`;
     this.store.dispatch(enableSpinner());
 
-    return this.http
-      .post(url, data, {
+    return this.processFileResponse(
+      this.http.post(url, data, {
         observe: 'events',
         responseType: 'blob',
       })
-      .pipe(
-        download(blob => this.save(blob)),
-        map(_ => 1)
-      );
+    ).pipe(map(_ => 1));
+  }
+
+  scrapTable(data: { url: string }): Observable<number> {
+    const url = `${environment.scraperApi}/scrap_table/`;
+
+    return this.processFileResponse(
+      this.http.post(url, data, {
+        observe: 'events',
+        responseType: 'blob',
+      })
+    ).pipe(map(_ => 1));
   }
 
   listRaces(): Observable<Array<Folder>> {
@@ -132,28 +155,40 @@ export class ScraperService {
 
   getRaceDetails(uuid: string): Observable<RaceDetails> {
     const url = `${environment.scraperApi}/race/${uuid}/`;
-    return this.http
-      .get<RaceDetails>(url, options)
-      .pipe(
-        tap(raceDetails => this.store.dispatch(addRaceDetails({ raceDetails })))
-      );
+    return this.http.get<RaceDetails>(url, options).pipe(
+      map((race: RaceDetails) => {
+        if (race.participant_set) {
+          for (let participant of race.participant_set) {
+            participant.jump_1_empty =
+              participant.jump_1 &&
+              !Object.values(participant.jump_1).every(Boolean);
+            participant.jump_2_empty =
+              participant.jump_2 &&
+              !Object.values(participant.jump_2).every(Boolean);
+          }
+
+          race.no_jump_1 = race.participant_set
+            .map(participant => participant.jump_1_empty)
+            .every(Boolean);
+          race.no_jump_2 = race.participant_set
+            .map(participant => participant.jump_2_empty)
+            .every(Boolean);
+        }
+
+        return race;
+      }),
+      tap(raceDetails => this.store.dispatch(addRaceDetails({ raceDetails })))
+    );
   }
 
   downloadFile(race: RaceDetails): Observable<Download> {
     const url = `${environment.scraperApi}/download/${race.uuid}/file/`;
-    return this.http
-      .get(url, {
+    return this.processFileResponse(
+      this.http.get(url, {
         observe: 'events',
         responseType: 'blob',
       })
-      .pipe(
-        download(blob =>
-          this.save(
-            blob,
-            `${race.place} ${race.hill_size} ${race.date}`.replace(' ', '_')
-          )
-        )
-      );
+    );
   }
 
   downloadSelectedFiles(
@@ -171,18 +206,12 @@ export class ScraperService {
       entries,
     };
 
-    return this.http
-      .post(url, body, {
+    return this.processFileResponse(
+      this.http.post(url, body, {
         observe: 'events',
         responseType: 'blob',
-      })
-      .pipe(
-        download(blob =>
-          this.save(
-            blob,
-            filename || `${new Date().toISOString()}.zip`.replace(':', '')
-          )
-        )
-      );
+      }),
+      filename
+    );
   }
 }

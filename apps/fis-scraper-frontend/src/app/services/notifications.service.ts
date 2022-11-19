@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   NotificationColors,
   NotificationIcons,
+  NotificationKind,
 } from '../models/notification.model';
 import {
   addNotification,
@@ -27,6 +28,7 @@ export class NotificationsService implements OnDestroy {
       message: error.error.detail || error.statusText,
       icon: NotificationIcons.ERROR,
       color: NotificationColors.ERROR,
+      kind: NotificationKind.ERROR,
     };
     this.store.dispatch(addNotification({ notification }));
     const snackbar = this.snackBar.open(notification.message, 'Close', {
@@ -41,6 +43,7 @@ export class NotificationsService implements OnDestroy {
       message: `${fileName} is ready`,
       icon: NotificationIcons.SUCCESS,
       color: NotificationColors.SUCCESS,
+      kind: NotificationKind.SUCCES,
     };
     this.store.dispatch(addNotification({ notification }));
     const snackbar = this.snackBar.open(notification.message, 'Close', {
