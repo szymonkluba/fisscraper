@@ -161,10 +161,10 @@ export class ScraperService {
           for (let participant of race.participant_set) {
             participant.jump_1_empty =
               participant.jump_1 &&
-              !Object.values(participant.jump_1).every(Boolean);
+              Object.values(participant.jump_1).every(param => param === null);
             participant.jump_2_empty =
               participant.jump_2 &&
-              !Object.values(participant.jump_2).every(Boolean);
+              Object.values(participant.jump_2).every(param => param === null);
           }
 
           race.no_jump_1 = race.participant_set
