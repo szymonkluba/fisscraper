@@ -4,7 +4,12 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <ng-container *ngIf="folders$ | async as folders; else loader">
+    <ng-container *ngIf="spinnerState$ | async">
+      <div class="loader">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="folders$ | async as folders">
       <mat-accordion class="accordion" multi>
         <mat-expansion-panel *ngFor="let folder of folders">
           <mat-expansion-panel-header>
@@ -118,10 +123,3 @@
     </ng-container>
   </mat-card-content>
 </mat-card>
-
-<ng-template #loader>
-  <div class="loader">
-    Loader
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
-</ng-template>

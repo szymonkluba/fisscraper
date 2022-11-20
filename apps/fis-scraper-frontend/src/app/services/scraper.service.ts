@@ -18,10 +18,11 @@ import { NotificationsService } from './notifications.service';
 import { disableSpinner, enableSpinner } from '../state/spinner.actions';
 import { download } from '../utils/download';
 import { Saver, SAVER } from '../providers/saver.provider';
-import { addRace } from '../state/races.actions';
 import { Download } from '../models/download.model';
 import { Folder } from '../models/folder.model';
 import { addRaceDetails } from '../state/raceDetails.actions';
+import { addFolder } from '../state/folders.actions';
+import { addRace } from '../state/races.actions';
 
 const options: {
   responseType: 'json';
@@ -67,7 +68,13 @@ export class ScraperService {
       }),
       filter(Boolean),
       tap(race => {
+        const folder: Folder = {
+          name: race.tournament.name,
+          entries: [race],
+        };
+        this.store.dispatch(addFolder({ folder }));
         this.store.dispatch(addRace({ race }));
+        this.store.dispatch(addRaceDetails({ raceDetails: race }));
         this.notificationService.handleFileReadyNotification(
           `${race.place!} ${race.hill_size} ${race.date}`
         );
@@ -109,7 +116,10 @@ export class ScraperService {
         observe: 'events',
         responseType: 'blob',
       })
-    ).pipe(map(_ => 1));
+    ).pipe(
+      tap(_ => this.store.dispatch(disableSpinner())),
+      map(_ => 1)
+    );
   }
 
   scrapTable(data: { url: string }): Observable<number> {
@@ -125,6 +135,8 @@ export class ScraperService {
 
   listRaces(): Observable<Array<Folder>> {
     const url = `${environment.scraperApi}/race/`;
+    this.store.dispatch(enableSpinner());
+
     return this.http.get<Array<RaceDetails>>(url).pipe(
       catchError(err => {
         this.notificationService.handleErrorNotification(err);

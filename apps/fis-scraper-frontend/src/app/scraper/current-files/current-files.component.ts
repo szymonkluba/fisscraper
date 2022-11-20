@@ -8,12 +8,12 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Download } from '../../models/download.model';
 import { selectSpinnerState } from '../../state/spinner.selectors';
-import { selectRaces } from '../../state/races.selectors';
 import { RaceDetails } from '../../models/race.model';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ScraperService } from '../../services/scraper.service';
 import { MatListOption } from '@angular/material/list';
+import { selectRaces } from '../../state/races.selectors';
 
 @Component({
   selector: 'app-current-files',

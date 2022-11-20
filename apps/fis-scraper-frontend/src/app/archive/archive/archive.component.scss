@@ -3,39 +3,44 @@ mat-card {
   width: min(70rem, 100%);
 
   &-content {
+    display: flex;
+    flex-direction: column;
     margin-top: 1rem;
     min-height: 10rem;
+    width: 100%;
   }
 }
 
-.accordion .mat-expansion-panel-header-description {
-  align-items: center;
-  justify-content: flex-end;
-}
+.accordion {
+  width: 100%;
 
-.accordion .mat-expansion-panel-header-title {
-  align-items: center;
-  font-size: 1.25rem;
-  gap: 1rem;
-  justify-content: flex-start;
-  width: calc(100% - 1rem);
-
-  & > mat-icon {
-    flex-basis: 2rem;
-    flex-shrink: 0;
+  & .mat-expansion-panel-header-description {
+    align-items: center;
+    justify-content: flex-end;
   }
 
-  & > span {
-    flex-basis: 0;
-    flex-shrink: 1;
-    flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  & .mat-expansion-panel-header-title {
+    align-items: center;
+    font-size: 1.25rem;
+    gap: 1rem;
+    justify-content: flex-start;
+    width: calc(100% - 1rem);
+
+    & > mat-icon {
+      flex-basis: 2rem;
+      flex-shrink: 0;
+    }
+
+    & > span {
+      flex-basis: 0;
+      flex-shrink: 1;
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
-
-
 
 table {
   width: 100%;
@@ -75,4 +80,5 @@ td.mat-cell:not(td.mat-column-expand) {
 .loader {
   display: inline-block;
   height: 10rem;
+  margin: 0 auto;
 }

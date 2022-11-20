@@ -4,14 +4,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Folder } from '../../models/folder.model';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { selectFolders } from '../../state/folders.selectors';
-import { ScraperService } from '../../services/scraper.service';
-import { RaceDetails } from '../../models/race.model';
-import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Folder } from '../../models/folder.model';
+import { MatIconRegistry } from '@angular/material/icon';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { RaceDetails } from '../../models/race.model';
+import { ScraperService } from '../../services/scraper.service';
+import { Store } from '@ngrx/store';
+import { selectFolders } from '../../state/folders.selectors';
 import {
   animate,
   state,
@@ -19,6 +19,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { selectSpinnerState } from '../../state/spinner.selectors';
+import { disableSpinner } from '../../state/spinner.actions';
 
 @Component({
   selector: 'app-archive',
@@ -61,8 +63,11 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private readonly store: Store
   ) {}
 
-  readonly folders$: Observable<ReadonlyArray<Folder>> =
-    this.store.select(selectFolders);
+  readonly folders$?: Observable<ReadonlyArray<Folder>> = this.store
+    .select(selectFolders)
+    .pipe(tap(_ => this.store.dispatch(disableSpinner())));
+  readonly spinnerState$: Observable<boolean> =
+    this.store.select(selectSpinnerState);
 
   ngOnInit(): void {
     this.iconRegistry.addSvgIcon(

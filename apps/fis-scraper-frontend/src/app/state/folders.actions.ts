@@ -5,3 +5,8 @@ export const retrievedFolderList = createAction(
   '[Folders Collection] Retrieve Folders',
   props<{ folders: ReadonlyArray<Folder> }>()
 );
+
+export const addFolder = createAction(
+  '[Folders Collection] Folder',
+  props<{ folder: Folder }>()
+);

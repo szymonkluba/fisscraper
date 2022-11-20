@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { StoreModule } from '@ngrx/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NotificationsModule } from './notifications/notifications.module';
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 import { racesReducer } from './state/races.reducer';
 import { foldersReducer } from './state/folders.reducer';
-import { folderContentReducer } from './state/folderContents.reducer';
-
 import { getSaver, SAVER } from './providers/saver.provider';
-import { NotificationsModule } from './notifications/notifications.module';
 import { notificationsReducer } from './state/notifications.reducer';
-import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
-import { spinnerReducer } from './state/spinner.reducer';
 import { raceDetailsReducer } from './state/raceDetails.reducer';
+import { spinnerReducer } from './state/spinner.reducer';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { csrfTokenProvider } from './providers/csrf-token.provider';
 
 @NgModule({
@@ -36,7 +34,6 @@ import { csrfTokenProvider } from './providers/csrf-token.provider';
         races: racesReducer,
         raceDetails: raceDetailsReducer,
         folders: foldersReducer,
-        folderContents: folderContentReducer,
         notifications: notificationsReducer,
         spinner: spinnerReducer,
       },
