@@ -32,9 +32,11 @@
           <a
             *ngFor="let link of navLinks"
             mat-tab-link
-            (click)="activeLink = link"
             [routerLink]="link.path"
-            [active]="activeLink === link"
+            [active]="
+              (activeLink$ | async) === link.path ||
+              isScraperPath(activeLink$ | async)
+            "
             routerLinkActive="active">
             {{ link.label }}
           </a>

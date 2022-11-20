@@ -144,6 +144,7 @@ export class ScraperService {
         return of(null);
       }),
       filter(Boolean),
+      tap(_ => this.store.dispatch(disableSpinner())),
       map((races: Array<RaceDetails>) => {
         const folders_map = new Map<string, Folder>();
 

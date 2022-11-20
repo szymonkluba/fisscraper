@@ -7,10 +7,9 @@
     <a
       mat-tab-link
       *ngFor="let link of links"
-      (click)="activeLink = link.path"
-      [active]="activeLink === link.path"
+      [active]="(activeLink$ | async) === link.path"
       [routerLink]="link.routerPath"
-      [routerLinkActive]="link.path === activeLink ? 'active' : ''">
+      [routerLinkActive]="link.path === (activeLink$ | async) ? 'active' : ''">
       {{ link.label }}
     </a>
   </nav>
