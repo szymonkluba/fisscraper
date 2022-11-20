@@ -6,7 +6,7 @@
     "start": "node server.js",
     "serve": "nx serve",
     "build": "nx build --base-href 'https://www.fisscraper.online/'",
-    "postbuild": "copyfiles --up 1 ./docs/* /home/szymon/PycharmProjects/fis-scraper-api/static",
+    "postbuild": "copyfiles --up 1 /home/szymon/WebstormProjects/fis-scraper-frontend/dist/apps/fis-scraper-frontend/* /home/szymon/PycharmProjects/fis-scraper-api/static",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "lint": "nx lint",
@@ -49,6 +49,7 @@
     "@nrwl/workspace": "15.2.1",
     "@types/file-saver": "^2.0.4",
     "@types/jasmine": "~3.10.0",
+    "@types/js-cookie": "^3.0.2",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
@@ -60,6 +61,7 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jasmine-core": "~3.10.0",
+    "js-cookie": "^3.0.1",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
@@ -70,4 +72,3 @@
     "prettier-eslint": "^15.0.1"
   }
 }
-

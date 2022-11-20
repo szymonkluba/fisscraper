@@ -19,6 +19,7 @@ import { notificationsReducer } from './state/notifications.reducer';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { spinnerReducer } from './state/spinner.reducer';
 import { raceDetailsReducer } from './state/raceDetails.reducer';
+import { csrfTokenProvider } from './providers/csrf-token.provider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +44,7 @@ import { raceDetailsReducer } from './state/raceDetails.reducer';
     ),
   ],
   providers: [
+    csrfTokenProvider,
     { provide: SAVER, useFactory: getSaver },
     {
       provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
