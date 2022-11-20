@@ -25,8 +25,8 @@ export class SingleRaceComponent {
   progress$?: Observable<number> = of(0);
 
   constructor(
-    private formBuilder: FormBuilder,
-    private scraperService: ScraperService
+    private readonly formBuilder: FormBuilder,
+    private readonly scraperService: ScraperService
   ) {
     this.raceForm = this.formBuilder.group({
       fis_id: this.fisId,

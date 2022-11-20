@@ -21,8 +21,8 @@ export class MultiRacesComponent {
   progress$?: Observable<number>;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private scraperService: ScraperService
+    private readonly formBuilder: FormBuilder,
+    private readonly scraperService: ScraperService
   ) {
     this.raceForm = this.formBuilder.group({
       races: this.formBuilder.array([this.newRace()]),

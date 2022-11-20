@@ -27,16 +27,16 @@ import { selectRaceDetails } from '../../../state/raceDetails.selectors';
 export class ArchiveRaceDetailsComponent
   implements OnChanges, OnInit, AfterViewChecked
 {
-  @ViewChild(MatTable) table?: MatTable<any>;
+  @ViewChild(MatTable) private readonly table?: MatTable<any>;
 
   @Input() uuid!: string;
 
   readonly countriesColumns = COUNTRY_TABLE_COLUMNS;
+  readonly prefixRegex = new RegExp(/[a-z]*-|jump_\d/gm);
+
   jumpersColumns = JUMPER_TABLE_COLUMNS;
   wideColumns = ['jumper', 'jump1', 'jump2', 'summary'];
-
   raceData$?: Observable<RaceDetails>;
-  prefixRegex = new RegExp(/[a-z]*-|jump_\d/gm);
 
   constructor(
     private readonly scraperService: ScraperService,

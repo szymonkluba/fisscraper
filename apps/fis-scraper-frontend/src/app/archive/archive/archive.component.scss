@@ -1,6 +1,6 @@
 mat-card {
-  width: min(70rem, 100%);
   margin: 0 auto;
+  width: min(70rem, 100%);
 
   &-content {
     margin-top: 1rem;
@@ -9,16 +9,33 @@ mat-card {
 }
 
 .accordion .mat-expansion-panel-header-description {
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .accordion .mat-expansion-panel-header-title {
-  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
   font-size: 1.25rem;
+  gap: 1rem;
+  justify-content: flex-start;
+  width: calc(100% - 1rem);
+
+  & > mat-icon {
+    flex-basis: 2rem;
+    flex-shrink: 0;
+  }
+
+  & > span {
+    flex-basis: 0;
+    flex-shrink: 1;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
+
+
 
 table {
   width: 100%;

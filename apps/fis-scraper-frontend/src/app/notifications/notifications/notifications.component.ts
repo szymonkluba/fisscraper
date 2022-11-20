@@ -10,7 +10,7 @@ import { selectNotifications } from '../../state/notifications.selectors';
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor(private readonly store: Store) {}
 
   notifications$?: Observable<ReadonlyArray<Notification>>;
 

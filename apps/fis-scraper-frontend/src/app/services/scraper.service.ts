@@ -34,10 +34,10 @@ const options: {
 })
 export class ScraperService {
   constructor(
-    private http: HttpClient,
-    private store: Store,
-    private notificationService: NotificationsService,
-    @Inject(SAVER) private save: Saver
+    private readonly http: HttpClient,
+    private readonly store: Store,
+    private readonly notificationService: NotificationsService,
+    @Inject(SAVER) private readonly save: Saver
   ) {}
 
   private processFileResponse(

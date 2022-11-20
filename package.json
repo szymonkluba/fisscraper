@@ -6,7 +6,7 @@
     "start": "node server.js",
     "serve": "nx serve",
     "build": "nx build --base-href 'https://www.fisscraper.online/'",
-    "postbuild": "copyfiles --up 1 /home/szymon/WebstormProjects/fis-scraper-frontend/dist/apps/fis-scraper-frontend/* /home/szymon/PycharmProjects/fis-scraper-api/static",
+    "postbuild": "copyfiles --up 3 ./dist/apps/fis-scraper-frontend/* /home/szymon/PycharmProjects/fis-scraper-api/static",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "lint": "nx lint",

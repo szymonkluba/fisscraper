@@ -30,8 +30,8 @@ export class RangeRacesComponent {
   progress$?: Observable<number>;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private scraperService: ScraperService
+    private readonly formBuilder: FormBuilder,
+    private readonly scraperService: ScraperService
   ) {
     this.raceForm = this.formBuilder.group({
       start_fis_id: this.startFisId,

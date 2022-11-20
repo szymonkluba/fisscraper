@@ -1,21 +1,21 @@
 :host {
-  width: 100%;
   display: block;
+  width: 100%;
 }
 
 * {
-  scrollbar-width: thin;
   scrollbar-color: rgb(55, 55, 55) rgb(66, 66, 66);
+  scrollbar-width: thin;
 }
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  width: 6px;
   height: 6px;
+  width: 6px;
 }
 *::-webkit-scrollbar-track {
-  border-radius: 3px;
   background-color: rgb(66, 66, 66);
+  border-radius: 3px;
 }
 
 *::-webkit-scrollbar-track:hover {
@@ -27,8 +27,8 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  border-radius: 5px;
   background-color: rgb(55, 55, 55);
+  border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
@@ -40,16 +40,16 @@
 }
 
 .loader {
-  margin: 2rem auto;
   display: inline-block;
+  margin: 2rem auto;
 }
 
 .table-container {
-  overflow: auto;
   margin: 1rem auto;
-  width: 100%;
-  max-width: 63rem;
   max-height: 40rem;
+  max-width: 63rem;
+  overflow: auto;
+  width: 100%;
 }
 
 table {
@@ -57,17 +57,17 @@ table {
 }
 
 th.mat-mdc-header-cell {
-  text-align: center;
   font-size: 0.75rem;
   font-weight: 800;
   padding: 0 .5rem;
+  text-align: center;
 }
 
 td.mat-mdc-cell {
-  text-align: center;
   font-size: 0.75rem;
   min-width: 2rem;
   padding: 0 .5rem;
+  text-align: center;
 }
 
 th.cdk-column-jump1,

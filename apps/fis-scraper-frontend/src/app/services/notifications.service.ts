@@ -20,7 +20,10 @@ export class NotificationsService implements OnDestroy {
   subscriptionEndSubject = new Subject();
   subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
 
-  constructor(private snackBar: MatSnackBar, private store: Store) {}
+  constructor(
+    private readonly snackBar: MatSnackBar,
+    private readonly store: Store
+  ) {}
 
   handleErrorNotification(error: HttpErrorResponse) {
     const notification = {

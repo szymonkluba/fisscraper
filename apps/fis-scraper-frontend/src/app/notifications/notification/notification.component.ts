@@ -12,7 +12,7 @@ import { removeNotification } from '../../state/notifications.actions';
 export class NotificationComponent {
   @Input() notification?: Notification;
 
-  constructor(private store: Store) {}
+  constructor(private readonly store: Store) {}
 
   close(event: MouseEvent) {
     event.preventDefault();
