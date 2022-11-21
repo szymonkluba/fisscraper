@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ScraperService } from '../../services/scraper.service';
+import { ScraperService } from '../scraper.service';
 import { Observable } from 'rxjs';
 
 @Component({

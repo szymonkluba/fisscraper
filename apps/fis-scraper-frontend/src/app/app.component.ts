@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { RouteInterface, routerPaths } from './models/routes.model';
+import { RouteInterface, routerPaths } from './shared/models/routes.model';
 import { Store } from '@ngrx/store';
-import { retrievedFolderList } from './state/folders.actions';
-import { Folder } from './models/folder.model';
+import { retrievedFolderList } from './shared/state/folders.actions';
+import { Folder } from './shared/models/folder.model';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
-import { ScraperService } from './services/scraper.service';
-import { disableSpinner } from './state/spinner.actions';
+import { ScraperService } from './scraper/scraper.service';
+import { disableSpinner } from './shared/state/spinner.actions';
 import { NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -17,13 +17,17 @@ import { NavigationStart, Router } from '@angular/router';
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  title = 'FIS Scraper';
+  readonly title = 'FIS Scraper';
+  readonly subtitle = 'Ski jumping results scraper';
 
-  subscriptionEndSubject = new Subject();
-  subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
+  readonly subscriptionEndSubject = new Subject();
+  readonly subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
 
-  navLinks: RouteInterface[] = [routerPaths.SCRAPER, routerPaths.ARCHIVE];
-  activeLink$: Observable<string> = this.router.events.pipe(
+  readonly navLinks: RouteInterface[] = [
+    routerPaths.SCRAPER,
+    routerPaths.ARCHIVE,
+  ];
+  readonly activeLink$: Observable<string> = this.router.events.pipe(
     filter(event => event instanceof NavigationStart),
     map(event => (event as NavigationStart).url)
   );

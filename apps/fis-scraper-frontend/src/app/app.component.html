@@ -18,7 +18,10 @@
         <button mat-icon-button (click)="sidenav.open()" matTooltip="Open menu">
           <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="app-title">FIS Scraper</h1>
+        <div class="titles">
+          <h1 class="app-title">{{ title }}</h1>
+          <h2 class="app-subtitle">{{ subtitle }}</h2>
+        </div>
       </div>
     </mat-toolbar>
     <mat-toolbar color="primary">

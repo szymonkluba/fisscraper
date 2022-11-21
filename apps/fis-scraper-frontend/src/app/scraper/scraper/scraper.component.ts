@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { routerPaths } from '../../models/routes.model';
+import { routerPaths } from '../../shared/models/routes.model';
 import { NavigationStart, Router } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
 

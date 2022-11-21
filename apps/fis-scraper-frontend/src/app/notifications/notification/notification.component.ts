@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Notification } from '../../models/notification.model';
+import { Notification } from '../../shared/models/notification.model';
 import { Store } from '@ngrx/store';
-import { removeNotification } from '../../state/notifications.actions';
+import { removeNotification } from '../../shared/state/notifications.actions';
 
 @Component({
   selector: 'app-notification',

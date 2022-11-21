@@ -40,4 +40,4 @@ export const JUMPER_TABLE_COLUMNS = [
   'disqualified',
 ];
 
-export const COUNTRY_TABLE_COLUMNS = ['rank', 'nation-name', 'total_points'];
+export const COUNTRY_TABLE_COLUMNS = ['rank', 'country-name', 'total_points'];

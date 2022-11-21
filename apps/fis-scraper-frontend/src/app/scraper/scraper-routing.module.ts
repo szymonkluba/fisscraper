@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScraperComponent } from './scraper/scraper.component';
 import { SingleRaceComponent } from './single-race/single-race.component';
-import { routerPaths } from '../models/routes.model';
+import { routerPaths } from '../shared/models/routes.model';
 import { MultiRacesComponent } from './multi-races/multi-races.component';
 import { RangeRacesComponent } from './range-races/range-races.component';
 import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';

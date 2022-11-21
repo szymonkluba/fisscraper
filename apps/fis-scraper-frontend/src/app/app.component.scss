@@ -1,33 +1,33 @@
 .container {
-  position: absolute;
   inset: 0;
+  position: absolute;
 }
 
 .loading {
   &-spinner {
     display: block;
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
   }
 
   &-text {
     color: black;
+    left: 50%;
     position: fixed;
     top: 60%;
-    left: 50%;
     transform: translateX(-50%);
   }
 }
 
 .mat-sidenav {
-  width: min(15rem, 100%);
   padding: 2rem 1rem;
+  width: min(15rem, 100%);
 
   & button {
     font-size: 1.25rem;
     font-weight: 700;
-    width: 100%;
     padding: 0.5rem 1rem;
+    width: 100%;
   }
 }
 
@@ -41,27 +41,46 @@ router-outlet {
   z-index: 1000;
 
   &-content {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 70rem;
-    display: flex;
     align-items: center;
+    display: flex;
+    margin: 0 auto;
+    max-width: 70rem;
+    width: 100%;
   }
 }
 
 .menu-content {
-  margin: 0 auto -0.5rem;
-  width: 100%;
-  max-width: 70rem;
-  display: flex;
   align-items: flex-start;
+  display: flex;
+  margin: 0 auto -0.5rem;
+  max-width: 70rem;
+  width: 100%;
 }
 
 .app-title {
-  margin: 0 auto;
   display: inline-block;
+  font-size: 2.75rem;
   font-weight: 700;
-  font-size: 2rem;
+  margin: 0 auto;
+  text-shadow: .125rem .125rem .25rem rgba(0, 0, 0, 0.5);
+}
+
+.app-subtitle {
+  bottom: 0;
+  color: rgba(222, 222, 222, .5);
+  font-size: 1rem;
+  letter-spacing: -1px;
+  margin: 0 .5rem;
+  position: absolute;
+  right: 0;
+  text-shadow: .125rem .125rem .125rem rgba(0, 0, 0, 0.3);
+  word-spacing: .2rem;
+}
+
+.titles {
+  margin-left: 2rem;
+  padding: 1rem .125rem;
+  position: relative;
 }
 
 .app-menu-title {

@@ -1,28 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Race, RaceDetails } from '../models/race.model';
+import { Race, RaceDetails } from '../shared/models/race.model';
 import { Store } from '@ngrx/store';
-import {
-  catchError,
-  filter,
-  map,
-  merge,
-  Observable,
-  of,
-  scan,
-  tap,
-} from 'rxjs';
+import { map, merge, Observable, scan, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { range } from '../utils/range';
-import { NotificationsService } from './notifications.service';
-import { disableSpinner, enableSpinner } from '../state/spinner.actions';
-import { download } from '../utils/download';
-import { Saver, SAVER } from '../providers/saver.provider';
-import { Download } from '../models/download.model';
-import { Folder } from '../models/folder.model';
-import { addRaceDetails } from '../state/raceDetails.actions';
-import { addFolder } from '../state/folders.actions';
-import { addRace } from '../state/races.actions';
+import { range } from '../shared/utils/range/range';
+import { NotificationsService } from '../notifications/notifications.service';
+import { disableSpinner, enableSpinner } from '../shared/state/spinner.actions';
+import { download } from '../shared/utils/download/download';
+import { Saver, SAVER } from '../shared/providers/saver.provider';
+import { Download } from '../shared/models/download.model';
+import { Folder } from '../shared/models/folder.model';
+import { addRaceDetails } from '../shared/state/raceDetails.actions';
+import { addFolder } from '../shared/state/folders.actions';
+import { addRace } from '../shared/state/races.actions';
 
 const options: {
   responseType: 'json';
@@ -45,15 +36,7 @@ export class ScraperService {
     response: Observable<HttpEvent<Blob>>,
     filename?: string
   ): Observable<Download> {
-    return response.pipe(
-      catchError(err => {
-        this.notificationService.handleErrorNotification(err);
-        this.store.dispatch(disableSpinner());
-        return of(null);
-      }),
-      filter(Boolean),
-      download(blob => this.save(blob, filename))
-    );
+    return response.pipe(download(blob => this.save(blob, filename)));
   }
 
   scrapRace(data: Race): Observable<number> {
@@ -61,12 +44,6 @@ export class ScraperService {
     this.store.dispatch(enableSpinner());
 
     return this.http.post<RaceDetails>(url, data, options).pipe(
-      catchError(err => {
-        this.notificationService.handleErrorNotification(err);
-        this.store.dispatch(disableSpinner());
-        return of(null);
-      }),
-      filter(Boolean),
       tap(race => {
         const folder: Folder = {
           name: race.tournament.name,
@@ -138,12 +115,6 @@ export class ScraperService {
     this.store.dispatch(enableSpinner());
 
     return this.http.get<Array<RaceDetails>>(url).pipe(
-      catchError(err => {
-        this.notificationService.handleErrorNotification(err);
-        this.store.dispatch(disableSpinner());
-        return of(null);
-      }),
-      filter(Boolean),
       tap(_ => this.store.dispatch(disableSpinner())),
       map((races: Array<RaceDetails>) => {
         const folders_map = new Map<string, Folder>();

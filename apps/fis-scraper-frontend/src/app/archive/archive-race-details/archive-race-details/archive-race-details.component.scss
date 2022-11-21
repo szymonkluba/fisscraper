@@ -39,59 +39,73 @@
   background-color: rgb(44, 44, 44);
 }
 
-.loader {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem;
-}
-
-.table-container {
+.table-container__jumpers {
   margin: 1rem auto;
   max-height: 40rem;
+  height: fit-content;
   max-width: 63rem;
   overflow: auto;
   width: 100%;
 }
 
-table {
+.table-container__countries {
+  margin: 1rem auto;
+  max-height: 26rem;
+  height: fit-content;
+  max-width: 63rem;
+  overflow: auto;
+  width: 100%;
+}
+
+table.jumpers-table {
   border-radius: 3px;
+
+  & th.mat-mdc-header-cell {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0 .5rem;
+    text-align: center;
+  }
+
+  & td.mat-mdc-cell {
+    font-size: 0.75rem;
+    min-width: 2rem;
+    padding: 0 .5rem;
+    text-align: center;
+  }
+
+  & th.cdk-column-jump1,
+  & th.cdk-column-jump2,
+  & th.cdk-column-jump_1-rank,
+  & td.cdk-column-jump_1-rank,
+  & th.cdk-column-jump_2-rank,
+  & td.cdk-column-jump_2-rank {
+    border-right: rgba(255, 255, 255, 0.12) solid 1px;
+  }
+
+
+  & th.cdk-column-jump1,
+  & th.cdk-column-jump_1-distance,
+  & td.cdk-column-jump_1-distance {
+    border-left: rgba(255, 255, 255, 0.12) solid 1px;
+  }
+
+  & td.mat-column-rank,
+  & td.mat-column-bib {
+    width: 2rem;
+  }
 }
 
-th.mat-mdc-header-cell {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0 .5rem;
-  text-align: center;
-}
+table.countries-table {
+  border-radius: 3px;
 
-td.mat-mdc-cell {
-  font-size: 0.75rem;
-  min-width: 2rem;
-  padding: 0 .5rem;
-  text-align: center;
-}
+  & .cdk-column-country-name {
+    text-align: center;
+  }
 
-th.cdk-column-jump1,
-th.cdk-column-jump2,
-th.cdk-column-jump_1-rank,
-td.cdk-column-jump_1-rank,
-th.cdk-column-jump_2-rank,
-td.cdk-column-jump_2-rank {
-  border-right: rgba(255, 255, 255, 0.12) solid 1px;
-}
-
-
-th.cdk-column-jump1,
-th.cdk-column-jump_1-distance,
-td.cdk-column-jump_1-distance {
-  border-left: rgba(255, 255, 255, 0.12) solid 1px;
-}
-
-td.mat-column-rank,
-td.mat-column-bib {
-  width: 2rem;
+  & .cdk-column-total_points {
+    text-align: right;
+  }
 }
 
 .mat-icon {

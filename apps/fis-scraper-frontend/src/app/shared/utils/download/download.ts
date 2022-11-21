@@ -5,7 +5,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable, scan } from 'rxjs';
-import { Download } from '../models/download.model';
+import { Download } from '../../models/download.model';
 
 function isHttpResponse<T>(event: HttpEvent<T>): event is HttpResponse<T> {
   return event.type === HttpEventType.Response;

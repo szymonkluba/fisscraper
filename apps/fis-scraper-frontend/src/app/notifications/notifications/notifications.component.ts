@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Notification } from '../../models/notification.model';
-import { selectNotifications } from '../../state/notifications.selectors';
+import { Notification } from '../../shared/models/notification.model';
+import { selectNotifications } from '../../shared/state/notifications.selectors';
 
 @Component({
   selector: 'app-notifications',

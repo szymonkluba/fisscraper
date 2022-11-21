@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurrentFilesComponent } from './current-files.component';
-import { DropboxService } from '../../services/dropbox.service';
+import { DropboxService } from '../../shared/services/dropbox.service';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { IFile } from '../../models/file.model';
+import { IFile } from '../../shared/models/file.model';
 
 class DropboxServiceMock {}
 

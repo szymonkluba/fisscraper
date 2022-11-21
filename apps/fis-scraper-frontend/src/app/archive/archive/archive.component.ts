@@ -5,13 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Folder } from '../../models/folder.model';
+import { Folder } from '../../shared/models/folder.model';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
-import { RaceDetails } from '../../models/race.model';
-import { ScraperService } from '../../services/scraper.service';
+import { RaceDetails } from '../../shared/models/race.model';
+import { ScraperService } from '../../scraper/scraper.service';
 import { Store } from '@ngrx/store';
-import { selectFolders } from '../../state/folders.selectors';
+import { selectFolders } from '../../shared/state/folders.selectors';
 import {
   animate,
   state,
@@ -19,8 +19,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { selectSpinnerState } from '../../state/spinner.selectors';
-import { disableSpinner } from '../../state/spinner.actions';
+import { selectSpinnerState } from '../../shared/state/spinner.selectors';
+import { disableSpinner } from '../../shared/state/spinner.actions';
 
 @Component({
   selector: 'app-archive',
