@@ -1,0 +1,19 @@
+<mat-card>
+  <nav
+    mat-tab-nav-bar
+    [tabPanel]="tabNavPanel"
+    color="primary"
+    backgroundColor="primary">
+    <a
+      mat-tab-link
+      *ngFor="let link of links"
+      [active]="(activeLink$ | async) === link.path"
+      [routerLink]="link.routerPath"
+      [routerLinkActive]="link.path === (activeLink$ | async) ? 'active' : ''">
+      {{ link.label }}
+    </a>
+  </nav>
+  <mat-tab-nav-panel #tabNavPanel></mat-tab-nav-panel>
+  <router-outlet></router-outlet>
+</mat-card>
+<app-current-files></app-current-files>

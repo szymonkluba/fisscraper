@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-progress-spinner {
+  margin: 2rem;
+}

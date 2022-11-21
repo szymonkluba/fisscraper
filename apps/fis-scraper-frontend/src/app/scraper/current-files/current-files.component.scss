@@ -1,0 +1,33 @@
+mat-card {
+  width: min(70rem, 100%);
+  min-height: 15rem;
+  margin: 2rem auto;
+
+  &-header {
+    display: flex;
+  }
+
+  &-title {
+    display: inline-block;
+  }
+
+  &-actions {
+    display: inline-block;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+}
+
+mat-selection-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+mat-list-option {
+  width: calc(100% - 5rem);
+}
+
+button {
+  margin: auto;
+}
+

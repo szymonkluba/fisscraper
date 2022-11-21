@@ -1,0 +1,109 @@
+{
+  "name": "fis-scraper-frontend",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:application": {
+      "strict": true
+    }
+  },
+  "sourceRoot": "apps/fis-scraper-frontend/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/fis-scraper-frontend",
+        "index": "apps/fis-scraper-frontend/src/index.html",
+        "main": "apps/fis-scraper-frontend/src/main.ts",
+        "polyfills": "apps/fis-scraper-frontend/src/polyfills.ts",
+        "tsConfig": "apps/fis-scraper-frontend/tsconfig.app.json",
+        "assets": [
+          "apps/fis-scraper-frontend/src/favicon.ico",
+          "apps/fis-scraper-frontend/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+          "apps/fis-scraper-frontend/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/fis-scraper-frontend/src/environments/environment.ts",
+              "with": "apps/fis-scraper-frontend/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "fis-scraper-frontend:build:production"
+        },
+        "development": {
+          "browserTarget": "fis-scraper-frontend:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "fis-scraper-frontend:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/fis-scraper-frontend/src/test.ts",
+        "polyfills": "apps/fis-scraper-frontend/src/polyfills.ts",
+        "tsConfig": "apps/fis-scraper-frontend/tsconfig.spec.json",
+        "karmaConfig": "apps/fis-scraper-frontend/karma.conf.js",
+        "assets": [
+          "apps/fis-scraper-frontend/src/favicon.ico",
+          "apps/fis-scraper-frontend/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+          "apps/fis-scraper-frontend/src/styles.scss"
+        ],
+        "scripts": []
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/fis-scraper-frontend/**/*.ts",
+          "apps/fis-scraper-frontend/**/*.html"
+        ]
+      }
+    }
+  }
+}

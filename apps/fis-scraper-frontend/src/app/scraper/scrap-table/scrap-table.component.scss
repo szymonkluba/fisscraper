@@ -1,0 +1,16 @@
+.single-race-form {
+  width: min(40rem, 100%);
+  padding: 3rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+
+  &-submit {
+   margin-top: 3rem;
+  }
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+}

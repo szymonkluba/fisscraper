@@ -1,0 +1,55 @@
+<mat-sidenav-container class="container" (backdropClick)="close()">
+  <mat-sidenav #sidenav (keydown.escape)="close()" disableClose>
+    <h2 class="app-menu-title">Menu:</h2>
+    <p *ngFor="let link of navLinks">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="close()"
+        [routerLink]="link.path"
+        routerLinkActive="active">
+        {{ link.label }}
+      </button>
+    </p>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="title mat-elevation-z8" color="primary">
+      <div class="title-content">
+        <button mat-icon-button (click)="sidenav.open()" matTooltip="Open menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="titles">
+          <h1 class="app-title">{{ title }}</h1>
+          <h2 class="app-subtitle">{{ subtitle }}</h2>
+        </div>
+      </div>
+    </mat-toolbar>
+    <mat-toolbar color="primary">
+      <div class="menu-content">
+        <nav
+          mat-tab-nav-bar
+          class="menu-content"
+          [tabPanel]="mainNavPanel"
+          color="primary"
+          backgroundColor="primary">
+          <a
+            *ngFor="let link of navLinks"
+            mat-tab-link
+            [routerLink]="link.path"
+            [active]="
+              (activeLink$ | async) === link.path ||
+              isScraperPath(activeLink$ | async)
+            "
+            routerLinkActive="active">
+            {{ link.label }}
+          </a>
+        </nav>
+        <mat-tab-nav-panel
+          class="menu-content"
+          #mainNavPanel></mat-tab-nav-panel>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <app-notifications></app-notifications>
+  </mat-sidenav-content>
+</mat-sidenav-container>

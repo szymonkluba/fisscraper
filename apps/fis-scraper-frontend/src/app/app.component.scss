@@ -1,0 +1,89 @@
+.container {
+  inset: 0;
+  position: absolute;
+}
+
+.loading {
+  &-spinner {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  &-text {
+    color: black;
+    left: 50%;
+    position: fixed;
+    top: 60%;
+    transform: translateX(-50%);
+  }
+}
+
+.mat-sidenav {
+  padding: 2rem 1rem;
+  width: min(15rem, 100%);
+
+  & button {
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+}
+
+router-outlet {
+  padding: 1rem;
+}
+
+.title {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  &-content {
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    max-width: 70rem;
+    width: 100%;
+  }
+}
+
+.menu-content {
+  align-items: flex-start;
+  display: flex;
+  margin: 0 auto -0.5rem;
+  max-width: 70rem;
+  width: 100%;
+}
+
+.app-title {
+  display: inline-block;
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin: 0 auto;
+  text-shadow: .125rem .125rem .25rem rgba(0, 0, 0, 0.5);
+}
+
+.app-subtitle {
+  bottom: 0;
+  color: rgba(222, 222, 222, .5);
+  font-size: 1rem;
+  letter-spacing: -1px;
+  margin: 0 .5rem;
+  position: absolute;
+  right: 0;
+  text-shadow: .125rem .125rem .125rem rgba(0, 0, 0, 0.3);
+  word-spacing: .2rem;
+}
+
+.titles {
+  margin-left: 2rem;
+  padding: 1rem .125rem;
+  position: relative;
+}
+
+.app-menu-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+}

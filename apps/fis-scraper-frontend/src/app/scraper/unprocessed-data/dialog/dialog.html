@@ -1,0 +1,23 @@
+<style>
+  img {
+    width: 100%;
+  }
+</style>
+<h2 mat-dialog-title>Scrap raw data</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    This mode should be the most resistant to the errors (describing the columns
+    is the most error prone). The downside is that data in CSV is not described.
+    Generally it's kind of WYSIWYG mode. Data is placed in CSV in order in which
+    it's displayed on FIS website. Please note that it means ie. that there will
+    be no FIS code in CSV for detailed results as it's not displayed anywhere in
+    detailed results table at fis-ski.com.
+  </p>
+  <h3 mat-dialog-title>Basic results table:</h3>
+  <img src="assets/results.png" alt="Basic results table description" />
+  <h3 mat-dialog-title>Detailed results table:</h3>
+  <img src="assets/details.png" alt="Detailed results table description" />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,56 @@
+<ng-container *ngIf="files$ | async as files">
+  <mat-card>
+    <mat-card-header class="header">
+      <mat-card-title>Current files:</mat-card-title>
+      <mat-card-actions *ngIf="files.length > 1" align="end">
+        <button
+          mat-button
+          (click)="downloadAll(races.selectedOptions.selected)"
+          matTooltip="Download all files as .zip">
+          {{
+            files.length > races.selectedOptions.selected.length
+              ? 'DOWNLOAD SELECTED'
+              : 'DOWNLOAD ALL'
+          }}
+          <mat-icon> download</mat-icon>
+        </button>
+      </mat-card-actions>
+      <mat-progress-bar
+        *ngIf="download$ | async as download"
+        [mode]="download.state === 'PENDING' ? 'buffer' : 'determinate'"
+        [value]="download.progress"
+        [color]="
+          download.state === 'DONE' || download.state === 'IN_PROGRES'
+            ? 'accent'
+            : 'warn'
+        ">
+      </mat-progress-bar>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-selection-list #races>
+        <ng-container *ngFor="let file of files">
+          <mat-list-option
+            class="mat-elevation-z1"
+            selected="true"
+            [value]="file.uuid">
+            <mat-icon
+              matListItemIcon
+              [svgIcon]="
+                file.kind === 'team' && !file.details ? 'zip_file' : 'csv_file'
+              "></mat-icon>
+            <div matListItemTitle>{{ file.place }} {{ file.hill_size }}</div>
+            <div matListItemLine>{{ file.date | date: 'medium' }}</div>
+          </mat-list-option>
+          <button
+            mat-icon-button
+            (click)="downloadFile($event, file)"
+            [matTooltip]="'Download ' + file.place + ' ' + file.hill_size">
+            <mat-icon> download</mat-icon>
+          </button>
+        </ng-container>
+      </mat-selection-list>
+      <app-file-spinner *ngIf="spinnerState$ | async"></app-file-spinner>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

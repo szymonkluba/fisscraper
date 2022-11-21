@@ -1,0 +1,17 @@
+<mat-card *ngIf="notification">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon [color]="notification.color">
+        {{ notification.icon }}
+      </mat-icon>
+    </div>
+
+    <mat-card-title>{{ notification.kind }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ notification.message }}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="close($event)">OK</button>
+  </mat-card-actions>
+</mat-card>
