@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -14,6 +14,7 @@ import { RawDataDialogComponent } from './raw-data-dialog.component';
   selector: 'app-unprocessed-data',
   templateUrl: './unprocessed-data.component.html',
   styleUrls: ['./unprocessed-data.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UnprocessedDataComponent {
   raceForm: FormGroup;

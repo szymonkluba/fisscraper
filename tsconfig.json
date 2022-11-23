@@ -21,7 +21,13 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@shared/*": ["apps/fis-scraper-frontend/src/app/shared/*"],
+      "@archive/*": ["apps/fis-scraper-frontend/src/app/archive/*"],
+      "@scraper/*": ["apps/fis-scraper-frontend/src/app/scraper/*"],
+      "@notifications/*": ["apps/fis-scraper-frontend/src/app/notifications/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

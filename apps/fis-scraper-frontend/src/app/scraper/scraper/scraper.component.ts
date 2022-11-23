@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { routerPaths } from '../../shared/models/routes.model';
 import { NavigationStart, Router } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { filter, map, Observable } from 'rxjs';
   selector: 'app-scraper',
   templateUrl: './scraper.component.html',
   styleUrls: ['./scraper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScraperComponent {
   links = [

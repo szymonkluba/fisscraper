@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
   selector: 'app-multi-races',
   templateUrl: './multi-races.component.html',
   styleUrls: ['./multi-races.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiRacesComponent {
   raceForm: FormGroup;

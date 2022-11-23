@@ -27,6 +27,24 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "@angular-eslint/prefer-on-push-component-change-detection": [
+          "error"
+        ],
+        "@angular-eslint/contextual-decorator": [
+          "error"
+        ],
+        "@angular-eslint/contextual-lifecycle": [
+          "error"
+        ],
+        "@angular-eslint/no-attribute-decorator": [
+          "error"
+        ],
+        "@angular-eslint/no-lifecycle-call": [
+          "error"
+        ],
+        "@angular-eslint/no-output-native": [
+          "error"
         ]
       }
     },

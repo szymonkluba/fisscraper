@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import {
   FormBuilder,
@@ -13,6 +13,7 @@ import { Observable, of } from 'rxjs';
   selector: 'app-single-race',
   templateUrl: './single-race.component.html',
   styleUrls: ['./single-race.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleRaceComponent {
   raceForm: FormGroup;
