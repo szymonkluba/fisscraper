@@ -18,7 +18,7 @@ import { ScrapTableDialogComponent } from './scrap-table-dialog.component';
 })
 export class ScrapTableComponent {
   form: FormGroup;
-  fisId: FormControl = new FormControl('', [Validators.required]);
+  url: FormControl = new FormControl('', [Validators.required]);
   details: FormControl = new FormControl(false);
   progress$?: Observable<number> = of(0);
 
@@ -28,7 +28,7 @@ export class ScrapTableComponent {
     private readonly scraperService: ScraperService
   ) {
     this.form = this.formBuilder.group({
-      url: this.fisId,
+      url: this.url,
     });
   }
 

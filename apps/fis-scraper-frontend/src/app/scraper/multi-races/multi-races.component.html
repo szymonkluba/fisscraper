@@ -3,18 +3,18 @@
     <h2>Scrap multiple races</h2>
     <div
       class="multi-races-form-group"
-      *ngFor="let race of races().controls; let i = index"
+      *ngFor="let race of races.controls; let i = index; trackBy: trackByIndex"
       [formGroupName]="i">
       <mat-form-field appearance="outline">
         <mat-label>FIS ID</mat-label>
         <input matInput type="number" formControlName="fis_id" />
-        <mat-error *ngIf="fisId[i].hasError('min')">
+        <mat-error *ngIf="fisId[i] | hasError: 'min'">
           Enter <strong>number</strong> greater than 0
         </mat-error>
-        <mat-error *ngIf="fisId[i].hasError('pattern')">
+        <mat-error *ngIf="fisId[i] | hasError: 'pattern'">
           Enter <strong>number</strong>
         </mat-error>
-        <mat-error *ngIf="fisId[i].hasError('required')">
+        <mat-error *ngIf="fisId[i] | hasError: 'required'">
           FIS ID is <strong>required</strong>
         </mat-error>
       </mat-form-field>

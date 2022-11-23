@@ -1,19 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Race, RaceDetails } from '../shared/models/race.model';
+import { Race, RaceDetails } from '@shared/models/race.model';
 import { Store } from '@ngrx/store';
 import { map, merge, Observable, scan, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { range } from '../shared/utils/range/range';
-import { NotificationsService } from '../notifications/notifications.service';
-import { disableSpinner, enableSpinner } from '../shared/state/spinner.actions';
-import { download } from '../shared/utils/download/download';
-import { Saver, SAVER } from '../shared/providers/saver.provider';
-import { Download } from '../shared/models/download.model';
-import { Folder } from '../shared/models/folder.model';
-import { addRaceDetails } from '../shared/state/raceDetails.actions';
-import { addFolder } from '../shared/state/folders.actions';
-import { addRace } from '../shared/state/races.actions';
+import { environment } from '@src/environments/environment';
+import { range } from '@shared/utils/range/range';
+import { NotificationsService } from '@notifications/notifications.service';
+import { disableSpinner, enableSpinner } from '@shared/state/spinner.actions';
+import { download } from '@shared/utils/download/download';
+import { Saver, SAVER } from '@shared/providers/saver.provider';
+import { Download } from '@shared/models/download.model';
+import { Folder } from '@shared/models/folder.model';
+import { addRaceDetails } from '@shared/state/raceDetails.actions';
+import { addFolder } from '@shared/state/folders.actions';
+import { addRace } from '@shared/state/races.actions';
 
 const options: {
   responseType: 'json';

@@ -8,9 +8,16 @@ import { ArchiveRoutingModule } from './archive-routing.module';
 import { CapitalizeModule } from '../shared/utils/capitalize/capitalize.module';
 import { FileSpinnerModule } from '../shared/file-spinner/file-spinner.module';
 import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.module';
+import { NestedValueModule } from '@shared/utils/nested-value/nested-value.module';
+import { RemovePrefixModule } from '@shared/utils/remove-prefix/remove-prefix.module';
+import { FolderTableCellComponent } from './folder-table-cell/folder-table-cell.component';
 
 @NgModule({
-  declarations: [ArchiveComponent, ArchiveRaceDetailsComponent],
+  declarations: [
+    ArchiveComponent,
+    ArchiveRaceDetailsComponent,
+    FolderTableCellComponent,
+  ],
   imports: [
     AngularMaterialModule,
     ArchiveRoutingModule,
@@ -18,6 +25,8 @@ import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.
     CommonModule,
     FileSpinnerModule,
     LoadingSpinnerModule,
+    NestedValueModule,
+    RemovePrefixModule,
   ],
 })
 export class ArchiveModule {}

@@ -29,7 +29,7 @@
     <mat-divider></mat-divider>
     <mat-card-content>
       <mat-selection-list #races>
-        <ng-container *ngFor="let file of files">
+        <ng-container *ngFor="let file of files; trackBy: trackByUuid">
           <mat-list-option
             class="mat-elevation-z1"
             selected="true"

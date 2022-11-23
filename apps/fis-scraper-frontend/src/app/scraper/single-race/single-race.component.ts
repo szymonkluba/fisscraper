@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ScraperService } from '../scraper.service';
+
 import { Observable, of } from 'rxjs';
+import { ScraperService } from '@scraper/scraper.service';
 
 @Component({
   selector: 'app-single-race',
