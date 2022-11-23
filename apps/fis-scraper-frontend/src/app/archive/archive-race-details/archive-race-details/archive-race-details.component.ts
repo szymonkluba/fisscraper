@@ -8,15 +8,16 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { ScraperService } from '../../../scraper/scraper.service';
+import { ScraperService } from '@scraper/scraper.service';
 import { Observable, of, switchMap, tap } from 'rxjs';
-import { RaceDetails } from '../../../shared/models/race.model';
+import { RaceDetails } from '@shared/models/race.model';
 import { COUNTRY_TABLE_COLUMNS, JUMPER_TABLE_COLUMNS } from './constants';
 import { MatTable } from '@angular/material/table';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { selectRaceDetails } from '../../../shared/state/raceDetails.selectors';
+import { selectRaceDetails } from '@shared/state/raceDetails.selectors';
+import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({
   selector: 'app-archive-race-details',
@@ -37,6 +38,7 @@ export class ArchiveRaceDetailsComponent
   jumpersColumns = JUMPER_TABLE_COLUMNS;
   wideColumns = ['jumper', 'jump1', 'jump2', 'summary'];
   raceData$?: Observable<RaceDetails>;
+  trackByIndex = trackByIndex;
 
   constructor(
     private readonly scraperService: ScraperService,
@@ -98,23 +100,4 @@ export class ArchiveRaceDetailsComponent
       );
     }
   }
-
-  getNestedValue(item: object, path: string) {
-    return path.split('-').reduce((obj: object, key: string) => {
-      if (hasProperty(obj, key)) {
-        return obj[key];
-      }
-      return obj;
-    }, item);
-  }
-}
-
-function hasProperty(
-  obj: object,
-  key: string | number | symbol
-): key is keyof typeof obj {
-  if (obj) {
-    return obj.hasOwnProperty(key);
-  }
-  return false;
 }

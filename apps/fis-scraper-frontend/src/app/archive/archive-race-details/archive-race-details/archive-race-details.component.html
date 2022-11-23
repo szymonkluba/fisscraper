@@ -9,13 +9,13 @@
       class="countries-table"
       [dataSource]="raceData.participantcountry_set">
       <ng-container
-        *ngFor="let column of countriesColumns"
+        *ngFor="let column of countriesColumns; trackBy: trackByIndex"
         [matColumnDef]="column">
         <th mat-header-cell *matHeaderCellDef>
-          {{ column.replace(prefixRegex, '') | capitalize }}
+          {{ column | removePrefix: prefixRegex | capitalize }}
         </th>
         <td mat-cell *matCellDef="let item">
-          {{ getNestedValue(item, column) }}
+          {{ item | nestedValue: column }}
         </td>
       </ng-container>
 
@@ -47,12 +47,16 @@
       </ng-container>
 
       <ng-container
-        *ngFor="let column of jumpersColumns; let indexOfElement = index"
+        *ngFor="
+          let column of jumpersColumns;
+          let indexOfElement = index;
+          trackBy: trackByIndex
+        "
         [matColumnDef]="column"
         [sticky]="indexOfElement < 6"
         [stickyEnd]="indexOfElement > jumpersColumns.length - 4">
         <th *matHeaderCellDef mat-header-cell>
-          {{ column.replace(prefixRegex, '') | capitalize }}
+          {{ column | removePrefix: prefixRegex | capitalize }}
         </th>
         <td mat-cell *matCellDef="let item">
           <ng-container *ngIf="column === 'disqualified'; else regularContent">
@@ -65,7 +69,7 @@
           </ng-container>
 
           <ng-template #regularContent>
-            {{ getNestedValue(item, column) }}
+            {{ item | nestedValue: column }}
           </ng-template>
         </td>
       </ng-container>

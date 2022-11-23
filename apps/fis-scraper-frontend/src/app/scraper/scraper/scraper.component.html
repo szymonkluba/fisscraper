@@ -6,7 +6,7 @@
     backgroundColor="primary">
     <a
       mat-tab-link
-      *ngFor="let link of links"
+      *ngFor="let link of links; trackBy: trackByIndex"
       [active]="(activeLink$ | async) === link.path"
       [routerLink]="link.routerPath"
       [routerLinkActive]="link.path === (activeLink$ | async) ? 'active' : ''">

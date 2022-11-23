@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -14,10 +14,11 @@ import { ScrapTableDialogComponent } from './scrap-table-dialog.component';
   selector: 'app-scrap-table',
   templateUrl: './scrap-table.component.html',
   styleUrls: ['./scrap-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrapTableComponent {
   form: FormGroup;
-  fisId: FormControl = new FormControl('', [Validators.required]);
+  url: FormControl = new FormControl('', [Validators.required]);
   details: FormControl = new FormControl(false);
   progress$?: Observable<number> = of(0);
 
@@ -27,7 +28,7 @@ export class ScrapTableComponent {
     private readonly scraperService: ScraperService
   ) {
     this.form = this.formBuilder.group({
-      url: this.fisId,
+      url: this.url,
     });
   }
 

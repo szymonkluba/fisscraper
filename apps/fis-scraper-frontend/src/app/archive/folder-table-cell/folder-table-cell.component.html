@@ -1,0 +1,36 @@
+<ng-container [ngSwitch]="key">
+  <ng-container *ngSwitchCase="'tournament'">
+    {{ item.tournament.name }}
+  </ng-container>
+  <ng-container *ngSwitchCase="'date'">
+    {{ item.date | date }}
+  </ng-container>
+  <ng-container *ngSwitchCase="'details'">
+    <mat-icon [color]="item.details ? 'accent' : 'warn'">
+      {{ item.details ? 'check_circle' : 'cancel' }}
+    </mat-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'kind'">
+    <mat-icon
+      [svgIcon]="item.kind"
+      [matTooltip]="item.kind | capitalize"></mat-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'download'">
+    <button mat-icon-button (click)="$event.stopPropagation(); downloadRace()">
+      <mat-icon>download</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'expand'">
+    <button
+      mat-icon-button
+      aria-label="Expand row"
+      (click)="expandItem(); $event.stopPropagation()">
+      <mat-icon>{{
+        expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'
+      }}</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    {{ item[key] }}
+  </ng-container>
+</ng-container>

@@ -19,6 +19,7 @@ import { raceDetailsReducer } from './shared/state/raceDetails.reducer';
 import { racesReducer } from './shared/state/races.reducer';
 import { spinnerReducer } from './shared/state/spinner.reducer';
 import { httpErrorProvider } from './shared/providers/http-error.provider';
+import { IsRouterPathModule } from './shared/utils/is-router-path/is-router-path.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +41,7 @@ import { httpErrorProvider } from './shared/providers/http-error.provider';
       },
       {}
     ),
+    IsRouterPathModule,
   ],
   providers: [
     csrfTokenProvider,

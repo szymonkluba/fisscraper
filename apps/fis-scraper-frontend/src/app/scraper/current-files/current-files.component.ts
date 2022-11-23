@@ -4,16 +4,18 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Download } from '../../shared/models/download.model';
-import { selectSpinnerState } from '../../shared/state/spinner.selectors';
-import { RaceDetails } from '../../shared/models/race.model';
-import { MatIconRegistry } from '@angular/material/icon';
+
 import { DomSanitizer } from '@angular/platform-browser';
-import { ScraperService } from '../scraper.service';
+import { Download } from '@shared/models/download.model';
+import { MatIconRegistry } from '@angular/material/icon';
 import { MatListOption } from '@angular/material/list';
-import { selectRaces } from '../../shared/state/races.selectors';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { RaceDetails } from '@shared/models/race.model';
+import { ScraperService } from '../scraper.service';
+import { Store } from '@ngrx/store';
+import { selectRaces } from '@shared/state/races.selectors';
+import { selectSpinnerState } from '@shared/state/spinner.selectors';
+import { trackByUuid } from '@shared/utils/track-by/track-by';
 
 @Component({
   selector: 'app-current-files',
@@ -27,6 +29,7 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
   spinnerState$?: Observable<boolean>;
   destroySubject$ = new Subject();
   destroy$: Observable<unknown> = this.destroySubject$.asObservable();
+  trackByUuid = trackByUuid;
 
   constructor(
     private readonly iconRegistry: MatIconRegistry,

@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { routerPaths } from '../../shared/models/routes.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+
 import { filter, map, Observable } from 'rxjs';
+import { routerPaths } from '@shared/models/routes.model';
+import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({
   selector: 'app-scraper',
   templateUrl: './scraper.component.html',
   styleUrls: ['./scraper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScraperComponent {
   links = [
@@ -24,6 +27,7 @@ export class ScraperComponent {
         : (event as NavigationStart).url
     )
   );
+  trackByIndex = trackByIndex;
 
   constructor(private readonly router: Router) {}
 }

@@ -8,13 +8,13 @@
   <mat-form-field appearance="outline">
     <mat-label>FIS ID</mat-label>
     <input matInput type="number" formControlName="fis_id" />
-    <mat-error *ngIf="fisId.hasError('min')">
+    <mat-error *ngIf="fisId | hasError: 'min'">
       Enter <strong>number</strong> greater than 0
     </mat-error>
-    <mat-error *ngIf="fisId.hasError('pattern')">
+    <mat-error *ngIf="fisId | hasError: 'pattern'">
       Enter <strong>number</strong>
     </mat-error>
-    <mat-error *ngIf="fisId.hasError('required')">
+    <mat-error *ngIf="fisId | hasError: 'required'">
       FIS ID is <strong>required</strong>
     </mat-error>
   </mat-form-field>
