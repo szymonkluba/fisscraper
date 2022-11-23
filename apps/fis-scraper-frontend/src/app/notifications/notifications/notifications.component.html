@@ -10,7 +10,7 @@
   </button>
   <mat-menu #notificationsContainer xPosition="before" yPosition="above">
     <app-notification
-      *ngFor="let notification of notifications"
+      *ngFor="let notification of notifications; trackBy: trackByIndex"
       [notification]="notification"></app-notification>
   </mat-menu>
 </div>

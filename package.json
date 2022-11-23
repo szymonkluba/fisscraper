@@ -9,7 +9,7 @@
     "postbuild": "copyfiles --up 3 ./dist/apps/fis-scraper-frontend/* /home/szymon/PycharmProjects/fis-scraper-api/static",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
-    "lint": "nx lint",
+    "lint": "nx lint --quiet --fix",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "engines": {

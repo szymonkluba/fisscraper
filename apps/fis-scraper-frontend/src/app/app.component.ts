@@ -1,18 +1,26 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { RouteInterface, routerPaths } from './shared/models/routes.model';
+
+import { RouteInterface, routerPaths } from '@shared/models/routes.model';
 import { Store } from '@ngrx/store';
-import { retrievedFolderList } from './shared/state/folders.actions';
-import { Folder } from './shared/models/folder.model';
+import { retrievedFolderList } from '@shared/state/folders.actions';
+import { Folder } from '@shared/models/folder.model';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
-import { ScraperService } from './scraper/scraper.service';
-import { disableSpinner } from './shared/state/spinner.actions';
+import { ScraperService } from '@scraper/scraper.service';
+import { disableSpinner } from '@shared/state/spinner.actions';
 import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -57,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptionEndSubject.complete();
   }
 
-  isScraperPath(url: string | null): boolean {
-    return Boolean(url && url.includes('scraper'));
+  trackByLink(index: number, _: RouteInterface) {
+    return index;
   }
 }

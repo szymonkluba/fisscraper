@@ -8,10 +8,10 @@
   <mat-form-field appearance="outline">
     <mat-label>URL</mat-label>
     <input matInput type="url" formControlName="url" />
-    <mat-error *ngIf="fisId.hasError('required')">
+    <mat-error *ngIf="url | hasError: 'required'">
       URL is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="fisId.hasError('pattern')">
+    <mat-error *ngIf="url | hasError: 'pattern'">
       Enter <strong>valid</strong> URL
     </mat-error>
   </mat-form-field>

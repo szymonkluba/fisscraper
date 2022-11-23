@@ -14,6 +14,7 @@ import { ScraperComponent } from './scraper/scraper.component';
 import { ScraperRoutingModule } from './scraper-routing.module';
 import { SingleRaceComponent } from './single-race/single-race.component';
 import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';
+import { HasErrorModule } from '../shared/utils/has-error/has-error.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.co
     FormsModule,
     ReactiveFormsModule,
     ScraperRoutingModule,
+    HasErrorModule,
   ],
 })
 export class ScraperModule {}

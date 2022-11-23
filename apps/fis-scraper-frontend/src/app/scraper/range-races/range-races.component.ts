@@ -5,8 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ScraperService } from '../scraper.service';
+
 import { Observable } from 'rxjs';
+import { ScraperService } from '@scraper/scraper.service';
 
 @Component({
   selector: 'app-range-races',
