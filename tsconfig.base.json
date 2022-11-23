@@ -19,7 +19,7 @@
     "module": "es2020",
     "lib": ["es2020", "dom"],
     "paths": {
-      "@src/*": ["apps/fis-scraper-frontend/src/*"],
+      "@environments/*": ["apps/fis-scraper-frontend/src/environments/*"],
       "@archive/*": ["apps/fis-scraper-frontend/src/app/archive/*"],
       "@notifications/*": ["apps/fis-scraper-frontend/src/app/notifications/*"],
       "@scraper/*": ["apps/fis-scraper-frontend/src/app/scraper/*"],
