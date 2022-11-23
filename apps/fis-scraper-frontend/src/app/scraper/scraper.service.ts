@@ -3,7 +3,7 @@ import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Race, RaceDetails } from '@shared/models/race.model';
 import { Store } from '@ngrx/store';
 import { map, merge, Observable, scan, tap } from 'rxjs';
-import { environment } from '@src/environments/environment';
+import { environment } from '@environments/environment';
 import { range } from '@shared/utils/range/range';
 import { NotificationsService } from '@notifications/notifications.service';
 import { disableSpinner, enableSpinner } from '@shared/state/spinner.actions';
