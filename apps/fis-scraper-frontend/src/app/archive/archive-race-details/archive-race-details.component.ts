@@ -8,6 +8,14 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+
 import { ScraperService } from '@scraper/scraper.service';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
@@ -24,6 +32,16 @@ import { trackByIndex } from '@shared/utils/track-by/track-by';
   templateUrl: './archive-race-details.component.html',
   styleUrls: ['./archive-race-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
 export class ArchiveRaceDetailsComponent
   implements OnChanges, OnInit, AfterViewChecked

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import { ArchiveComponent } from './archive/archive.component';
-import { ArchiveRaceDetailsComponent } from './archive-race-details/archive-race-details/archive-race-details.component';
+import { ArchiveRaceDetailsComponent } from './archive-race-details/archive-race-details.component';
 import { ArchiveRoutingModule } from './archive-routing.module';
 import { CapitalizeModule } from '../shared/utils/capitalize/capitalize.module';
 import { FileSpinnerModule } from '../shared/file-spinner/file-spinner.module';

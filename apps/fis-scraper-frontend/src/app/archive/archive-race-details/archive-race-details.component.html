@@ -3,10 +3,16 @@
     *ngIf="
       raceData.participantcountry_set && raceData.participantcountry_set.length
     "
-    class="table-container__countries mat-elevation-z4">
+    class="table-container__countries mat-elevation-z4"
+    [class]="
+      raceData.participantcountry_set && raceData.participantcountry_set.length
+        ? 'expanded'
+        : 'collapsed'
+    ">
     <table
       mat-table
       class="countries-table"
+      [class]=""
       [dataSource]="raceData.participantcountry_set">
       <ng-container
         *ngFor="let column of countriesColumns; trackBy: trackByIndex"
@@ -25,7 +31,12 @@
   </div>
   <div
     *ngIf="raceData.participant_set && raceData.participant_set.length"
-    class="table-container__jumpers mat-elevation-z4">
+    class="table-container__jumpers mat-elevation-z4"
+    [class]="
+      raceData.participant_set && raceData.participant_set.length
+        ? 'expanded'
+        : 'collapsed'
+    ">
     <table
       mat-table
       class="jumpers-table"
