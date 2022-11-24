@@ -18,8 +18,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "nx lint --fix --quiet && nx test",
-      "pre-push": "nx lint --fix --quiet && nx test"
+      "pre-commit": "npm run lint && npm run test",
+      "pre-push": "npm run lint && npm run test"
     }
   },
   "private": true,
