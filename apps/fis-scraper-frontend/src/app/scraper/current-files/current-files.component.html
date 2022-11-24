@@ -31,9 +31,10 @@
       <mat-selection-list #races>
         <ng-container *ngFor="let file of files; trackBy: trackByUuid">
           <mat-list-option
-            class="mat-elevation-z1"
+            class="mat-elevation-z1 expanded"
             selected="true"
-            [value]="file.uuid">
+            [value]="file.uuid"
+            @currentFileEnter>
             <mat-icon
               matListItemIcon
               [svgIcon]="

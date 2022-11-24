@@ -6,16 +6,33 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 import { Observable } from 'rxjs';
 import { ScraperService } from '@scraper/scraper.service';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
+
+const inputEnterAnimation = [
+  style({ height: '0' }),
+  animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ height: '*' })),
+];
+
+const inputLeaveAnimation = [
+  style({ height: '*' }),
+  animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ height: '0' })),
+];
 
 @Component({
   selector: 'app-multi-races',
   templateUrl: './multi-races.component.html',
   styleUrls: ['./multi-races.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('changeInputsNumber', [
+      transition(':enter', inputEnterAnimation),
+      transition(':leave', inputLeaveAnimation),
+    ]),
+  ],
 })
 export class MultiRacesComponent {
   readonly fisId: FormControl[] = [];

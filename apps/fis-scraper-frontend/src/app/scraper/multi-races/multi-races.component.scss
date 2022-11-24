@@ -2,7 +2,6 @@
   width: min(40rem, 100%);
   padding: 3rem;
   display: flex;
-  gap: 1rem;
   flex-direction: column;
 
   &-controls {
@@ -12,6 +11,7 @@
   }
 
   &-group {
+    overflow: hidden;
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
@@ -28,4 +28,8 @@
 
 mat-suffix {
   max-height: 2rem;
+}
+
+mat-form-field {
+  margin-top: 1rem;
 }

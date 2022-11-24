@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { Download } from '@shared/models/download.model';
@@ -22,6 +23,14 @@ import { trackByUuid } from '@shared/utils/track-by/track-by';
   templateUrl: './current-files.component.html',
   styleUrls: ['./current-files.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('currentFileEnter', [
+      transition(':enter', [
+        style({ width: '0px', minWidth: '0' }),
+        animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ width: '*' })),
+      ]),
+    ]),
+  ],
 })
 export class CurrentFilesComponent implements OnInit, OnDestroy {
   files$!: Observable<readonly RaceDetails[]>;

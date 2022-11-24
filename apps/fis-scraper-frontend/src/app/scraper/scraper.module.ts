@@ -15,6 +15,7 @@ import { ScraperRoutingModule } from './scraper-routing.module';
 import { SingleRaceComponent } from './single-race/single-race.component';
 import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';
 import { HasErrorModule } from '../shared/utils/has-error/has-error.module';
+import { CapitalizeModule } from '../shared/utils/capitalize/capitalize.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HasErrorModule } from '../shared/utils/has-error/has-error.module';
     ReactiveFormsModule,
     ScraperRoutingModule,
     HasErrorModule,
+    CapitalizeModule,
   ],
 })
 export class ScraperModule {}
