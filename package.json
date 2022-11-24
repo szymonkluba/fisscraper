@@ -16,6 +16,12 @@
     "node": "16.11.1",
     "npm": "8.12.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test",
+      "pre-push": "npm run lint && npm run test"
+    }
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "15.0.0",
@@ -60,6 +66,7 @@
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.2",
     "jasmine-core": "~3.10.0",
     "js-cookie": "^3.0.1",
     "karma": "~6.3.0",
