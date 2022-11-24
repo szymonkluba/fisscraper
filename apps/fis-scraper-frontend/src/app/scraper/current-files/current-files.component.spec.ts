@@ -1,21 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurrentFilesComponent } from './current-files.component';
-import { DropboxService } from '../../shared/services/dropbox.service';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { IFile } from '../../shared/models/file.model';
+import { RaceDetails } from '@shared/models/race.model';
+import { ScraperService } from '@scraper/scraper.service';
 
-class DropboxServiceMock {}
+class ScraperServiceMock {}
 
 class StoreMock {
-  select(): Observable<ReadonlyArray<IFile>> {
+  select(): Observable<ReadonlyArray<RaceDetails>> {
     return of([
       {
-        name: 'test',
-        id: 'test',
-        path_display: 'test',
-        path_lower: 'test',
+        uuid: 'test',
+        fis_id: 1234,
+        place: 'test_place',
+        tournament: {
+          id: 1,
+          name: 'test_tournament_name',
+        },
+        date: new Date(2022, 11, 1).toISOString(),
+        kind: 'men',
+        hill_size: 'string',
+        details: true,
+        participant_set: [],
+        no_jump_1: true,
+        no_jump_2: true,
+        participantcountry_set: [],
       },
     ]);
   }
@@ -29,8 +40,8 @@ describe('CurrentFilesComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CurrentFilesComponent],
       providers: [
-        { provide: DropboxService, useClass: DropboxServiceMock },
         { provide: Store, useClass: StoreMock },
+        { provide: ScraperService, useClass: ScraperServiceMock },
       ],
     }).compileComponents();
   });
