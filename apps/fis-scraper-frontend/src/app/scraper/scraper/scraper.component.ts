@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
 
-import { filter, map, Observable } from 'rxjs';
-import { routerPaths } from '@shared/models/routes.model';
-import { trackByIndex } from '@shared/utils/track-by/track-by';
+enum ScraperTabs {
+  SINGLE_RACE = 'SINGLE_RACE',
+  MULTIPLE_RACES = 'MULTIPLE_RACES',
+  RANGE_OF_RACES = 'RANGE_OF_RACES',
+  RAW_DATA = 'RAW_DATA',
+  SCRAP_TABLE = 'SCRAP_TABLE',
+}
 
 @Component({
   selector: 'app-scraper',
@@ -12,22 +15,5 @@ import { trackByIndex } from '@shared/utils/track-by/track-by';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScraperComponent {
-  links = [
-    routerPaths.SINGLE_RACE,
-    routerPaths.MULTI_RACES,
-    routerPaths.RANGE_RACES,
-    routerPaths.RAW_DATA,
-    routerPaths.SCRAP_TABLE,
-  ];
-  activeLink$: Observable<string> = this.router.events.pipe(
-    filter(event => event instanceof NavigationStart),
-    map(event =>
-      (event as NavigationStart).url === '/scraper'
-        ? '/scraper/single-race'
-        : (event as NavigationStart).url
-    )
-  );
-  trackByIndex = trackByIndex;
-
-  constructor(private readonly router: Router) {}
+  scraperTabs = ScraperTabs;
 }

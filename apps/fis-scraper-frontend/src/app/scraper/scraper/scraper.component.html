@@ -1,19 +1,30 @@
 <mat-card>
-  <nav
-    mat-tab-nav-bar
-    [tabPanel]="tabNavPanel"
-    color="primary"
-    backgroundColor="primary">
-    <a
-      mat-tab-link
-      *ngFor="let link of links; trackBy: trackByIndex"
-      [active]="(activeLink$ | async) === link.path"
-      [routerLink]="link.routerPath"
-      [routerLinkActive]="link.path === (activeLink$ | async) ? 'active' : ''">
-      {{ link.label }}
-    </a>
-  </nav>
-  <mat-tab-nav-panel #tabNavPanel></mat-tab-nav-panel>
-  <router-outlet></router-outlet>
+  <mat-tab-group color="primary" backgroundColor="primary">
+    <mat-tab [label]="scraperTabs.SINGLE_RACE | capitalize">
+      <ng-template matTabContent>
+        <app-single-race></app-single-race>
+      </ng-template>
+    </mat-tab>
+    <mat-tab [label]="scraperTabs.MULTIPLE_RACES | capitalize">
+      <ng-template matTabContent>
+        <app-multi-races></app-multi-races>
+      </ng-template>
+    </mat-tab>
+    <mat-tab [label]="scraperTabs.RANGE_OF_RACES | capitalize">
+      <ng-template matTabContent>
+        <app-range-races></app-range-races>
+      </ng-template>
+    </mat-tab>
+    <mat-tab [label]="scraperTabs.RAW_DATA | capitalize">
+      <ng-template matTabContent>
+        <app-unprocessed-data></app-unprocessed-data>
+      </ng-template>
+    </mat-tab>
+    <mat-tab [label]="scraperTabs.SCRAP_TABLE | capitalize">
+      <ng-template matTabContent>
+        <app-scrap-table></app-scrap-table>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
 <app-current-files></app-current-files>
