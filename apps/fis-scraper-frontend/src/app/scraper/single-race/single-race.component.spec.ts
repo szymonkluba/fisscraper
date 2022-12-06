@@ -6,13 +6,11 @@ describe('SingleRaceComponent', () => {
   let component: SingleRaceComponent;
   let fixture: ComponentFixture<SingleRaceComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [SingleRaceComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SingleRaceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

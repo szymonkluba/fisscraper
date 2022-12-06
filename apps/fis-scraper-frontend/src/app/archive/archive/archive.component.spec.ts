@@ -6,13 +6,11 @@ describe('ArchiveComponent', () => {
   let component: ArchiveComponent;
   let fixture: ComponentFixture<ArchiveComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [ArchiveComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ArchiveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

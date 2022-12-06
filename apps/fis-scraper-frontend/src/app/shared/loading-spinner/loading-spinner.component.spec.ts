@@ -6,8 +6,8 @@ describe('LoadingSpinnerComponent', () => {
   let component: LoadingSpinnerComponent;
   let fixture: ComponentFixture<LoadingSpinnerComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [LoadingSpinnerComponent],
     }).compileComponents();
 

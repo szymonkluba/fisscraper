@@ -6,8 +6,8 @@ describe('ScrapTableComponent', () => {
   let component: ScrapTableComponent;
   let fixture: ComponentFixture<ScrapTableComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [ScrapTableComponent],
     }).compileComponents();
 

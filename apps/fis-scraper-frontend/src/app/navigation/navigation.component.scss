@@ -1,0 +1,25 @@
+a {
+  border-radius: 0 100vh 100vh 0;
+}
+
+button {
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  z-index: 1000;
+  overflow: visible;
+}
+
+.label {
+  display: block;
+  overflow: hidden;
+}
+
+.link-active {
+  background-color: rgba(156,39,176,.2);
+
+  & .label, & mat-icon {
+    color: #d176e1;
+    font-weight: 700;
+  }
+}

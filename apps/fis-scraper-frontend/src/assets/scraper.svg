@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="171.265"
+   height="171.265"
+   viewBox="-0.56 0 171.265 171.265"
+   id="svg897"
+   xmlns="http://www.w3.org/2000/svg">
+  <defs
+     id="defs901" />
+  <path
+     id="Path_105"
+     data-name="Path 105"
+     d="m 144.38658,17.276288 a 6.1292098,6.1123407 0 1 0 8.6667,0 6.1292098,6.1123407 0 0 0 -8.6667,0 z"
+     style="display:inline;stroke:currentColor;stroke-width:1.5;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     id="Path_106"
+     data-name="Path 106"
+     d="m 158.87976,28.964402 v 0.002 a 11.511625,11.5 0 0 0 0,-16.263 l -0.70872,-0.709 a 11.511625,11.5 0 0 0 -16.27844,0 l -50.610104,50.559 16.988154,16.971 z m -41.54195,52.817 -9.06416,9.055 -28.313588,-28.283 7.866944,-7.859 c -21.543755,0.994 -50.695193,16.019 -76.410161,39.794 L 77.434512,160.4394 c 24.901148,-26.858 40.016408,-56.952 39.903298,-78.657998 z m 52.92444,-60.949 a 19.392583,19.373 0 0 1 -5.71677,13.788 l -39.79018,39.75 c 3.90794,25.08 -13.63377,62.679998 -44.352791,94.579998 l -2.829858,2.939 -77.61938151,-77.539998 2.94297191,-2.828 c 31.3226296,-30.109 67.3850466,-47.375 92.6845946,-44.575 l 40.651054,-40.61 a 19.519712,19.5 0 0 1 27.60587,0 l 0.70772,0.709 a 19.391582,19.372 0 0 1 5.71677,13.787 z"
+     style="display:inline;mix-blend-mode:normal;fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:5.12591;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke"
+     class="UnoptimicedTransforms"
+     transform="matrix(0.97543703,0,0,0.97543703,2.5787868,1.8939831)" />
+</svg>

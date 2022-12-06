@@ -6,13 +6,11 @@ describe('RangeRacesComponent', () => {
   let component: RangeRacesComponent;
   let fixture: ComponentFixture<RangeRacesComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [RangeRacesComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(RangeRacesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

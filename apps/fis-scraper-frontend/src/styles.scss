@@ -3,6 +3,8 @@ html {
   padding: 0;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  height: 100%;
+  width: 100%;
 }
 
 *,
@@ -21,6 +23,7 @@ html {
   width: 10px;
   height: 10px;
 }
+
 *::-webkit-scrollbar-track {
   border-radius: 5px;
   background-color: rgb(77, 77, 77);

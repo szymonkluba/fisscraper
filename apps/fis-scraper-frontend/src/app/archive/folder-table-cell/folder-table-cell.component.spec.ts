@@ -6,8 +6,8 @@ describe('FolderTableCellComponent', () => {
   let component: FolderTableCellComponent;
   let fixture: ComponentFixture<FolderTableCellComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [FolderTableCellComponent],
     }).compileComponents();
 

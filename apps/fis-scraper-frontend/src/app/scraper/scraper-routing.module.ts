@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScraperComponent } from './scraper/scraper.component';
-import { routerPaths } from '../shared/models/routes.model';
+import { Paths, RouterPaths, routerPaths } from '@shared/models/routes.model';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: routerPaths.SCRAPER.routerPath,
+    path: RouterPaths.EMPTY,
+    redirectTo: routerPaths[Paths.SCRAPER].routerPath,
     pathMatch: 'prefix',
   },
   {
-    path: '',
+    path: RouterPaths.EMPTY,
     component: ScraperComponent,
   },
 ];

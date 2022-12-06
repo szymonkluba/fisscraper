@@ -6,13 +6,11 @@ describe('MultiRacesComponent', () => {
   let component: MultiRacesComponent;
   let fixture: ComponentFixture<MultiRacesComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [MultiRacesComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(MultiRacesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

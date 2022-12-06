@@ -6,13 +6,11 @@ describe('UnprocessedDataComponent', () => {
   let component: UnprocessedDataComponent;
   let fixture: ComponentFixture<UnprocessedDataComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [UnprocessedDataComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(UnprocessedDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

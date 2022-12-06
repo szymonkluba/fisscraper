@@ -1,18 +1,14 @@
-mat-card {
-  margin: 0 auto;
-  width: min(70rem, 100%);
-
-  &-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    min-height: 10rem;
-    width: 100%;
-  }
+h2 {
+  margin: 1.5rem 4rem;
 }
 
 .accordion {
-  width: 100%;
+  width: calc(100% - 3rem);
+  padding: 3rem;
+
+  & mat-expansion-panel {
+    margin-inline: 4rem;
+  }
 
   & .mat-expansion-panel-header-description {
     align-items: center;
@@ -44,6 +40,7 @@ mat-card {
 
 table {
   width: 100%;
+  table-layout: fixed;
 }
 
 tr.detail-row {
@@ -63,6 +60,7 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .detail-content {
+  width: 100%;
 }
 
 td.mat-column-expand {

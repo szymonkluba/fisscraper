@@ -1,85 +1,65 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { ScraperService } from '@scraper/scraper.service';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
-
-const inputEnterAnimation = [
-  style({ height: '0' }),
-  animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ height: '*' })),
-];
-
-const inputLeaveAnimation = [
-  style({ height: '*' }),
-  animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ height: '0' })),
-];
+import { Race } from '@shared/models/race.model';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-multi-races',
   templateUrl: './multi-races.component.html',
   styleUrls: ['./multi-races.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('changeInputsNumber', [
-      transition(':enter', inputEnterAnimation),
-      transition(':leave', inputLeaveAnimation),
-    ]),
-  ],
 })
 export class MultiRacesComponent {
   readonly fisId: FormControl[] = [];
   readonly details: FormControl = new FormControl(false);
-  raceForm: FormGroup;
   progress$?: Observable<number>;
   trackByIndex = trackByIndex;
-  races: FormArray;
+
+  races: Race[] = [];
+  readonly separatorKeyCodes = [COMMA, ENTER, SPACE] as const;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly scraperService: ScraperService
-  ) {
-    this.raceForm = this.formBuilder.group({
-      races: this.formBuilder.array([this.newRace()]),
-    });
-    this.races = this.raceForm.get('races')! as FormArray;
+  ) {}
+
+  addRace(event: MatChipInputEvent): void {
+    const value = Number((event.value || '').trim());
+
+    if (value > 0) {
+      this.races.push({
+        fis_id: value,
+        details: false,
+      });
+    }
+
+    event.chipInput.clear();
   }
 
-  newRace(): FormGroup {
-    this.fisId.push(
-      new FormControl(0, [
-        Validators.required,
-        Validators.min(1),
-        Validators.pattern(/\d*/),
-      ])
-    );
-    return this.formBuilder.group({
-      fis_id: this.fisId[this.fisId.length - 1],
-      details: this.details,
-    });
+  removeRace(race: Race): void {
+    const index = this.races.indexOf(race);
+
+    if (index > -1) {
+      this.races.splice(index, 1);
+    }
   }
 
-  addInput() {
-    this.races.push(this.newRace());
+  submit(): void {
+    if (this.races.length > 0) {
+      this.progress$ = this.scraperService.scrapMultipleRaces(this.races);
+    }
   }
 
-  removeInput() {
-    this.fisId.pop();
-    this.races.removeAt(this.races.length - 1);
-  }
+  changeDetailsState(race: Race): void {
+    const index = this.races.indexOf(race);
 
-  submit() {
-    if (this.raceForm.valid) {
-      this.progress$ = this.scraperService.scrapMultipleRaces(
-        this.raceForm.value['races']
-      );
+    if (index > -1) {
+      this.races[index].details = !this.races[index].details;
     }
   }
 }

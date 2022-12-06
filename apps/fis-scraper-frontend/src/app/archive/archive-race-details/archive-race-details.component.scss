@@ -40,25 +40,22 @@
 }
 
 .table-container__jumpers {
-  margin: 1rem auto;
+  margin: 1rem 0;
   max-height: 40rem;
-  height: fit-content;
-  max-width: 63rem;
   overflow: auto;
   width: 100%;
 }
 
 .table-container__countries {
-  margin: 1rem auto;
+  margin: 1rem 0;
   max-height: 26rem;
-  height: fit-content;
-  max-width: 63rem;
   overflow: auto;
   width: 100%;
 }
 
 table.jumpers-table {
   border-radius: 3px;
+  table-layout: fixed;
 
   & th.mat-mdc-header-cell {
     font-size: 0.75rem;
@@ -98,6 +95,7 @@ table.jumpers-table {
 
 table.countries-table {
   border-radius: 3px;
+  table-layout: fixed;
 
   & .cdk-column-country-name {
     text-align: center;

@@ -1,50 +1,45 @@
-<form [formGroup]="raceForm">
-  <div class="multi-races-form" formArrayName="races">
-    <h2>Scrap multiple races</h2>
-    <div
-      class="multi-races-form-group"
-      *ngFor="
-        let race of races.controls;
-        let i = index;
-        let first = first;
-        trackBy: trackByIndex
-      "
-      [formGroupName]="i"
-      [@changeInputsNumber]="!first">
-      <mat-form-field appearance="outline">
-        <mat-label>FIS ID</mat-label>
-        <input matInput type="number" formControlName="fis_id" />
-        <mat-error *ngIf="fisId[i] | hasError: 'min'">
-          Enter <strong>number</strong> greater than 0
-        </mat-error>
-        <mat-error *ngIf="fisId[i] | hasError: 'pattern'">
-          Enter <strong>number</strong>
-        </mat-error>
-        <mat-error *ngIf="fisId[i] | hasError: 'required'">
-          FIS ID is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
-    </div>
-
-    <div class="multi-races-form-controls">
-      <button mat-icon-button color="accent" (click)="addInput()">
-        <mat-icon>exposure_plus_1</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="removeInput()">
-        <mat-icon>exposure_neg_1</mat-icon>
-      </button>
-    </div>
-
-    <button
-      class="multi-races-form-submit"
-      mat-raised-button
-      color="primary"
-      (click)="submit()"
-      [disabled]="!raceForm.valid">
-      Scrap!
-    </button>
-  </div>
+<form class="multi-races-form">
+  <h2>Scrap multiple races</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>FIS ID</mat-label>
+    <mat-chip-grid #racesGrid aria-label="Enter FIS Ids">
+      <mat-chip-row
+        *ngFor="let race of races; trackBy: trackByIndex"
+        (removed)="removeRace(race)"
+        [highlighted]="race.details"
+        (click)="changeDetailsState(race)"
+        [editable]="false">
+        {{ race.fis_id }}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input
+      matInput
+      [matChipInputFor]="racesGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+      [matChipInputAddOnBlur]="true"
+      (matChipInputTokenEnd)="addRace($event)" />
+    <!--<mat-error *ngIf="fisId[i] | hasError: 'min'">
+        Enter <strong>number</strong> greater than 0
+      </mat-error>
+      <mat-error *ngIf="fisId[i] | hasError: 'pattern'">
+        Enter <strong>number</strong>
+      </mat-error>
+      <mat-error *ngIf="fisId[i] | hasError: 'required'">
+        FIS ID is <strong>required</strong>
+      </mat-error>-->
+  </mat-form-field>
+  <mat-slide-toggle>Details</mat-slide-toggle>
+  <button
+    class="multi-races-form-submit"
+    mat-raised-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="races.length === 0">
+    Scrap!
+  </button>
 </form>
 <mat-progress-bar
   *ngIf="progress$ | async as progress"

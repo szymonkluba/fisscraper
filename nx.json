@@ -35,12 +35,6 @@
       ]
     }
   },
-  "cli": {
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
-    "analytics": false
-  },
   "generators": {
     "@schematics/angular:component": {
       "style": "scss"

@@ -36,17 +36,14 @@ describe('CurrentFilesComponent', () => {
   let component: CurrentFilesComponent;
   let fixture: ComponentFixture<CurrentFilesComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [CurrentFilesComponent],
       providers: [
         { provide: Store, useClass: StoreMock },
         { provide: ScraperService, useClass: ScraperServiceMock },
       ],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(CurrentFilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,27 +1,17 @@
-.container {
-  inset: 0;
-  position: absolute;
+:host {
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
-.loading {
-  &-spinner {
-    display: block;
-    height: 100vh;
-    width: 100vw;
-  }
-
-  &-text {
-    color: black;
-    left: 50%;
-    position: fixed;
-    top: 60%;
-    transform: translateX(-50%);
-  }
+.container {
+  height: calc(100% - 64px);
+  width: 100%;
 }
 
 .mat-sidenav {
-  padding: 2rem 1rem;
-  width: min(15rem, 100%);
+  padding: 3rem 0;
+  overflow: visible;
 
   & button {
     font-size: 1.25rem;
@@ -35,18 +25,11 @@ router-outlet {
   padding: 1rem;
 }
 
-.title {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  &-content {
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
-    max-width: 70rem;
-    width: 100%;
-  }
+.title-content {
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .menu-content {
@@ -86,4 +69,22 @@ router-outlet {
 .app-menu-title {
   font-weight: 700;
   font-size: 1.75rem;
+}
+
+.app-content {
+  height: 100%;
+  overflow: auto;
+  transition: margin-left ease-in-out 150ms;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+.collapsed {
+  width: 3rem;
+}
+
+.extended {
+  width: 20rem;
 }

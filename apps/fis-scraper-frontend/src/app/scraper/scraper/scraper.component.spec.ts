@@ -6,13 +6,11 @@ describe('ScraperComponent', () => {
   let component: ScraperComponent;
   let fixture: ComponentFixture<ScraperComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [ScraperComponent],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ScraperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

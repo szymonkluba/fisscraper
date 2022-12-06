@@ -1,26 +1,19 @@
-mat-card {
-  width: min(70rem, 100%);
-  min-height: 15rem;
-  margin: 2rem auto;
-
-  &-header {
-    display: flex;
-  }
-
-  &-title {
-    display: inline-block;
-  }
-
-  &-actions {
-    display: inline-block;
-    margin-left: auto;
-    margin-bottom: 0;
-  }
+h2 {
+  margin: .5rem 3rem;
+  display: inline-block;
 }
 
-mat-selection-list {
+.current-files__header {
+  width: 100%;
+  padding: 1rem;
   display: flex;
-  flex-flow: row wrap;
+}
+
+.option {
+  display: flex;
+  gap: 1rem;
+  padding: 0 4rem;
+  align-items: center;
 }
 
 mat-list-option {
@@ -28,6 +21,6 @@ mat-list-option {
 }
 
 button {
-  margin: auto;
+  margin-left: auto;
 }
 

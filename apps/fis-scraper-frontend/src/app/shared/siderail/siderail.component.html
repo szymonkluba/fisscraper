@@ -1,0 +1,17 @@
+<mat-drawer-container hasBackdrop="false">
+  <mat-drawer
+    *ngIf="sideRailState$ | async as sideRailState"
+    mode="side"
+    position="end"
+    [opened]="sideRailState.opened">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <ng-template
+      *ngIf="sideRailState.portal"
+      [cdkPortalOutlet]="sideRailState.portal"></ng-template>
+  </mat-drawer>
+  <mat-drawer-container>
+    <router-outlet></router-outlet>
+  </mat-drawer-container>
+</mat-drawer-container>

@@ -1,6 +1,12 @@
+:host {
+  width: 20rem;
+  height: 100%;
+}
+
 .multi-races-form {
-  width: min(40rem, 100%);
-  padding: 3rem;
+  width: 20rem;
+  height: 100%;
+  padding: 3rem 1rem;
   display: flex;
   flex-direction: column;
 
