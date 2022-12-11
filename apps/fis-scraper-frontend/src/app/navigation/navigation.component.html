@@ -1,19 +1,29 @@
-<mat-nav-list>
-  <a
-    *ngFor="let link of navLinks; trackBy: trackByIndex"
-    mat-list-item
-    [matTooltip]="link.label || ''"
-    [routerLink]="link.routerPath"
-    [activated]="(activeLink$ | async) === link.link"
-    [class.link-active]="(activeLink$ | async) === link.link"
-    (click)="link.action && link.action()">
-    <mat-icon matListItemIcon [svgIcon]="link.icon!"></mat-icon>
-    <span [@showHide]="menuCollapsed" class="label">{{ link.label }}</span>
-  </a>
-</mat-nav-list>
+<ng-container *ngIf="menuDisplayState$ | async as menuDisplayState">
+  <mat-nav-list>
+    <a
+      *ngFor="let link of navLinks; trackBy: trackByIndex"
+      mat-list-item
+      [matTooltip]="link.label || ''"
+      [routerLink]="link.routerPath"
+      [activated]="(activeLink$ | async) === link.link"
+      [class.link-active]="(activeLink$ | async) === link.link"
+      (click)="link.action && link.action()">
+      <mat-icon matListItemIcon [svgIcon]="link.icon!"></mat-icon>
+      <span [@showHide]="menuDisplayState" class="label">{{ link.label }}</span>
+    </a>
+  </mat-nav-list>
 
-<button mat-mini-fab (click)="menuCollapsed ? expandMenu() : collapseMenu()">
-  <mat-icon>{{
-    menuCollapsed ? 'keyboard_arrow_right' : 'keyboard_arrow_left'
-  }}</mat-icon>
-</button>
+  <button
+    mat-mini-fab
+    (click)="
+      menuDisplayState === MenuDisplayStates.COLLAPSED
+        ? expandMenu()
+        : collapseMenu()
+    ">
+    <mat-icon>{{
+      menuDisplayState === MenuDisplayStates.COLLAPSED
+        ? 'keyboard_arrow_right'
+        : 'keyboard_arrow_left'
+    }}</mat-icon>
+  </button>
+</ng-container>

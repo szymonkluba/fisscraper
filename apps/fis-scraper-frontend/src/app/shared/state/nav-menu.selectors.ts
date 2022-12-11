@@ -5,7 +5,7 @@ const selectNavMenu = createFeatureSelector<NavMenuState>('navMenu');
 
 export const selectNavMenuState = createSelector(
   selectNavMenu,
-  (state: NavMenuState) => state.collapsed
+  (state: NavMenuState) => state.displayState
 );
 
 export const selectActiveLink = createSelector(

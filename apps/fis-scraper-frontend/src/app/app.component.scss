@@ -74,7 +74,6 @@ router-outlet {
 .app-content {
   height: 100%;
   overflow: auto;
-  transition: margin-left ease-in-out 150ms;
 }
 
 mat-drawer-container {

@@ -1,21 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 import { collapseMenu, expandMenu, navigate } from './nav-menu.actions';
-import { Paths } from "@shared/models/routes.model";
+import { Paths } from '@shared/models/routes.model';
 
+export enum MenuDisplayStates {
+  COLLAPSED = 'collapsed',
+  EXPANDED = 'expanded',
+}
 
 export interface NavMenuState {
-  collapsed: boolean;
+  displayState: MenuDisplayStates;
   activeLink: Paths;
 }
 
 const initialState: NavMenuState = {
-  collapsed: false,
+  displayState: MenuDisplayStates.EXPANDED,
   activeLink: Paths.SCRAPER,
 };
 
 export const navMenuReducer = createReducer(
   initialState,
-  on(collapseMenu, state => ({ ...state, collapsed: true })),
-  on(expandMenu, state => ({ ...state, collapsed: false })),
-  on(navigate, (state, { activeLink }) => ({...state, activeLink}))
+  on(collapseMenu, state => ({
+    ...state,
+    displayState: MenuDisplayStates.COLLAPSED,
+  })),
+  on(expandMenu, state => ({
+    ...state,
+    displayState: MenuDisplayStates.EXPANDED,
+  })),
+  on(navigate, (state, { activeLink }) => ({ ...state, activeLink }))
 );
