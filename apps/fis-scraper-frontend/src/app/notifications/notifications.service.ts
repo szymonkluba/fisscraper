@@ -8,7 +8,7 @@ import {
 import {
   addNotification,
   removeNotification,
-} from '../shared/state/notifications.actions';
+} from './store/notifications.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';

@@ -13,7 +13,7 @@ import {
   changeSideRailContent,
   closeSideRail,
   openSideRail,
-} from '@shared/state/siderail.actions';
+} from '@shared/siderail/store/siderail.actions';
 import { Portals } from '@shared/models/portal.model';
 import { Store } from '@ngrx/store';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
@@ -23,12 +23,8 @@ import { Observable } from 'rxjs';
 import {
   selectActiveLink,
   selectNavMenuState,
-} from '@shared/state/nav-menu.selectors';
-import {
-  collapseMenu,
-  expandMenu,
-  navigate,
-} from '@shared/state/nav-menu.actions';
+} from './store/nav-menu.selectors';
+import { collapseMenu, expandMenu, navigate } from './store/nav-menu.actions';
 import {
   animate,
   state,
@@ -36,7 +32,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MenuDisplayStates } from '@shared/state/nav-menu.reducer';
+import { MenuDisplayStates } from './store/nav-menu.reducer';
 
 @Component({
   selector: 'app-navigation',

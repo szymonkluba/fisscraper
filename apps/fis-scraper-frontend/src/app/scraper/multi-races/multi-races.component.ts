@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
-import { ScraperService } from '@scraper/scraper.service';
+import { ScraperService } from '../../services/scraper.service';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 import { Race } from '@shared/models/race.model';
 import { MatChipInputEvent } from '@angular/material/chips';

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Folder } from '../models/folder.model';
+import { Folder } from '@shared/models/folder.model';
 
 export const retrievedFolderList = createAction(
   '[Folders Collection] Retrieve Folders',

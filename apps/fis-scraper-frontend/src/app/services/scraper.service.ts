@@ -6,14 +6,17 @@ import { map, merge, Observable, scan, tap } from 'rxjs';
 import { environment } from '@environments/environment';
 import { range } from '@shared/utils/range/range';
 import { NotificationsService } from '@notifications/notifications.service';
-import { disableSpinner, enableSpinner } from '@shared/state/spinner.actions';
+import {
+  disableSpinner,
+  enableSpinner,
+} from '@shared/../store/spinner.actions';
 import { download } from '@shared/utils/download/download';
 import { Saver, SAVER } from '@shared/providers/saver.provider';
 import { Download } from '@shared/models/download.model';
 import { Folder } from '@shared/models/folder.model';
-import { addRaceDetails } from '@shared/state/raceDetails.actions';
-import { addFolder } from '@shared/state/folders.actions';
-import { addRace } from '@shared/state/races.actions';
+import { addRaceDetails } from '@shared/../store/raceDetails.actions';
+import { addFolder } from '@archive/store/folders.actions';
+import { addRace } from '@shared/../store/races.actions';
 
 const options: {
   responseType: 'json';

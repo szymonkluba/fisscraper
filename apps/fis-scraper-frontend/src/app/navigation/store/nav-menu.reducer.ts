@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { collapseMenu, expandMenu, navigate } from './nav-menu.actions';
-import { Paths } from '@shared/models/routes.model';
+import { Paths } from 'apps/fis-scraper-frontend/src/app/shared/models/routes.model';
 
 export enum MenuDisplayStates {
   COLLAPSED = 'collapsed',

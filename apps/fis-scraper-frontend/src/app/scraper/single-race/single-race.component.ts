@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
-import { ScraperService } from '@scraper/scraper.service';
+import { ScraperService } from '../../services/scraper.service';
 
 @Component({
   selector: 'app-single-race',

@@ -1,5 +1,5 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { RaceDetails } from '../models/race.model';
+import { RaceDetails } from '../shared/models/race.model';
 
 export const selectRaces =
   createFeatureSelector<ReadonlyArray<RaceDetails>>('races');

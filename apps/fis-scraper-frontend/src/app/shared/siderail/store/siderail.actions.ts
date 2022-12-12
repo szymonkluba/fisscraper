@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Portals } from '../models/portal.model';
+import { Portals } from '../../models/portal.model';
 
 export const closeSideRail = createAction('[Side Rail] Close Side Rail');
 

@@ -1,4 +1,4 @@
-import { Folder } from '../models/folder.model';
+import { Folder } from '../../shared/models/folder.model';
 import { createReducer, on } from '@ngrx/store';
 import { addFolder, retrievedFolderList } from './folders.actions';
 

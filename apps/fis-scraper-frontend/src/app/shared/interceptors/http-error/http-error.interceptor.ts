@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { catchError, filter, Observable, of } from 'rxjs';
-import { disableSpinner } from '../../state/spinner.actions';
+import { disableSpinner } from '../../../store/spinner.actions';
 import { NotificationsService } from '../../../notifications/notifications.service';
 import { Store } from '@ngrx/store';
 

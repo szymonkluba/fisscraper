@@ -23,7 +23,9 @@
       "@environments/*": ["apps/fis-scraper-frontend/src/environments/*"],
       "@notifications/*": ["apps/fis-scraper-frontend/src/app/notifications/*"],
       "@scraper/*": ["apps/fis-scraper-frontend/src/app/scraper/*"],
-      "@shared/*": ["apps/fis-scraper-frontend/src/app/shared/*"]
+      "@services/*": ["apps/fis-scraper-frontend/src/app/services/*"],
+      "@shared/*": ["apps/fis-scraper-frontend/src/app/shared/*"],
+      "@store/*": ["apps/fis-scraper-frontend/src/app/store/*"]
     },
     "rootDir": "."
   },

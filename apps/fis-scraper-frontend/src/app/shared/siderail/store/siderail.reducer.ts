@@ -16,7 +16,7 @@ export const initialState: SideRailState = {
   portal: null,
 };
 
-export const sideRailStateReducer = createReducer(
+export const sideRailReducer = createReducer(
   initialState,
   on(openSideRail, state => ({ ...state, opened: true })),
   on(closeSideRail, state => ({ ...state, opened: false })),

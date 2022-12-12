@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Notification } from '@shared/models/notification.model';
-import { selectNotifications } from '@shared/state/notifications.selectors';
+import { selectNotifications } from '@notifications/store/notifications.selectors';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({

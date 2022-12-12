@@ -13,43 +13,45 @@ import { StoreModule } from '@ngrx/store';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { NavigationModule } from './navigation/navigation.module';
 import { ScraperModule } from '@scraper/scraper.module';
-import { SiderailModule } from '@shared/siderail/siderail.module';
+import { SideRailModule } from '@shared/siderail/side-rail.module';
 import { csrfTokenProvider } from '@shared/providers/csrf-token.provider';
-import { foldersReducer } from '@shared/state/folders.reducer';
 import { getSaver, SAVER } from '@shared/providers/saver.provider';
 import { httpErrorProvider } from '@shared/providers/http-error.provider';
-import { navMenuReducer } from '@shared/state/nav-menu.reducer';
-import { notificationsReducer } from '@shared/state/notifications.reducer';
-import { raceDetailsReducer } from '@shared/state/raceDetails.reducer';
-import { racesReducer } from '@shared/state/races.reducer';
-import { sideRailStateReducer } from '@shared/state/siderail.reducer';
-import { spinnerReducer } from '@shared/state/spinner.reducer';
+import { raceDetailsReducer } from '@store/raceDetails.reducer';
+import { racesReducer } from '@store/races.reducer';
+import { spinnerReducer } from '@store/spinner.reducer';
+import { ArchiveModule } from '@archive/archive.module';
+
+const STORE_MODULES = [
+  StoreModule.forRoot(
+    {
+      raceDetails: raceDetailsReducer,
+      races: racesReducer,
+      spinner: spinnerReducer,
+    },
+    {}
+  ),
+];
+
+const APP_MODULES = [
+  ArchiveModule,
+  FileSpinnerModule,
+  NavigationModule,
+  ScraperModule,
+  SideRailModule,
+];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    APP_MODULES,
     AngularMaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    FileSpinnerModule,
     HttpClientModule,
     NotificationsModule,
-    StoreModule.forRoot(
-      {
-        folders: foldersReducer,
-        navMenu: navMenuReducer,
-        notifications: notificationsReducer,
-        raceDetails: raceDetailsReducer,
-        races: racesReducer,
-        spinner: spinnerReducer,
-        sideRail: sideRailStateReducer,
-      },
-      {}
-    ),
-    ScraperModule,
-    SiderailModule,
-    NavigationModule,
+    STORE_MODULES,
   ],
   providers: [
     csrfTokenProvider,

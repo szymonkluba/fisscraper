@@ -9,9 +9,9 @@ import { Folder } from '@shared/models/folder.model';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
-import { ScraperService } from '@scraper/scraper.service';
+import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
-import { selectFolders } from '@shared/state/folders.selectors';
+import { selectFolders } from '@archive/store/folders.selectors';
 import {
   animate,
   state,
@@ -19,8 +19,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { selectSpinnerState } from '@shared/state/spinner.selectors';
-import { disableSpinner } from '@shared/state/spinner.actions';
+import { selectSpinnerState } from '@store/spinner.selectors';
+import { disableSpinner } from '@store/spinner.actions';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({

@@ -16,7 +16,7 @@ import {
   trigger,
 } from '@angular/animations';
 
-import { ScraperService } from '@scraper/scraper.service';
+import { ScraperService } from '@services/scraper.service';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
 import { COUNTRY_TABLE_COLUMNS, JUMPER_TABLE_COLUMNS } from './constants';
@@ -24,7 +24,7 @@ import { MatTable } from '@angular/material/table';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { selectRaceDetails } from '@shared/state/raceDetails.selectors';
+import { selectRaceDetails } from '@store/raceDetails.selectors';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({

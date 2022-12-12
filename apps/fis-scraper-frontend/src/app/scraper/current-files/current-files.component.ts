@@ -12,10 +12,10 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { MatListOption } from '@angular/material/list';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
-import { ScraperService } from '../scraper.service';
+import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
-import { selectRaces } from '@shared/state/races.selectors';
-import { selectSpinnerState } from '@shared/state/spinner.selectors';
+import { selectRaces } from '@store/races.selectors';
+import { selectSpinnerState } from '@store/spinner.selectors';
 import { trackByUuid } from '@shared/utils/track-by/track-by';
 
 @Component({

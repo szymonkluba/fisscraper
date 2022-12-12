@@ -1,11 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SideRailState } from './siderail.reducer';
-import { Portals } from '@shared/models/portal.model';
-import { SingleRaceComponent } from '@scraper/single-race/single-race.component';
-import { MultiRacesComponent } from '@scraper/multi-races/multi-races.component';
-import { RangeRacesComponent } from '@scraper/range-races/range-races.component';
-import { UnprocessedDataComponent } from '@scraper/unprocessed-data/unprocessed-data.component';
-import { ScrapTableComponent } from '@scraper/scrap-table/scrap-table.component';
+import { Portals } from 'apps/fis-scraper-frontend/src/app/shared/models/portal.model';
+import { SingleRaceComponent } from 'apps/fis-scraper-frontend/src/app/scraper/single-race/single-race.component';
+import { MultiRacesComponent } from 'apps/fis-scraper-frontend/src/app/scraper/multi-races/multi-races.component';
+import { RangeRacesComponent } from 'apps/fis-scraper-frontend/src/app/scraper/range-races/range-races.component';
+import { UnprocessedDataComponent } from 'apps/fis-scraper-frontend/src/app/scraper/unprocessed-data/unprocessed-data.component';
+import { ScrapTableComponent } from 'apps/fis-scraper-frontend/src/app/scraper/scrap-table/scrap-table.component';
 import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
 
 const portals = new Map<Portals, ComponentType<unknown>>([

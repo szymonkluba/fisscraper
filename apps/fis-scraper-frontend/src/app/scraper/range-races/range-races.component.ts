@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 import { Observable } from 'rxjs';
-import { ScraperService } from '@scraper/scraper.service';
+import { ScraperService } from '../../services/scraper.service';
 
 @Component({
   selector: 'app-range-races',

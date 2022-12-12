@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
-import { retrievedFolderList } from '@shared/state/folders.actions';
+import { retrievedFolderList } from '@archive/store/folders.actions';
 import { Folder } from '@shared/models/folder.model';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { ScraperService } from '@scraper/scraper.service';
-import { disableSpinner } from '@shared/state/spinner.actions';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { ScraperService } from '@services/scraper.service';
+import { disableSpinner } from '@store/spinner.actions';
 import { Router } from '@angular/router';
-import { selectNavMenuState } from '@shared/state/nav-menu.selectors';
+import { selectNavMenuState } from './navigation/store/nav-menu.selectors';
 import {
   animate,
   state,
@@ -22,7 +22,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MenuDisplayStates } from '@shared/state/nav-menu.reducer';
+import { MenuDisplayStates } from './navigation/store/nav-menu.reducer';
 
 const MENU_ANIMATION = [
   state(
@@ -77,9 +77,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   readonly title = 'FIS Scraper';
   readonly subtitle = 'Ski jumping results scraper';
-  readonly menuDisplayState$: Observable<MenuDisplayStates> =
-    this.store.select(selectNavMenuState);
-  readonly MenuDisplayStates = MenuDisplayStates;
+  readonly menuDisplayState$: Observable<MenuDisplayStates> = this.store
+    .select(selectNavMenuState)
+    .pipe(tap(s => console.log(s)));
   readonly subscriptionEndSubject = new Subject();
   readonly subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
 

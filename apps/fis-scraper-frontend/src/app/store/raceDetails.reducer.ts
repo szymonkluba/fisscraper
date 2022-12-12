@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { RaceDetails } from '../models/race.model';
+import { RaceDetails } from '../shared/models/race.model';
 import { addRaceDetails } from './raceDetails.actions';
 
 export const initialState: ReadonlyArray<RaceDetails> = [];
