@@ -11,7 +11,10 @@ import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
 import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
-import { selectFolders } from '@archive/store/folders.selectors';
+import {
+  selectFolders,
+  selectFoldersLoadStatus,
+} from '@archive/store/folders.selectors';
 import {
   animate,
   state,
@@ -19,9 +22,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { selectSpinnerState } from '@store/spinner.selectors';
-import { disableSpinner } from '@store/spinner.actions';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
+import { loadFolders } from '@archive/store/folders.actions';
 
 @Component({
   selector: 'app-archive',
@@ -64,11 +66,12 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private readonly store: Store
   ) {}
 
-  readonly folders$?: Observable<ReadonlyArray<Folder>> = this.store
+  readonly folders$: Observable<ReadonlyArray<Folder>> = this.store
     .select(selectFolders)
-    .pipe(tap(_ => this.store.dispatch(disableSpinner())));
-  readonly spinnerState$: Observable<boolean> =
-    this.store.select(selectSpinnerState);
+    .pipe(tap(folders => console.log(folders)));
+  readonly foldersLoadStatus$: Observable<boolean> = this.store.select(
+    selectFoldersLoadStatus
+  );
   trackByIndex = trackByIndex;
 
   ngOnInit(): void {
@@ -92,6 +95,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
       'other',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/other.svg')
     );
+    this.store.dispatch(loadFolders());
   }
 
   ngOnDestroy() {

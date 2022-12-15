@@ -1,15 +1,11 @@
 import { Action, ActionReducer } from '@ngrx/store';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from "@services/local-storage.service";
 
 function hasProp<T>(
   object: T,
   prop: string | number | symbol
 ): prop is keyof T {
   return Object.keys(object as object).includes(String(prop));
-}
-
-function isObject(object: unknown): object is object {
-  return typeof object === 'object';
 }
 
 function getSelectedProps<T>(object: T, keys: string[]): Partial<T> {
@@ -34,17 +30,16 @@ export function localstorageMetaReducer<S, A extends Action = Action>(
 
       if (initial) {
         initial = false;
-        const savedState = localStorageService.getSavedState(localStorageKey);
+        const savedState = localStorageService.getItem<Partial<S>>(localStorageKey);
 
-        if (isObject(savedState)) {
-          console.log({ ...nextState, ...savedState });
+        if (savedState) {
           return { ...nextState, ...savedState };
         }
         return nextState;
       }
 
       const stateToSave = getSelectedProps(nextState, saveKeys);
-      localStorageService.setSavedState(stateToSave, localStorageKey);
+      localStorageService.setItem<Partial<S>>(stateToSave, localStorageKey);
 
       return nextState;
     };

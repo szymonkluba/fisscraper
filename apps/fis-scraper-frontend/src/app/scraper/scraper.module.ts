@@ -16,7 +16,17 @@ import { SingleRaceComponent } from './single-race/single-race.component';
 import { UnprocessedDataComponent } from './unprocessed-data/unprocessed-data.component';
 import { HasErrorModule } from '@shared/utils/has-error/has-error.module';
 import { CapitalizeModule } from '@shared/utils/capitalize/capitalize.module';
+import { StoreModule } from '@ngrx/store';
+import { Feature } from '@constants/store_constants';
+import { racesReducer } from '@scraper/store/races.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { RacesEffects } from '@scraper/store/races.effects';
+import { FoldersEffects } from '@archive/store/folders.effects';
 
+const STORE_MODULES = [
+  StoreModule.forFeature(Feature.RACES, racesReducer),
+  EffectsModule.forFeature([RacesEffects, FoldersEffects]),
+];
 @NgModule({
   declarations: [
     CurrentFilesComponent,
@@ -39,6 +49,7 @@ import { CapitalizeModule } from '@shared/utils/capitalize/capitalize.module';
     ScraperRoutingModule,
     HasErrorModule,
     CapitalizeModule,
+    STORE_MODULES,
   ],
   exports: [SingleRaceComponent],
 })

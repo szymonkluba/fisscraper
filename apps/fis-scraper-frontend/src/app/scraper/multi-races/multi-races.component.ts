@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
-import { ScraperService } from '../../services/scraper.service';
+import { ScraperService } from '@services/scraper.service';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 import { Race } from '@shared/models/race.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
+import * as racesSelectors from '@scraper/store/races.selectors';
+import { Store } from '@ngrx/store';
+import { scrapMultipleRaces } from '@scraper/store/races.actions';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-multi-races',
@@ -15,17 +19,25 @@ import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiRacesComponent {
-  readonly fisId: FormControl[] = [];
-  readonly details: FormControl = new FormControl(false);
-  progress$?: Observable<number>;
-  trackByIndex = trackByIndex;
-
   races: Race[] = [];
+
+  readonly details: FormControl = new FormControl(false);
+  readonly overallProgress$: Observable<number> = this.store.select(
+    racesSelectors.selectOverallProgress
+  );
+  readonly progress$: Observable<number> = this.store.select(
+    racesSelectors.selectProgress
+  );
+  readonly racesFormControl = new FormControl<Array<Race>>(this.races, [
+    Validators.required,
+  ]);
   readonly separatorKeyCodes = [COMMA, ENTER, SPACE] as const;
 
+  trackByIndex = trackByIndex;
+
   constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly scraperService: ScraperService
+    private readonly scraperService: ScraperService,
+    private readonly store: Store
   ) {}
 
   addRace(event: MatChipInputEvent): void {
@@ -51,7 +63,7 @@ export class MultiRacesComponent {
 
   submit(): void {
     if (this.races.length > 0) {
-      this.progress$ = this.scraperService.scrapMultipleRaces(this.races);
+      this.store.dispatch(scrapMultipleRaces({ races: this.races }));
     }
   }
 
@@ -61,5 +73,9 @@ export class MultiRacesComponent {
     if (index > -1) {
       this.races[index].details = !this.races[index].details;
     }
+  }
+
+  onDetailsToggleChange(event: MatSlideToggleChange) {
+    this.races = this.races.map(race => ({ ...race, details: event.checked }));
   }
 }

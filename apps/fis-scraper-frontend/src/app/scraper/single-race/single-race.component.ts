@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Observable, of } from 'rxjs';
-import { ScraperService } from '../../services/scraper.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Race } from '@shared/models/race.model';
+
+import * as racesActions from '../store/races.actions';
+import * as racesSelectors from '../store/races.selectors';
+
+interface RaceForm {
+  fis_id: FormControl<number | null>;
+  details: FormControl<boolean | null>;
+}
 
 @Component({
   selector: 'app-single-race',
@@ -16,28 +20,34 @@ import { ScraperService } from '../../services/scraper.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleRaceComponent {
-  raceForm: FormGroup;
-  fisId: FormControl = new FormControl(0, [
-    Validators.required,
-    Validators.min(1),
-    Validators.pattern('[0-9]*'),
-  ]);
-  details: FormControl = new FormControl(false);
-  progress$?: Observable<number> = of(0);
+  readonly raceFormControls: RaceForm = {
+    fis_id: new FormControl<number>(0, [
+      Validators.required,
+      Validators.min(1),
+      Validators.pattern('[0-9]*'),
+    ]),
+    details: new FormControl<boolean>(false),
+  };
+  readonly raceForm: FormGroup<RaceForm> = new FormGroup<RaceForm>(
+    this.raceFormControls
+  );
+  progress$: Observable<number> = this.store.select(
+    racesSelectors.selectProgress
+  );
+  overallProgress$: Observable<number> = this.store.select(
+    racesSelectors.selectOverallProgress
+  );
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly scraperService: ScraperService
-  ) {
-    this.raceForm = this.formBuilder.group({
-      fis_id: this.fisId,
-      details: this.details,
-    });
-  }
+  constructor(private readonly store: Store) {}
 
   submit() {
-    if (this.raceForm.valid) {
-      this.progress$ = this.scraperService.scrapRace(this.raceForm.value);
+    if (!this.raceForm.valid) return;
+    if (this.raceForm.value.fis_id) {
+      const race: Race = {
+        fis_id: this.raceForm.value.fis_id,
+        details: this.raceForm.value.details || false,
+      };
+      this.store.dispatch(racesActions.scrapSingleRace({ race }));
     }
   }
 }

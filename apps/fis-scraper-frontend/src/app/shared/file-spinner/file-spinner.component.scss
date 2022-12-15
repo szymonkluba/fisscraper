@@ -1,7 +1,19 @@
 :host {
   align-items: center;
   display: flex;
-  height: 2rem;
   justify-content: center;
+  transition: opacity 500ms ease-in-out;
   width: 100%;
+}
+
+.spinner {
+  position: relative;
+
+  &-label {
+    align-items: center;
+    display: inline-flex;
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+  }
 }

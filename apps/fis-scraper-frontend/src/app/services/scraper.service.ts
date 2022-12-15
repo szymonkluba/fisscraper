@@ -2,21 +2,14 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Race, RaceDetails } from '@shared/models/race.model';
 import { Store } from '@ngrx/store';
-import { map, merge, Observable, scan, tap } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 import { environment } from '@environments/environment';
-import { range } from '@shared/utils/range/range';
-import { NotificationsService } from '@notifications/notifications.service';
-import {
-  disableSpinner,
-  enableSpinner,
-} from '@shared/../store/spinner.actions';
+
 import { download } from '@shared/utils/download/download';
 import { Saver, SAVER } from '@shared/providers/saver.provider';
 import { Download } from '@shared/models/download.model';
 import { Folder } from '@shared/models/folder.model';
-import { addRaceDetails } from '@shared/../store/raceDetails.actions';
-import { addFolder } from '@archive/store/folders.actions';
-import { addRace } from '@shared/../store/races.actions';
+import { addRaceDetails } from '@archive/store/raceDetails.actions';
 
 const options: {
   responseType: 'json';
@@ -31,7 +24,6 @@ export class ScraperService {
   constructor(
     private readonly http: HttpClient,
     private readonly store: Store,
-    private readonly notificationService: NotificationsService,
     @Inject(SAVER) private readonly save: Saver
   ) {}
 
@@ -42,64 +34,21 @@ export class ScraperService {
     return response.pipe(download(blob => this.save(blob, filename)));
   }
 
-  scrapRace(data: Race): Observable<number> {
+  scrapRace(data: Race): Observable<RaceDetails> {
     const url = `${environment.scraperApi}/scrap_race/`;
-    this.store.dispatch(enableSpinner());
 
-    return this.http.post<RaceDetails>(url, data, options).pipe(
-      tap(race => {
-        const folder: Folder = {
-          name: race.tournament.name,
-          entries: [race],
-        };
-        this.store.dispatch(addFolder({ folder }));
-        this.store.dispatch(addRace({ race }));
-        this.store.dispatch(addRaceDetails({ raceDetails: race }));
-        this.notificationService.handleFileReadyNotification(
-          `${race.place!} ${race.hill_size} ${race.date}`
-        );
-        this.store.dispatch(disableSpinner());
-      }),
-      map(_ => 1)
-    );
-  }
-
-  scrapMultipleRaces(data: Race[]): Observable<number> {
-    const step = Math.ceil(100 / data.length);
-
-    return merge(...data.map(race => this.scrapRace(race))).pipe(
-      scan((progress: number, current: number) => progress + current * step, 0)
-    );
-  }
-
-  scrapRangeOfRaces(data: {
-    start_fis_id: number;
-    end_fis_id: number;
-    details: boolean;
-  }): Observable<number> {
-    const races: Race[] = range(data.start_fis_id, data.end_fis_id, 1).map(
-      fisId => ({
-        fis_id: fisId,
-        details: data.details,
-      })
-    );
-
-    return this.scrapMultipleRaces(races);
+    return this.http.post<RaceDetails>(url, data, options).pipe(take(1));
   }
 
   scrapRawData(data: Race): Observable<number> {
     const url = `${environment.scraperApi}/scrap_race/raw_data/`;
-    this.store.dispatch(enableSpinner());
 
     return this.processFileResponse(
       this.http.post(url, data, {
         observe: 'events',
         responseType: 'blob',
       })
-    ).pipe(
-      tap(_ => this.store.dispatch(disableSpinner())),
-      map(_ => 1)
-    );
+    ).pipe(map(_ => 1));
   }
 
   scrapTable(data: { url: string }): Observable<number> {
@@ -115,10 +64,8 @@ export class ScraperService {
 
   listRaces(): Observable<Array<Folder>> {
     const url = `${environment.scraperApi}/race/`;
-    this.store.dispatch(enableSpinner());
 
     return this.http.get<Array<RaceDetails>>(url).pipe(
-      tap(_ => this.store.dispatch(disableSpinner())),
       map((races: Array<RaceDetails>) => {
         const folders_map = new Map<string, Folder>();
 

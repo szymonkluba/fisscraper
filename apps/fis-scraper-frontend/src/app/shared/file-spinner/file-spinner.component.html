@@ -1,1 +1,10 @@
-<mat-spinner mode="indeterminate" diameter="30" color="accent"></mat-spinner>
+<span class="spinner" *ngIf="!hidden">
+  <mat-spinner
+    [mode]="mode"
+    [value]="value"
+    diameter="60"
+    [color]="color"></mat-spinner>
+  <span class="spinner-label" [style.color]="labelColor">{{
+    progress / overallProgress | percent
+  }}</span>
+</span>

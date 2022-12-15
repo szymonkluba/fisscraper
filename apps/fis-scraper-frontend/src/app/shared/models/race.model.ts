@@ -69,7 +69,10 @@ export interface RaceDetails {
   no_jump_1?: boolean;
   no_jump_2?: boolean;
   participantcountry_set?: Array<ParticipantCountry>;
+  hasError?: boolean;
 }
+
+
 
 export interface Race {
   fis_id: number;

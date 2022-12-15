@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from '@shared/angular-material/angular-material.module';
@@ -17,20 +17,21 @@ import { SideRailModule } from '@shared/siderail/side-rail.module';
 import { csrfTokenProvider } from '@shared/providers/csrf-token.provider';
 import { getSaver, SAVER } from '@shared/providers/saver.provider';
 import { httpErrorProvider } from '@shared/providers/http-error.provider';
-import { raceDetailsReducer } from '@store/raceDetails.reducer';
-import { racesReducer } from '@store/races.reducer';
-import { spinnerReducer } from '@store/spinner.reducer';
 import { ArchiveModule } from '@archive/archive.module';
+import { EffectsModule } from '@ngrx/effects';
+import { RacesEffects } from '@scraper/store/races.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const STORE_MODULES = [
-  StoreModule.forRoot(
-    {
-      raceDetails: raceDetailsReducer,
-      races: racesReducer,
-      spinner: spinnerReducer,
-    },
-    {}
-  ),
+  EffectsModule.forRoot([RacesEffects]),
+  StoreDevtoolsModule.instrument({
+    maxAge: 25,
+    logOnly: !isDevMode(),
+    autoPause: true,
+    trace: true,
+    traceLimit: 75,
+  }),
+  StoreModule.forRoot(),
 ];
 
 const APP_MODULES = [

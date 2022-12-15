@@ -1,13 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
-import { ScraperService } from '../../services/scraper.service';
+import { Store } from '@ngrx/store';
+import { scrapRangeOfRaces } from '@scraper/store/races.actions';
+import * as racesSelectors from '@scraper/store/races.selectors';
+
+interface RaceForm {
+  startFisId: FormControl<number>;
+  endFisId: FormControl<number>;
+  details: FormControl<boolean>;
+}
 
 @Component({
   selector: 'app-range-races',
@@ -16,35 +19,40 @@ import { ScraperService } from '../../services/scraper.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeRacesComponent {
-  raceForm: FormGroup;
-  startFisId: FormControl = new FormControl(0, [
+  readonly startFisId: FormControl = new FormControl<number>(0, [
     Validators.required,
     Validators.min(1),
     Validators.pattern(/\d*/),
   ]);
-  endFisId: FormControl = new FormControl(0, [
+  readonly endFisId: FormControl = new FormControl<number>(0, [
     Validators.required,
     Validators.min(1),
     Validators.pattern(/\d*/),
   ]);
-  details: FormControl = new FormControl(false);
-  progress$?: Observable<number>;
+  readonly details: FormControl = new FormControl<boolean>(false);
+  readonly raceForm: FormGroup<RaceForm> = new FormGroup<RaceForm>({
+    startFisId: this.startFisId,
+    endFisId: this.endFisId,
+    details: this.details,
+  });
+  readonly overallProgress$: Observable<number> = this.store.select(
+    racesSelectors.selectOverallProgress
+  );
+  readonly progress$: Observable<number> = this.store.select(
+    racesSelectors.selectProgress
+  );
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly scraperService: ScraperService
-  ) {
-    this.raceForm = this.formBuilder.group({
-      start_fis_id: this.startFisId,
-      end_fis_id: this.endFisId,
-      details: this.details,
-    });
-  }
+  constructor(private readonly store: Store) {}
 
   submit(): void {
-    if (this.raceForm.valid) {
-      this.progress$ = this.scraperService.scrapRangeOfRaces(
-        this.raceForm.value
+    if (!this.raceForm.valid) return;
+    if (this.raceForm.value.endFisId && this.raceForm.value.startFisId) {
+      this.store.dispatch(
+        scrapRangeOfRaces({
+          startFisId: this.raceForm.value.startFisId,
+          endFisId: this.raceForm.value.endFisId,
+          details: this.raceForm.value.details || false,
+        })
       );
     }
   }

@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
-import { catchError, filter, Observable, of } from 'rxjs';
-import { disableSpinner } from '../../../store/spinner.actions';
-import { NotificationsService } from '../../../notifications/notifications.service';
-import { Store } from '@ngrx/store';
+import { catchError, Observable } from 'rxjs';
+import { NotificationsService } from '@notifications/notifications.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(
-    private readonly notificationService: NotificationsService,
-    private readonly store: Store
-  ) {}
+  constructor(private readonly notificationService: NotificationsService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -24,10 +19,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(err => {
         this.notificationService.handleErrorNotification(err);
-        this.store.dispatch(disableSpinner());
-        return of(null);
-      }),
-      filter(Boolean)
+        throw err;
+      })
     );
   }
 }

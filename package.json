@@ -34,8 +34,10 @@
     "@angular/platform-browser": "15.0.0",
     "@angular/platform-browser-dynamic": "15.0.0",
     "@angular/router": "15.0.0",
+    "@ngrx/effects": "15.0.0",
     "@ngrx/store": "15.0.0",
-    "@nrwl/angular": "15.3.2",
+    "@ngrx/store-devtools": "^15.0.0",
+    "@nrwl/angular": "15.3.3",
     "express": "^4.17.2",
     "path": "^0.12.7",
     "rxjs": "~7.6.0",
@@ -50,9 +52,9 @@
     "@angular-eslint/template-parser": "15.0.0",
     "@angular/cli": "^14.2.9",
     "@angular/compiler-cli": "15.0.0",
-    "@nrwl/eslint-plugin-nx": "15.3.2",
-    "@nrwl/linter": "15.3.2",
-    "@nrwl/workspace": "15.3.2",
+    "@nrwl/eslint-plugin-nx": "15.3.3",
+    "@nrwl/linter": "15.3.3",
+    "@nrwl/workspace": "15.3.3",
     "@types/file-saver": "^2.0.4",
     "@types/jasmine": "~3.10.0",
     "@types/js-cookie": "^3.0.2",
@@ -74,9 +76,8 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "nx": "15.3.2",
+    "nx": "15.3.3",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1"
   }
 }
-

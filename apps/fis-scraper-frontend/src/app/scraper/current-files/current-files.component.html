@@ -26,27 +26,38 @@
   </mat-progress-bar>
   <mat-divider></mat-divider>
   <mat-selection-list #races>
-    <div *ngFor="let file of files; trackBy: trackByUuid" class="option">
-      <mat-list-option
-        class="mat-elevation-z1 expanded"
-        selected="true"
-        [value]="file.uuid"
-        @currentFileEnter>
-        <mat-icon
-          matListItemIcon
-          [svgIcon]="
-            file.kind === 'team' && !file.details ? 'zip_file' : 'csv_file'
-          "></mat-icon>
-        <div matListItemTitle>{{ file.place }} {{ file.hill_size }}</div>
-        <div matListItemLine>{{ file.date | date: 'medium' }}</div>
-      </mat-list-option>
-      <button
-        mat-icon-button
-        (click)="downloadFile($event, file)"
-        [matTooltip]="'Download ' + file.place + ' ' + file.hill_size">
-        <mat-icon> download</mat-icon>
-      </button>
-    </div>
+    <mat-grid-list cols="2" rowHeight="80px" gutterSize="20px">
+      <mat-grid-tile
+        *ngFor="let file of files; trackBy: trackByUuid"
+        class="option">
+        <mat-list-option
+          *ngIf="!file.hasError"
+          class="mat-elevation-z1 expanded"
+          [selected]="!file.hasError"
+          [value]="file.uuid"
+          @currentFileEnter>
+          <mat-icon
+            matListItemIcon
+            [svgIcon]="
+              file.kind === 'team' && !file.details ? 'zip_file' : 'csv_file'
+            "></mat-icon>
+          <div matListItemTitle>{{ file.place }} {{ file.hill_size }}</div>
+          <div matListItemLine>{{ file.date | date: 'medium' }}</div>
+        </mat-list-option>
+        <button
+          *ngIf="!file.hasError"
+          mat-icon-button
+          (click)="downloadFile($event, file)"
+          [matTooltip]="'Download ' + file.place + ' ' + file.hill_size">
+          <mat-icon> download</mat-icon>
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <app-file-spinner
+          [hasError]="(hasError$ | async) || false"
+          [overallProgress]="(overallProgress$ | async) || 0"
+          [progress]="(progress$ | async) || 0"></app-file-spinner>
+      </mat-grid-tile>
+    </mat-grid-list>
   </mat-selection-list>
-  <app-file-spinner *ngIf="spinnerState$ | async"></app-file-spinner>
 </ng-container>

@@ -2,7 +2,10 @@
   <h2>Scrap multiple races</h2>
   <mat-form-field appearance="outline">
     <mat-label>FIS ID</mat-label>
-    <mat-chip-grid #racesGrid aria-label="Enter FIS Ids">
+    <mat-chip-grid
+      #racesGrid
+      aria-label="Enter FIS Ids"
+      [formControl]="racesFormControl">
       <mat-chip-row
         *ngFor="let race of races; trackBy: trackByIndex"
         (removed)="removeRace(race)"
@@ -21,17 +24,13 @@
       [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
       [matChipInputAddOnBlur]="true"
       (matChipInputTokenEnd)="addRace($event)" />
-    <!--<mat-error *ngIf="fisId[i] | hasError: 'min'">
-        Enter <strong>number</strong> greater than 0
-      </mat-error>
-      <mat-error *ngIf="fisId[i] | hasError: 'pattern'">
-        Enter <strong>number</strong>
-      </mat-error>
-      <mat-error *ngIf="fisId[i] | hasError: 'required'">
-        FIS ID is <strong>required</strong>
-      </mat-error>-->
+    <mat-error *ngIf="racesFormControl | hasError: 'required'">
+      FIS ID is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-  <mat-slide-toggle>Details</mat-slide-toggle>
+  <mat-slide-toggle (change)="onDetailsToggleChange($event)"
+    >Details</mat-slide-toggle
+  >
   <button
     class="multi-races-form-submit"
     mat-raised-button
@@ -42,7 +41,8 @@
   </button>
 </form>
 <mat-progress-bar
-  *ngIf="progress$ | async as progress"
+  *ngIf="overallProgress$ | async as overallProgress"
   color="accent"
-  [value]="progress"
+  [value]="progress$ | async"
+  [bufferValue]="overallProgress"
   mode="buffer"></mat-progress-bar>

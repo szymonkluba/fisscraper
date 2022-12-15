@@ -14,9 +14,10 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
 import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
-import { selectRaces } from '@store/races.selectors';
-import { selectSpinnerState } from '@store/spinner.selectors';
+import { selectRaces } from '@scraper/store/races.selectors';
 import { trackByUuid } from '@shared/utils/track-by/track-by';
+
+import * as racesSelectors from '../store/races.selectors';
 
 @Component({
   selector: 'app-current-files',
@@ -35,7 +36,15 @@ import { trackByUuid } from '@shared/utils/track-by/track-by';
 export class CurrentFilesComponent implements OnInit, OnDestroy {
   files$!: Observable<readonly RaceDetails[]>;
   download$!: Observable<Download>;
-  spinnerState$?: Observable<boolean>;
+  overallProgress$: Observable<number> = this.store.select(
+    racesSelectors.selectOverallProgress
+  );
+  progress$: Observable<number> = this.store.select(
+    racesSelectors.selectProgress
+  );
+  hasError$: Observable<boolean> = this.store.select(
+    racesSelectors.selectHasError
+  );
   destroySubject$ = new Subject();
   destroy$: Observable<unknown> = this.destroySubject$.asObservable();
   trackByUuid = trackByUuid;
@@ -58,7 +67,6 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.files$ = this.store.select(selectRaces);
-    this.spinnerState$ = this.store.select(selectSpinnerState);
   }
 
   downloadAll(races: MatListOption[]) {

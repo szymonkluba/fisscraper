@@ -24,7 +24,7 @@ import { MatTable } from '@angular/material/table';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { selectRaceDetails } from '@store/raceDetails.selectors';
+import { selectRaceDetails } from '@archive/store/raceDetails.selectors';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 
 @Component({

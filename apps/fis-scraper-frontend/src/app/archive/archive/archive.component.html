@@ -1,7 +1,8 @@
 <h2>Archive directories:</h2>
 
 <mat-divider></mat-divider>
-<app-loading-spinner [isLoading]="spinnerState$ | async"></app-loading-spinner>
+<app-loading-spinner
+  [isLoading]="(foldersLoadStatus$ | async) === false"></app-loading-spinner>
 <ng-container *ngIf="folders$ | async as folders">
   <mat-accordion class="accordion" multi>
     <mat-expansion-panel *ngFor="let folder of folders; trackBy: trackByIndex">
@@ -47,8 +48,8 @@
                 element === expandedElement ? 'expanded' : 'collapsed'
               ">
               <app-archive-race-details
-                *ngIf="element === expandedElement"
-                [uuid]="element.uuid"></app-archive-race-details>
+                *ngIf="expandedElement && element === expandedElement"
+                [uuid]="expandedElement.uuid"></app-archive-race-details>
             </div>
           </td>
         </ng-container>

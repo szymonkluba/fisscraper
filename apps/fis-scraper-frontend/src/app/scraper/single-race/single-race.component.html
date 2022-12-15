@@ -2,18 +2,20 @@
   <h2>Scrap single race</h2>
   <mat-form-field appearance="outline">
     <mat-label>FIS ID</mat-label>
-    <input matInput type="number" formControlName="fis_id" />
-    <mat-error *ngIf="fisId | hasError: 'min'">
+    <input matInput type="number" [formControl]="raceFormControls.fis_id" />
+    <mat-error *ngIf="raceFormControls.fis_id | hasError: 'min'">
       Enter <strong>number</strong> greater than 0
     </mat-error>
-    <mat-error *ngIf="fisId | hasError: 'pattern'">
+    <mat-error *ngIf="raceFormControls.fis_id | hasError: 'pattern'">
       Enter <strong>number</strong>
     </mat-error>
-    <mat-error *ngIf="fisId | hasError: 'required'">
+    <mat-error *ngIf="raceFormControls.fis_id | hasError: 'required'">
       FIS ID is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
+  <mat-slide-toggle [formControl]="raceFormControls.details"
+    >Details</mat-slide-toggle
+  >
   <button
     class="single-race-form-submit"
     mat-raised-button
@@ -24,7 +26,8 @@
   </button>
 </form>
 <mat-progress-bar
-  *ngIf="progress$ | async as progress"
+  *ngIf="overallProgress$ | async as overallProgress"
   color="accent"
-  [value]="progress * 100"
+  [value]="progress$ | async"
+  [bufferValue]="overallProgress"
   mode="buffer"></mat-progress-bar>

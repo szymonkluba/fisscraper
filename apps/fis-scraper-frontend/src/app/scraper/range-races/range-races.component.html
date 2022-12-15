@@ -2,7 +2,7 @@
   <h2>Scrap races in range of IDs</h2>
   <mat-form-field appearance="outline">
     <mat-label>Initial FIS ID</mat-label>
-    <input matInput type="number" formControlName="start_fis_id" />
+    <input matInput type="number" [formControl]="startFisId" />
     <mat-error *ngIf="startFisId | hasError: 'min'">
       Enter <strong>number</strong> greater than 0
     </mat-error>
@@ -15,7 +15,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Final FIS ID</mat-label>
-    <input matInput type="number" formControlName="end_fis_id" />
+    <input matInput type="number" [formControl]="endFisId" />
     <mat-error *ngIf="endFisId | hasError: 'min'">
       Enter <strong>number</strong> greater than 0
     </mat-error>
@@ -26,7 +26,7 @@
       Final FIS ID is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <mat-slide-toggle formControlName="details">Details</mat-slide-toggle>
+  <mat-slide-toggle [formControl]="details">Details</mat-slide-toggle>
   <button
     class="range-races-form-submit"
     mat-raised-button
@@ -37,7 +37,8 @@
   </button>
 </form>
 <mat-progress-bar
-  *ngIf="progress$ | async as progress"
+  *ngIf="overallProgress$ | async as overallProgress"
   color="accent"
-  [value]="progress"
+  [value]="progress$ | async"
+  [bufferValue]="overallProgress"
   mode="buffer"></mat-progress-bar>

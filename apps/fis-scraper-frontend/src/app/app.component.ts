@@ -2,17 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
-import { retrievedFolderList } from '@archive/store/folders.actions';
-import { Folder } from '@shared/models/folder.model';
-import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ScraperService } from '@services/scraper.service';
-import { disableSpinner } from '@store/spinner.actions';
 import { Router } from '@angular/router';
 import { selectNavMenuState } from './navigation/store/nav-menu.selectors';
 import {
@@ -72,16 +67,13 @@ const APP_CONTENT_ANIMATION = [
     trigger('widenShorten', APP_CONTENT_ANIMATION),
   ],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   readonly title = 'FIS Scraper';
   readonly subtitle = 'Ski jumping results scraper';
-  readonly menuDisplayState$: Observable<MenuDisplayStates> = this.store
-    .select(selectNavMenuState)
-    .pipe(tap(s => console.log(s)));
-  readonly subscriptionEndSubject = new Subject();
-  readonly subscriptionEnd$ = this.subscriptionEndSubject.asObservable();
+  readonly menuDisplayState$: Observable<MenuDisplayStates> =
+    this.store.select(selectNavMenuState);
 
   constructor(
     private readonly changeDetector: ChangeDetectorRef,
@@ -89,23 +81,4 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly scraperService: ScraperService,
     private readonly store: Store
   ) {}
-
-  ngOnInit() {
-    this.scraperService
-      .listRaces()
-      .pipe(takeUntil(this.subscriptionEnd$))
-      .subscribe((folders: Folder[]) => {
-        this.store.dispatch(disableSpinner());
-        return this.store.dispatch(retrievedFolderList({ folders }));
-      });
-  }
-
-  ngOnDestroy() {
-    this.subscriptionEndSubject.next(null);
-    this.subscriptionEndSubject.complete();
-  }
-
-  trackByLink(index: number) {
-    return index;
-  }
 }
