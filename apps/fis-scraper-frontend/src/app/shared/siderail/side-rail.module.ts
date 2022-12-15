@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SideRailComponent } from './side-rail.component';
-import { AngularMaterialModule } from '@shared/angular-material/angular-material.module';
-import { RouterModule } from '@angular/router';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { PortalModule } from '@angular/cdk/portal';
+import { RouterModule } from '@angular/router';
+import { SideRailComponent } from './side-rail.component';
 import { StoreModule } from '@ngrx/store';
 import { sideRailReducer } from '@shared/siderail/store/siderail.reducer';
+
+const MATERIAL_MODULES = [MatButtonModule, MatIconModule, MatSidenavModule];
 
 const STORE_MODULES = [StoreModule.forFeature('sideRail', sideRailReducer)];
 
@@ -13,7 +18,7 @@ const STORE_MODULES = [StoreModule.forFeature('sideRail', sideRailReducer)];
   declarations: [SideRailComponent],
   imports: [
     CommonModule,
-    AngularMaterialModule,
+    MATERIAL_MODULES,
     RouterModule,
     PortalModule,
     STORE_MODULES,

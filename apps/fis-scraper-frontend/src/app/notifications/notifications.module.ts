@@ -1,12 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AngularMaterialModule } from '@shared/angular-material/angular-material.module';
 import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { StoreModule } from '@ngrx/store';
 import { notificationsReducer } from '@notifications/store/notifications.reducer';
+
+const MATERIAL_MODULES = [
+  MatBadgeModule,
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatMenuModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+];
 
 const STORE_MODULES = [
   StoreModule.forFeature('notifications', notificationsReducer),
@@ -15,11 +31,6 @@ const STORE_MODULES = [
 @NgModule({
   declarations: [NotificationsComponent, NotificationComponent],
   exports: [NotificationsComponent],
-  imports: [
-    AngularMaterialModule,
-    CommonModule,
-    FileSpinnerModule,
-    STORE_MODULES,
-  ],
+  imports: [CommonModule, FileSpinnerModule, STORE_MODULES, MATERIAL_MODULES],
 })
 export class NotificationsModule {}

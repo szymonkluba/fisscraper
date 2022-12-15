@@ -4,11 +4,11 @@ import {
   NotificationColors,
   NotificationIcons,
   NotificationKind,
-} from '../shared/models/notification.model';
+} from '@shared/models/notification.model';
 import {
   addNotification,
   removeNotification,
-} from './store/notifications.actions';
+} from '@notifications/store/notifications.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';

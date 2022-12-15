@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { FoldersAction } from '@archive/store/folders.actions';
-import { NotificationsService } from '@notifications/notifications.service';
+import { NotificationsService } from '@services/notifications.service';
 import { Race } from '@shared/models/race.model';
 import { RaceDetailsAction } from '@archive/store/raceDetails.actions';
 import { RacesAction } from './races.actions';
