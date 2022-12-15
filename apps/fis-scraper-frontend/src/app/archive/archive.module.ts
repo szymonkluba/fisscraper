@@ -6,6 +6,7 @@ import { ArchiveRaceDetailsComponent } from './archive-race-details/archive-race
 import { ArchiveRoutingModule } from './archive-routing.module';
 import { CapitalizeModule } from '@shared/utils/capitalize/capitalize.module';
 import { EffectsModule } from '@ngrx/effects';
+import { Feature } from '@constants/store_constants';
 import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
 import { FolderTableCellComponent } from './folder-table-cell/folder-table-cell.component';
 import { FoldersEffects } from '@archive/store/folders.effects';
@@ -33,8 +34,8 @@ const MATERIAL_MODULES = [
 ];
 
 const STORE_MODULES = [
-  StoreModule.forFeature('folders', foldersReducer),
-  StoreModule.forFeature('raceDetails', raceDetailsReducer),
+  StoreModule.forFeature(Feature.FOLDERS, foldersReducer),
+  StoreModule.forFeature(Feature.RACE_DETAILS, raceDetailsReducer),
   EffectsModule.forFeature([FoldersEffects, RacesEffects]),
 ];
 

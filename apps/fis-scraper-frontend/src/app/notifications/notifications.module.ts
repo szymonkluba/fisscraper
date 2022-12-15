@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Feature } from '@constants/store_constants';
 import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +26,7 @@ const MATERIAL_MODULES = [
 ];
 
 const STORE_MODULES = [
-  StoreModule.forFeature('notifications', notificationsReducer),
+  StoreModule.forFeature(Feature.NOTIFICATIONS, notificationsReducer),
 ];
 
 @NgModule({

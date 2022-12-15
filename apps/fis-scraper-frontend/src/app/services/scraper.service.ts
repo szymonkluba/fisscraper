@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Race, RaceDetails } from '@shared/models/race.model';
+import { Participant, Race, RaceDetails } from '@shared/models/race.model';
 import { Store } from '@ngrx/store';
 import { map, Observable, take, tap } from 'rxjs';
 import { environment } from '@environments/environment';
@@ -31,7 +31,7 @@ export class ScraperService {
     response: Observable<HttpEvent<Blob>>,
     filename?: string
   ): Observable<Download> {
-    return response.pipe(download(blob => this.save(blob, filename)));
+    return response.pipe(download((blob: Blob) => this.save(blob, filename)));
   }
 
   scrapRace(data: Race): Observable<RaceDetails> {
@@ -102,10 +102,10 @@ export class ScraperService {
           }
 
           race.no_jump_1 = race.participant_set
-            .map(participant => participant.jump_1_empty)
+            .map((participant: Participant) => participant.jump_1_empty)
             .every(Boolean);
           race.no_jump_2 = race.participant_set
-            .map(participant => participant.jump_2_empty)
+            .map((participant: Participant) => participant.jump_2_empty)
             .every(Boolean);
         }
 

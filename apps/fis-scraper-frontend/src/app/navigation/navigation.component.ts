@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  Paths,
+  Destination,
   RouteInterface,
   routerPaths,
 } from '@shared/models/routes.model';
@@ -14,7 +14,7 @@ import {
   closeSideRail,
   openSideRail,
 } from '@shared/siderail/store/siderail.actions';
-import { Portals } from '@shared/models/portal.model';
+import { SideRailPortal } from '@shared/models/portal.model';
 import { Store } from '@ngrx/store';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -32,7 +32,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MenuDisplayStates } from './store/nav-menu.reducer';
+import { MenuDisplayState } from './store/nav-menu.reducer';
 
 @Component({
   selector: 'app-navigation',
@@ -41,95 +41,100 @@ import { MenuDisplayStates } from './store/nav-menu.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('showHide', [
-      state(MenuDisplayStates.COLLAPSED, style({ width: '0' })),
-      state(MenuDisplayStates.EXPANDED, style({ width: '*' })),
+      state(MenuDisplayState.COLLAPSED, style({ width: '0' })),
+      state(MenuDisplayState.EXPANDED, style({ width: '*' })),
       transition('collapsed <=> expanded', [animate('150ms ease-in-out')]),
     ]),
   ],
 })
 export class NavigationComponent implements OnInit {
-  readonly menuDisplayState$: Observable<MenuDisplayStates> =
+  readonly menuDisplayState$: Observable<MenuDisplayState> =
     this.store.select(selectNavMenuState);
 
-  readonly activeLink$: Observable<Paths> = this.store.select(selectActiveLink);
+  readonly activeLink$: Observable<Destination> =
+    this.store.select(selectActiveLink);
   readonly navLinks: RouteInterface[] = [
     {
-      ...routerPaths[Paths.SCRAPER],
+      ...routerPaths[Destination.SCRAPER],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.SCRAPER }));
+        this.store.dispatch(navigate({ activeLink: Destination.SCRAPER }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.SINGLE_RACE_PORTAL })
+          changeSideRailContent({ portal: SideRailPortal.SINGLE_RACE_PORTAL })
         );
       },
       icon: 'scraper',
     },
     {
-      ...routerPaths[Paths.SINGLE_RACE],
+      ...routerPaths[Destination.SINGLE_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.SINGLE_RACE }));
+        this.store.dispatch(navigate({ activeLink: Destination.SINGLE_RACE }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.SINGLE_RACE_PORTAL })
+          changeSideRailContent({ portal: SideRailPortal.SINGLE_RACE_PORTAL })
         );
       },
       icon: 'single_race',
     },
     {
-      ...routerPaths[Paths.MULTI_RACE],
+      ...routerPaths[Destination.MULTI_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.MULTI_RACE }));
+        this.store.dispatch(navigate({ activeLink: Destination.MULTI_RACE }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.MULTIPLE_RACES_PORTAL })
+          changeSideRailContent({
+            portal: SideRailPortal.MULTIPLE_RACES_PORTAL,
+          })
         );
       },
       icon: 'multi_race',
     },
     {
-      ...routerPaths[Paths.RANGE_RACE],
+      ...routerPaths[Destination.RANGE_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.RANGE_RACE }));
+        this.store.dispatch(navigate({ activeLink: Destination.RANGE_RACE }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.RANGE_OF_RACES_PORTAL })
+          changeSideRailContent({
+            portal: SideRailPortal.RANGE_OF_RACES_PORTAL,
+          })
         );
       },
       icon: 'range_race',
     },
     {
-      ...routerPaths[Paths.RAW_DATA],
+      ...routerPaths[Destination.RAW_DATA],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.RAW_DATA }));
+        this.store.dispatch(navigate({ activeLink: Destination.RAW_DATA }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.RAW_DATA_PORTAL })
+          changeSideRailContent({ portal: SideRailPortal.RAW_DATA_PORTAL })
         );
       },
       icon: 'raw_data',
     },
     {
-      ...routerPaths[Paths.SCRAP_TABLE],
+      ...routerPaths[Destination.SCRAP_TABLE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.SCRAP_TABLE }));
+        this.store.dispatch(navigate({ activeLink: Destination.SCRAP_TABLE }));
         this.store.dispatch(openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: Portals.SCRAP_TABLE_PORTAL })
+          changeSideRailContent({ portal: SideRailPortal.SCRAP_TABLE_PORTAL })
         );
       },
       icon: 'table',
     },
     {
-      ...routerPaths[Paths.ARCHIVE],
+      ...routerPaths[Destination.ARCHIVE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Paths.ARCHIVE }));
+        this.store.dispatch(navigate({ activeLink: Destination.ARCHIVE }));
         this.store.dispatch(closeSideRail());
       },
       icon: 'archive',
     },
   ];
   trackByIndex = trackByIndex;
-  MenuDisplayStates = MenuDisplayStates;
+  MenuDisplayStates = MenuDisplayState;
   constructor(
     private readonly changeDetector: ChangeDetectorRef,
     private readonly store: Store,

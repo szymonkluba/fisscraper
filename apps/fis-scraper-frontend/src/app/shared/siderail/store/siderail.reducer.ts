@@ -4,11 +4,11 @@ import {
   closeSideRail,
   openSideRail,
 } from './siderail.actions';
-import { Portals } from '@shared/models/portal.model';
+import { SideRailPortal } from '@shared/models/portal.model';
 
 export interface SideRailState {
   opened: boolean;
-  portal: Portals | null;
+  portal: SideRailPortal | null;
 }
 
 export const initialState: SideRailState = {

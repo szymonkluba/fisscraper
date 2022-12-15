@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Paths, RouterPaths, routerPaths } from '@shared/models/routes.model';
+import {
+  Destination,
+  RouterPath,
+  routerPaths,
+} from '@shared/models/routes.model';
 
 const routes: Routes = [
   {
-    path: RouterPaths.EMPTY,
-    redirectTo: routerPaths[Paths.SCRAPER].routerPath,
+    path: RouterPath.EMPTY,
+    redirectTo: routerPaths[Destination.SCRAPER].routerPath,
     pathMatch: 'full',
   },
   {
-    path: routerPaths[Paths.SCRAPER].routerPath,
+    path: routerPaths[Destination.SCRAPER].routerPath,
     loadChildren: () =>
       import('./scraper/scraper.module').then(m => m.ScraperModule),
   },
   {
-    path: routerPaths[Paths.ARCHIVE].routerPath,
+    path: routerPaths[Destination.ARCHIVE].routerPath,
     loadChildren: () =>
       import('./archive/archive.module').then(m => m.ArchiveModule),
   },

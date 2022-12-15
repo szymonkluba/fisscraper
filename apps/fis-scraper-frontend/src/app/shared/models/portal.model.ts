@@ -1,7 +1,7 @@
-export enum Portals {
-  SINGLE_RACE_PORTAL,
+export enum SideRailPortal {
   MULTIPLE_RACES_PORTAL,
   RANGE_OF_RACES_PORTAL,
   RAW_DATA_PORTAL,
   SCRAP_TABLE_PORTAL,
+  SINGLE_RACE_PORTAL,
 }

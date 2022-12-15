@@ -1,18 +1,18 @@
 export interface Notification {
   id: string;
   kind: NotificationKind;
-  icon: NotificationIcons;
-  color: NotificationColors;
+  icon: NotificationIcon;
+  color: NotificationColor;
   message: string;
 }
 
-export enum NotificationColors {
+export enum NotificationColor {
   ERROR = 'warn',
   SUCCESS = 'accent',
   INFO = 'primary',
 }
 
-export enum NotificationIcons {
+export enum NotificationIcon {
   ERROR = 'error',
   INFO = 'info',
   SUCCESS = 'check',

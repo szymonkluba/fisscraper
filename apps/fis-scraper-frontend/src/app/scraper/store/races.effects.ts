@@ -74,7 +74,7 @@ export class RacesEffects {
       ofType(racesActions.scrapRangeOfRaces),
       map(({ startFisId, endFisId, details }) => {
         const races: Array<Race> = range(startFisId, endFisId, 1).map(
-          fisId => ({ fis_id: fisId, details: details })
+          (fisId: number) => ({ fis_id: fisId, details: details })
         );
 
         return { type: RacesAction.SCRAP_MULTI_RACES, races };

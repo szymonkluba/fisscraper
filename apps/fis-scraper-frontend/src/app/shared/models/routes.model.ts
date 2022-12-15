@@ -1,13 +1,13 @@
 export interface RouteInterface {
   path?: string;
   label?: string;
-  routerPath: RouterPaths;
+  routerPath: RouterPath;
   action?: () => void;
   icon?: string;
-  link: Paths;
+  link: Destination;
 }
 
-export enum Paths {
+export enum Destination {
   EMPTY,
   SCRAPER,
   ARCHIVE,
@@ -18,53 +18,53 @@ export enum Paths {
   SCRAP_TABLE,
 }
 
-export enum RouterPaths {
+export enum RouterPath {
   EMPTY = '',
   SCRAPER = 'scraper',
   ARCHIVE = 'archive',
 }
 
 export const routerPaths = {
-  [Paths.SCRAPER]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.SCRAPER]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Scraper',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.SCRAPER,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.SCRAPER,
   },
-  [Paths.ARCHIVE]: {
-    path: '/' + RouterPaths.ARCHIVE,
+  [Destination.ARCHIVE]: {
+    path: '/' + RouterPath.ARCHIVE,
     label: 'Archive',
-    routerPath: RouterPaths.ARCHIVE,
-    link: Paths.ARCHIVE,
+    routerPath: RouterPath.ARCHIVE,
+    link: Destination.ARCHIVE,
   },
-  [Paths.SINGLE_RACE]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.SINGLE_RACE]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Single race',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.SINGLE_RACE,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.SINGLE_RACE,
   },
-  [Paths.MULTI_RACE]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.MULTI_RACE]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Multiple races',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.MULTI_RACE,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.MULTI_RACE,
   },
-  [Paths.RANGE_RACE]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.RANGE_RACE]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Range of races',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.RANGE_RACE,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.RANGE_RACE,
   },
-  [Paths.RAW_DATA]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.RAW_DATA]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Raw data',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.RAW_DATA,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.RAW_DATA,
   },
-  [Paths.SCRAP_TABLE]: {
-    path: '/' + RouterPaths.SCRAPER,
+  [Destination.SCRAP_TABLE]: {
+    path: '/' + RouterPath.SCRAPER,
     label: 'Scrap table',
-    routerPath: RouterPaths.SCRAPER,
-    link: Paths.SCRAP_TABLE,
+    routerPath: RouterPath.SCRAPER,
+    link: Destination.SCRAP_TABLE,
   },
 };

@@ -7,7 +7,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { Folder } from '@shared/models/folder.model';
 import { MatIconRegistry } from '@angular/material/icon';
-import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
 import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
@@ -66,9 +66,8 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private readonly store: Store
   ) {}
 
-  readonly folders$: Observable<ReadonlyArray<Folder>> = this.store
-    .select(selectFolders)
-    .pipe(tap(folders => console.log(folders)));
+  readonly folders$: Observable<ReadonlyArray<Folder>> =
+    this.store.select(selectFolders);
   readonly foldersLoadStatus$: Observable<boolean> = this.store.select(
     selectFoldersLoadStatus
   );

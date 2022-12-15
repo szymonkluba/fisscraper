@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Feature } from '@constants/store_constants';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -12,7 +13,9 @@ import { sideRailReducer } from '@shared/siderail/store/siderail.reducer';
 
 const MATERIAL_MODULES = [MatButtonModule, MatIconModule, MatSidenavModule];
 
-const STORE_MODULES = [StoreModule.forFeature('sideRail', sideRailReducer)];
+const STORE_MODULES = [
+  StoreModule.forFeature(Feature.SIDE_RAIL, sideRailReducer),
+];
 
 @NgModule({
   declarations: [SideRailComponent],

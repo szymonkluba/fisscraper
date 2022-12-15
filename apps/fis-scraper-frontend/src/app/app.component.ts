@@ -17,44 +17,42 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MenuDisplayStates } from './navigation/store/nav-menu.reducer';
+import { MenuDisplayState } from './navigation/store/nav-menu.reducer';
 
 const MENU_ANIMATION = [
   state(
-    MenuDisplayStates.EXPANDED,
+    MenuDisplayState.EXPANDED,
     style({
       width: '15rem',
     })
   ),
   state(
-    MenuDisplayStates.COLLAPSED,
+    MenuDisplayState.COLLAPSED,
     style({
       width: '4rem',
     })
   ),
-  transition(
-    `${MenuDisplayStates.COLLAPSED} <=> ${MenuDisplayStates.EXPANDED}`,
-    [animate('150ms ease-in-out')]
-  ),
+  transition(`${MenuDisplayState.COLLAPSED} <=> ${MenuDisplayState.EXPANDED}`, [
+    animate('150ms ease-in-out'),
+  ]),
 ];
 
 const APP_CONTENT_ANIMATION = [
   state(
-    MenuDisplayStates.EXPANDED,
+    MenuDisplayState.EXPANDED,
     style({
       'margin-left': '15rem',
     })
   ),
   state(
-    MenuDisplayStates.COLLAPSED,
+    MenuDisplayState.COLLAPSED,
     style({
       'margin-left': '4rem',
     })
   ),
-  transition(
-    `${MenuDisplayStates.COLLAPSED} <=> ${MenuDisplayStates.EXPANDED}`,
-    [animate('150ms ease-in-out')]
-  ),
+  transition(`${MenuDisplayState.COLLAPSED} <=> ${MenuDisplayState.EXPANDED}`, [
+    animate('150ms ease-in-out'),
+  ]),
 ];
 
 @Component({
@@ -72,7 +70,7 @@ export class AppComponent {
 
   readonly title = 'FIS Scraper';
   readonly subtitle = 'Ski jumping results scraper';
-  readonly menuDisplayState$: Observable<MenuDisplayStates> =
+  readonly menuDisplayState$: Observable<MenuDisplayState> =
     this.store.select(selectNavMenuState);
 
   constructor(
