@@ -1,16 +1,58 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
-import { Observable } from 'rxjs';
-import { ScraperService } from '@services/scraper.service';
-import { trackByIndex } from '@shared/utils/track-by/track-by';
-import { Race } from '@shared/models/race.model';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
-import * as racesSelectors from '@scraper/store/races.selectors';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Observable } from 'rxjs';
+import { Race } from '@shared/models/race.model';
+import { ScraperService } from '@services/scraper.service';
 import { Store } from '@ngrx/store';
 import { scrapMultipleRaces } from '@scraper/store/races.actions';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { trackByIndex } from '@shared/utils/track-by/track-by';
+
+import * as racesSelectors from '@scraper/store/races.selectors';
+
+const NUMBER_REGEX = new RegExp(/\d+/);
+
+interface RacesForm {
+  races: FormControl<number[] | null>;
+  details: FormControl<boolean>;
+}
+
+function atLeastOneRequiredValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+
+    if (!Array.isArray(value)) {
+      return { oneRequired: true };
+    }
+
+    return value.length === 0 ? { oneRequired: true } : null;
+  };
+}
+
+function allNumbersValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+
+    if (!Array.isArray(value)) {
+      return null;
+    }
+
+    if (value.length === 0) {
+      return null;
+    }
+
+    return value.every(v => NUMBER_REGEX.test(v)) ? null : { numbers: true };
+  };
+}
 
 @Component({
   selector: 'app-multi-races',
@@ -28,9 +70,14 @@ export class MultiRacesComponent {
   readonly progress$: Observable<number> = this.store.select(
     racesSelectors.selectProgress
   );
-  readonly racesFormControl = new FormControl<Array<Race>>(this.races, [
-    Validators.required,
-  ]);
+  readonly racesFormControl = new FormControl<number[]>(
+    [],
+    [allNumbersValidator(), atLeastOneRequiredValidator()]
+  );
+  readonly racesForm = new FormGroup<RacesForm>({
+    races: this.racesFormControl,
+    details: this.details,
+  });
   readonly separatorKeyCodes = [COMMA, ENTER, SPACE] as const;
 
   trackByIndex = trackByIndex;
@@ -62,8 +109,12 @@ export class MultiRacesComponent {
   }
 
   submit(): void {
+    console.log(this.racesFormControl.errors);
     if (this.races.length > 0) {
       this.store.dispatch(scrapMultipleRaces({ races: this.races }));
+      this.racesFormControl.setValue([]);
+      this.racesFormControl.markAsUntouched();
+      this.races = [];
     }
   }
 

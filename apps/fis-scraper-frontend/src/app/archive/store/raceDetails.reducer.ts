@@ -7,7 +7,6 @@ export const initialState: ReadonlyArray<RaceDetails> = [];
 export const raceDetailsReducer = createReducer(
   initialState,
   on(addRaceDetails, (state, { raceDetails }) => {
-    console.log(state, raceDetails);
     if (state.findIndex(element => element.uuid === raceDetails.uuid) > -1) {
       return [
         ...state.filter(raceInState => raceInState.uuid !== raceDetails.uuid),

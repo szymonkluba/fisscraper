@@ -1,4 +1,4 @@
-<form class="multi-races-form">
+<form class="multi-races-form" [formGroup]="racesForm">
   <h2>Scrap multiple races</h2>
   <mat-form-field appearance="outline">
     <mat-label>FIS ID</mat-label>
@@ -20,12 +20,16 @@
     </mat-chip-grid>
     <input
       matInput
+      placeholder="FIS IDs..."
       [matChipInputFor]="racesGrid"
       [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
       [matChipInputAddOnBlur]="true"
       (matChipInputTokenEnd)="addRace($event)" />
-    <mat-error *ngIf="racesFormControl | hasError: 'required'">
-      FIS ID is <strong>required</strong>
+    <mat-error *ngIf="racesFormControl | hasError: 'oneRequired'">
+      At least one FIS ID is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="racesFormControl | hasError: 'numbers'">
+      FIS ID must be a <strong>number</strong>
     </mat-error>
   </mat-form-field>
   <mat-slide-toggle (change)="onDetailsToggleChange($event)"
