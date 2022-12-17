@@ -49,3 +49,16 @@ html {
 *::-webkit-scrollbar-thumb:active {
   background-color: rgb(33, 33, 33);
 }
+
+.mat-menu-panel {
+  max-width: none !important;
+  width: max-content;
+  padding: 1rem;
+  max-height: 70vh;
+}
+
+.mat-menu-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}

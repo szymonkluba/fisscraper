@@ -20,23 +20,25 @@ export class RacesEffects {
       ofType(racesActions.scrapRace),
       mergeMap(({ race }) =>
         this.scraperService.scrapRace(race).pipe(
-          switchMap(raceDetails => {
-            console.log(raceDetails);
-            return [
-              {
-                type: RacesAction.ADD_RACE,
-                race: raceDetails,
-              },
-              {
-                type: FoldersAction.ADD_RACE_TO_FOLDER,
-                race: raceDetails,
-              },
-              {
-                type: RaceDetailsAction.ADD_RACE_DETAILS,
-                raceDetails,
-              },
-            ];
-          }),
+          tap(raceDetails =>
+            this.notificationsService.handleFileReadyNotification(
+              `${raceDetails.fis_id} ${raceDetails.place} ${raceDetails.hill_size}`
+            )
+          ),
+          switchMap(raceDetails => [
+            {
+              type: RacesAction.ADD_RACE,
+              race: raceDetails,
+            },
+            {
+              type: FoldersAction.ADD_RACE_TO_FOLDER,
+              race: raceDetails,
+            },
+            {
+              type: RaceDetailsAction.ADD_RACE_DETAILS,
+              raceDetails,
+            },
+          ]),
           catchError(() => of({ type: RacesAction.SCRAP_RACE_FAILURE }))
         )
       )

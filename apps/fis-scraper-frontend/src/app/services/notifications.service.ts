@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   NotificationColor,
@@ -11,7 +11,7 @@ import {
 } from '@notifications/store/notifications.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { Subject, take, takeUntil } from 'rxjs';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +29,7 @@ export class NotificationsService {
       icon: NotificationIcon.ERROR,
       color: NotificationColor.ERROR,
       kind: NotificationKind.ERROR,
+      read: false,
     };
     this.store.dispatch(addNotification({ notification }));
     const snackbar = this.snackBar.open(notification.message, 'Close', {
@@ -44,6 +45,7 @@ export class NotificationsService {
       icon: NotificationIcon.SUCCESS,
       color: NotificationColor.SUCCESS,
       kind: NotificationKind.SUCCES,
+      read: false,
     };
     this.store.dispatch(addNotification({ notification }));
     const snackbar = this.snackBar.open(notification.message, 'Close', {

@@ -5,6 +5,7 @@
       <h2 class="app-subtitle">{{ subtitle }}</h2>
     </div>
   </div>
+  <app-notifications></app-notifications>
 </mat-toolbar>
 <mat-sidenav-container
   class="container"
@@ -21,6 +22,5 @@
   </mat-sidenav>
   <mat-sidenav-content [@widenShorten]="menuDisplayState" class="app-content">
     <app-side-rail></app-side-rail>
-    <app-notifications></app-notifications>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,16 +1,27 @@
-<div class="notifications" *ngIf="notifications$ | async as notifications">
+<ng-container *ngIf="notifications$ | async as notifications">
   <button
-    mat-fab
-    *ngIf="notifications.length > 0"
+    mat-icon-button
     [matMenuTriggerFor]="notificationsContainer"
-    [matBadge]="notifications.length > 0 ? notifications.length : null"
+    [matBadge]="
+      notifications.length - read === 0 ? null : notifications.length - read
+    "
+    [matBadgeHidden]="notifications.length - read === 0"
     matBadgePosition="after"
-    matTooltip="Notifications">
-    <mat-icon>notifications</mat-icon>
+    matBadgeColor="warn"
+    matTooltip="Notifications"
+    (click)="markAsRead()">
+    <mat-icon>{{
+      notifications.length ? 'notifications_active' : 'notifications'
+    }}</mat-icon>
   </button>
-  <mat-menu #notificationsContainer xPosition="before" yPosition="above">
-    <app-notification
-      *ngFor="let notification of notifications; trackBy: trackByIndex"
-      [notification]="notification"></app-notification>
+  <mat-menu #notificationsContainer xPosition="before" yPosition="below">
+    <ng-container *ngIf="notifications.length === 0; else notificationList">
+      <p class="no-notifications">Nothing to report.</p>
+    </ng-container>
+    <ng-template #notificationList>
+      <app-notification
+        *ngFor="let notification of notifications; trackBy: trackByIndex"
+        [notification]="notification"></app-notification>
+    </ng-template>
   </mat-menu>
-</div>
+</ng-container>

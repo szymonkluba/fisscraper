@@ -4,6 +4,7 @@ export interface Notification {
   icon: NotificationIcon;
   color: NotificationColor;
   message: string;
+  read: boolean;
 }
 
 export enum NotificationColor {

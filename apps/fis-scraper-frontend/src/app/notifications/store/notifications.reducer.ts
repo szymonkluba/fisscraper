@@ -1,18 +1,46 @@
 import { createReducer, on } from '@ngrx/store';
-import { addNotification, removeNotification } from './notifications.actions';
-import { Notification } from '../../shared/models/notification.model';
+import {
+  addNotification,
+  markAsRead,
+  removeNotification,
+} from './notifications.actions';
+import { Notification } from '@shared/models/notification.model';
 
-export const initialState: ReadonlyArray<Notification> = [];
+export interface NotificationsState {
+  notifications: ReadonlyArray<Notification>;
+}
+export const initialState: NotificationsState = {
+  notifications: [],
+};
 
 export const notificationsReducer = createReducer(
   initialState,
   on(addNotification, (state, { notification }) => {
-    if (state.findIndex(element => element.id === notification.id) > -1) {
-      return state;
+    if (
+      state.notifications.findIndex(
+        notificationInState => notificationInState.id === notification.id
+      ) > -1
+    ) {
+      return {
+        ...state,
+      };
     }
-    return [...state, notification];
+    return {
+      ...state,
+      notifications: [...state.notifications, notification],
+    };
   }),
-  on(removeNotification, (state, { notification }) =>
-    state.filter(element => element.id !== notification.id)
-  )
+  on(removeNotification, (state, { notification }) => ({
+    ...state,
+    notifications: state.notifications.filter(
+      notificationInState => notificationInState.id !== notification.id
+    ),
+  })),
+  on(markAsRead, state => ({
+    ...state,
+    notifications: state.notifications.map(notification => ({
+      ...notification,
+      read: true,
+    })),
+  }))
 );
