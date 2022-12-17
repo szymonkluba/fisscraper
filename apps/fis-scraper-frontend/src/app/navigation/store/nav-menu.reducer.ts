@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { collapseMenu, expandMenu, navigate } from './nav-menu.actions';
 import { Destination } from 'apps/fis-scraper-frontend/src/app/shared/models/routes.model';
+
+import * as navMenuActions from './nav-menu.actions';
 
 export enum MenuDisplayState {
   COLLAPSED = 'collapsed',
@@ -10,22 +11,35 @@ export enum MenuDisplayState {
 export interface NavMenuState {
   displayState: MenuDisplayState;
   activeLink: Destination;
+  expandedGroup: Destination;
 }
 
 const initialState: NavMenuState = {
   displayState: MenuDisplayState.EXPANDED,
   activeLink: Destination.SCRAPER,
+  expandedGroup: Destination.EMPTY,
 };
 
 export const navMenuReducer = createReducer(
   initialState,
-  on(collapseMenu, state => ({
+  on(navMenuActions.collapseGroup, state => ({
+    ...state,
+    expandedGroup: Destination.EMPTY,
+  })),
+  on(navMenuActions.expandGroup, (state, { expandedGroup }) => ({
+    ...state,
+    expandedGroup,
+  })),
+  on(navMenuActions.collapseMenu, state => ({
     ...state,
     displayState: MenuDisplayState.COLLAPSED,
   })),
-  on(expandMenu, state => ({
+  on(navMenuActions.expandMenu, state => ({
     ...state,
     displayState: MenuDisplayState.EXPANDED,
   })),
-  on(navigate, (state, { activeLink }) => ({ ...state, activeLink }))
+  on(navMenuActions.navigate, (state, { activeLink }) => ({
+    ...state,
+    activeLink,
+  }))
 );

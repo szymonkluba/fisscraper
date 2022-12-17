@@ -5,6 +5,7 @@ export interface RouteInterface {
   action?: () => void;
   icon?: string;
   link: Destination;
+  children?: RouteInterface[];
 }
 
 export enum Destination {

@@ -12,3 +12,8 @@ export const selectActiveLink = createSelector(
   selectNavMenu,
   (state: NavMenuState) => state.activeLink
 );
+
+export const selectExpandedGroup = createSelector(
+  selectNavMenu,
+  ({ expandedGroup }) => expandedGroup
+);

@@ -1,16 +1,59 @@
 <ng-container *ngIf="menuDisplayState$ | async as menuDisplayState">
   <mat-nav-list>
-    <a
-      *ngFor="let link of navLinks; trackBy: trackByIndex"
-      mat-list-item
-      [matTooltip]="link.label || ''"
-      [routerLink]="link.routerPath"
-      [activated]="(activeLink$ | async) === link.link"
-      [class.link-active]="(activeLink$ | async) === link.link"
-      (click)="link.action && link.action()">
-      <mat-icon matListItemIcon [svgIcon]="link.icon!"></mat-icon>
-      <span [@showHide]="menuDisplayState" class="label">{{ link.label }}</span>
-    </a>
+    <ng-container *ngFor="let link of navLinks; trackBy: trackByIndex">
+      <ng-container *ngIf="link.children; else regularLink">
+        <mat-expansion-panel
+          class="mat-elevation-z0"
+          hideToggle
+          [expanded]="(expandedGroup$ | async) === link.link"
+          (afterExpand)="expandGroup(link.link)"
+          (afterCollapse)="collapseGroup()">
+          <mat-expansion-panel-header
+            [class.link-active]="(activeLink$ | async) === link.link"
+            [routerLink]="link.routerPath"
+            [matTooltip]="link.label || ''"
+            (click)="link.action && link.action()">
+            <mat-panel-title>
+              <mat-icon [svgIcon]="link.icon!"> </mat-icon>
+              <span [@showHide]="menuDisplayState" class="label">{{
+                link.label
+              }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <mat-nav-list>
+              <a
+                *ngFor="let child of link.children; trackBy: trackByIndex"
+                mat-list-item
+                [matTooltip]="child.label || ''"
+                [routerLink]="child.routerPath"
+                [activated]="(activeLink$ | async) === child.link"
+                [class.link-active]="(activeLink$ | async) === child.link"
+                (click)="child.action && child.action()">
+                <mat-icon matListItemIcon [svgIcon]="child.icon!"></mat-icon>
+                <span [@showHide]="menuDisplayState" class="label">{{
+                  child.label
+                }}</span>
+              </a>
+            </mat-nav-list>
+          </ng-template>
+        </mat-expansion-panel>
+      </ng-container>
+      <ng-template #regularLink>
+        <a
+          mat-list-item
+          [matTooltip]="link.label || ''"
+          [routerLink]="link.routerPath"
+          [activated]="(activeLink$ | async) === link.link"
+          [class.link-active]="(activeLink$ | async) === link.link"
+          (click)="link.action && link.action()">
+          <mat-icon matListItemIcon [svgIcon]="link.icon!"></mat-icon>
+          <span [@showHide]="menuDisplayState" class="label">{{
+            link.label
+          }}</span>
+        </a>
+      </ng-template>
+    </ng-container>
   </mat-nav-list>
 
   <button

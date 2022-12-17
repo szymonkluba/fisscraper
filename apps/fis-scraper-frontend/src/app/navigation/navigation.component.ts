@@ -18,19 +18,16 @@ import { MenuDisplayState } from './store/nav-menu.reducer';
 import { Observable } from 'rxjs';
 import { SideRailPortal } from '@shared/models/portal.model';
 import { Store } from '@ngrx/store';
-import { collapseMenu, expandMenu, navigate } from './store/nav-menu.actions';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 import {
   Destination,
   RouteInterface,
   routerPaths,
 } from '@shared/models/routes.model';
-import {
-  selectActiveLink,
-  selectNavMenuState,
-} from './store/nav-menu.selectors';
 
 import * as sideRailActions from '@shared/siderail/store/side-rail.actions';
+import * as navMenuSelectors from './store/nav-menu.selectors';
+import * as navMenuActions from './store/nav-menu.actions';
 
 @Component({
   selector: 'app-navigation',
@@ -46,29 +43,24 @@ import * as sideRailActions from '@shared/siderail/store/side-rail.actions';
   ],
 })
 export class NavigationComponent implements OnInit {
-  readonly menuDisplayState$: Observable<MenuDisplayState> =
-    this.store.select(selectNavMenuState);
+  readonly menuDisplayState$: Observable<MenuDisplayState> = this.store.select(
+    navMenuSelectors.selectNavMenuState
+  );
 
-  readonly activeLink$: Observable<Destination> =
-    this.store.select(selectActiveLink);
-  readonly navLinks: RouteInterface[] = [
-    {
-      ...routerPaths[Destination.SCRAPER],
-      action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.SCRAPER }));
-        this.store.dispatch(sideRailActions.openSideRail());
-        this.store.dispatch(
-          sideRailActions.changeSideRailContent({
-            portal: SideRailPortal.SINGLE_RACE_PORTAL,
-          })
-        );
-      },
-      icon: 'scraper',
-    },
+  readonly activeLink$: Observable<Destination> = this.store.select(
+    navMenuSelectors.selectActiveLink
+  );
+
+  readonly expandedGroup$: Observable<Destination> = this.store.select(
+    navMenuSelectors.selectExpandedGroup
+  );
+  readonly scraperNavLinks: RouteInterface[] = [
     {
       ...routerPaths[Destination.SINGLE_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.SINGLE_RACE }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.SINGLE_RACE })
+        );
         this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
           sideRailActions.changeSideRailContent({
@@ -81,7 +73,9 @@ export class NavigationComponent implements OnInit {
     {
       ...routerPaths[Destination.MULTI_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.MULTI_RACE }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.MULTI_RACE })
+        );
         this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
           sideRailActions.changeSideRailContent({
@@ -94,7 +88,9 @@ export class NavigationComponent implements OnInit {
     {
       ...routerPaths[Destination.RANGE_RACE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.RANGE_RACE }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.RANGE_RACE })
+        );
         this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
           sideRailActions.changeSideRailContent({
@@ -107,7 +103,9 @@ export class NavigationComponent implements OnInit {
     {
       ...routerPaths[Destination.RAW_DATA],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.RAW_DATA }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.RAW_DATA })
+        );
         this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
           sideRailActions.changeSideRailContent({
@@ -120,7 +118,9 @@ export class NavigationComponent implements OnInit {
     {
       ...routerPaths[Destination.SCRAP_TABLE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.SCRAP_TABLE }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.SCRAP_TABLE })
+        );
         this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
           sideRailActions.changeSideRailContent({
@@ -130,10 +130,30 @@ export class NavigationComponent implements OnInit {
       },
       icon: 'table',
     },
+  ];
+  readonly navLinks: RouteInterface[] = [
+    {
+      ...routerPaths[Destination.SCRAPER],
+      action: () => {
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.SCRAPER })
+        );
+        this.store.dispatch(sideRailActions.openSideRail());
+        this.store.dispatch(
+          sideRailActions.changeSideRailContent({
+            portal: SideRailPortal.SINGLE_RACE_PORTAL,
+          })
+        );
+      },
+      icon: 'scraper',
+      children: this.scraperNavLinks,
+    },
     {
       ...routerPaths[Destination.ARCHIVE],
       action: () => {
-        this.store.dispatch(navigate({ activeLink: Destination.ARCHIVE }));
+        this.store.dispatch(
+          navMenuActions.navigate({ activeLink: Destination.ARCHIVE })
+        );
         this.store.dispatch(sideRailActions.closeSideRail());
       },
       icon: 'archive',
@@ -141,6 +161,7 @@ export class NavigationComponent implements OnInit {
   ];
   trackByIndex = trackByIndex;
   MenuDisplayStates = MenuDisplayState;
+
   constructor(
     private readonly changeDetector: ChangeDetectorRef,
     private readonly store: Store,
@@ -149,13 +170,21 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   collapseMenu() {
-    this.store.dispatch(collapseMenu());
+    this.store.dispatch(navMenuActions.collapseMenu());
     this.changeDetector.detectChanges();
   }
 
   expandMenu() {
-    this.store.dispatch(expandMenu());
+    this.store.dispatch(navMenuActions.expandMenu());
     this.changeDetector.detectChanges();
+  }
+
+  collapseGroup() {
+    this.store.dispatch(navMenuActions.collapseGroup());
+  }
+
+  expandGroup(expandedGroup: Destination) {
+    this.store.dispatch(navMenuActions.expandGroup({ expandedGroup }));
   }
 
   ngOnInit(): void {
