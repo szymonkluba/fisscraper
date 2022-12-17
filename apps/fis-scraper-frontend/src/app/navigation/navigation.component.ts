@@ -4,27 +4,8 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import {
-  Destination,
-  RouteInterface,
-  routerPaths,
-} from '@shared/models/routes.model';
-import {
-  changeSideRailContent,
-  closeSideRail,
-  openSideRail,
-} from '@shared/siderail/store/siderail.actions';
-import { SideRailPortal } from '@shared/models/portal.model';
-import { Store } from '@ngrx/store';
-import { trackByIndex } from '@shared/utils/track-by/track-by';
-import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import {
-  selectActiveLink,
-  selectNavMenuState,
-} from './store/nav-menu.selectors';
-import { collapseMenu, expandMenu, navigate } from './store/nav-menu.actions';
+import { MatIconRegistry } from '@angular/material/icon';
 import {
   animate,
   state,
@@ -32,7 +13,24 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+
 import { MenuDisplayState } from './store/nav-menu.reducer';
+import { Observable } from 'rxjs';
+import { SideRailPortal } from '@shared/models/portal.model';
+import { Store } from '@ngrx/store';
+import { collapseMenu, expandMenu, navigate } from './store/nav-menu.actions';
+import { trackByIndex } from '@shared/utils/track-by/track-by';
+import {
+  Destination,
+  RouteInterface,
+  routerPaths,
+} from '@shared/models/routes.model';
+import {
+  selectActiveLink,
+  selectNavMenuState,
+} from './store/nav-menu.selectors';
+
+import * as sideRailActions from '@shared/siderail/store/side-rail.actions';
 
 @Component({
   selector: 'app-navigation',
@@ -58,9 +56,11 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.SCRAPER],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.SCRAPER }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: SideRailPortal.SINGLE_RACE_PORTAL })
+          sideRailActions.changeSideRailContent({
+            portal: SideRailPortal.SINGLE_RACE_PORTAL,
+          })
         );
       },
       icon: 'scraper',
@@ -69,9 +69,11 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.SINGLE_RACE],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.SINGLE_RACE }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: SideRailPortal.SINGLE_RACE_PORTAL })
+          sideRailActions.changeSideRailContent({
+            portal: SideRailPortal.SINGLE_RACE_PORTAL,
+          })
         );
       },
       icon: 'single_race',
@@ -80,9 +82,9 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.MULTI_RACE],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.MULTI_RACE }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({
+          sideRailActions.changeSideRailContent({
             portal: SideRailPortal.MULTIPLE_RACES_PORTAL,
           })
         );
@@ -93,9 +95,9 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.RANGE_RACE],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.RANGE_RACE }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({
+          sideRailActions.changeSideRailContent({
             portal: SideRailPortal.RANGE_OF_RACES_PORTAL,
           })
         );
@@ -106,9 +108,11 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.RAW_DATA],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.RAW_DATA }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: SideRailPortal.RAW_DATA_PORTAL })
+          sideRailActions.changeSideRailContent({
+            portal: SideRailPortal.RAW_DATA_PORTAL,
+          })
         );
       },
       icon: 'raw_data',
@@ -117,9 +121,11 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.SCRAP_TABLE],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.SCRAP_TABLE }));
-        this.store.dispatch(openSideRail());
+        this.store.dispatch(sideRailActions.openSideRail());
         this.store.dispatch(
-          changeSideRailContent({ portal: SideRailPortal.SCRAP_TABLE_PORTAL })
+          sideRailActions.changeSideRailContent({
+            portal: SideRailPortal.SCRAP_TABLE_PORTAL,
+          })
         );
       },
       icon: 'table',
@@ -128,7 +134,7 @@ export class NavigationComponent implements OnInit {
       ...routerPaths[Destination.ARCHIVE],
       action: () => {
         this.store.dispatch(navigate({ activeLink: Destination.ARCHIVE }));
-        this.store.dispatch(closeSideRail());
+        this.store.dispatch(sideRailActions.closeSideRail());
       },
       icon: 'archive',
     },

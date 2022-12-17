@@ -1,7 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ComponentPortal } from '@angular/cdk/portal';
+
+import {
+  SideRailPortalComponents,
+  SideRailService,
+} from '@services/side-rail.service';
 import { Store } from '@ngrx/store';
-import { selectSideRailState } from '@shared/siderail/store/siderail.selectors';
-import { closeSideRail } from '@shared/siderail/store/siderail.actions';
+import { map, Observable } from 'rxjs';
+
+import * as sideRailSelectors from './store/side-rail.selectors';
+import * as sideRailActions from './store/side-rail.actions';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,11 +18,21 @@ import { closeSideRail } from '@shared/siderail/store/siderail.actions';
   styleUrls: ['./side-rail.component.scss'],
 })
 export class SideRailComponent {
-  sideRailState$ = this.store.select(selectSideRailState);
+  readonly portal$: Observable<ComponentPortal<SideRailPortalComponents>> =
+    this.store
+      .select(sideRailSelectors.selectPortal)
+      .pipe(map(portal => this.sideRailService.getPortal(portal)));
 
-  constructor(private readonly store: Store) {}
+  readonly opened$: Observable<boolean> = this.store.select(
+    sideRailSelectors.selectOpened
+  );
+
+  constructor(
+    private readonly store: Store,
+    private readonly sideRailService: SideRailService
+  ) {}
 
   close() {
-    this.store.dispatch(closeSideRail());
+    this.store.dispatch(sideRailActions.closeSideRail());
   }
 }

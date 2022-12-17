@@ -3,7 +3,7 @@ import {
   changeSideRailContent,
   closeSideRail,
   openSideRail,
-} from './siderail.actions';
+} from './side-rail.actions';
 import { SideRailPortal } from '@shared/models/portal.model';
 
 export interface SideRailState {

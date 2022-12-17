@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SiderailService } from './siderail.service';
+import { SideRailService } from './side-rail.service';
 
 describe('SiderailService', () => {
-  let service: SiderailService;
+  let service: SideRailService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SiderailService);
+    service = TestBed.inject(SideRailService);
   });
 
   it('should be created', () => {
