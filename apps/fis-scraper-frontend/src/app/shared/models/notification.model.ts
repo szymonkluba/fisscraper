@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export interface Notification {
   id: string;
   kind: NotificationKind;
@@ -22,5 +24,5 @@ export enum NotificationIcon {
 export enum NotificationKind {
   ERROR = 'Error!',
   INFO = 'Info',
-  SUCCES = 'Success!',
+  SUCCESS = 'Success!',
 }

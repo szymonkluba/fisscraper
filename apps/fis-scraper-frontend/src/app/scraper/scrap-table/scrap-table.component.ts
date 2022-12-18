@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { ScraperService } from '../../services/scraper.service';
+import { ScraperService } from '@services/scraper.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ScrapTableDialogComponent } from './scrap-table-dialog.component';
 

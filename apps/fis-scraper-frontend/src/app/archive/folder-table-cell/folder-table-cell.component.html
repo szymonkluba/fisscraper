@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="key">
   <ng-container *ngSwitchCase="'tournament'">
-    {{ item.tournament.name }}
+    {{ item[key].name }}
   </ng-container>
   <ng-container *ngSwitchCase="'date'">
     {{ item.date | date }}

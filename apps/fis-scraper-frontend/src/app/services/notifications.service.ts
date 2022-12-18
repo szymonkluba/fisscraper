@@ -44,7 +44,7 @@ export class NotificationsService {
       message: `${fileName} is ready`,
       icon: NotificationIcon.SUCCESS,
       color: NotificationColor.SUCCESS,
-      kind: NotificationKind.SUCCES,
+      kind: NotificationKind.SUCCESS,
       read: false,
     };
     this.store.dispatch(addNotification({ notification }));

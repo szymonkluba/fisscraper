@@ -1,6 +1,7 @@
 <ng-container *ngIf="files$ | async as files">
   <div class="current-files__header">
     <h2>Current files:</h2>
+    <!--suppress TypeScriptValidateTypes -->
     <button
       *ngIf="files.length > 1 && races.selectedOptions.selected.length > 0"
       mat-button

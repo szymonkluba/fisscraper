@@ -4,7 +4,7 @@ import { CurrentFilesComponent } from './current-files.component';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { RaceDetails } from '@shared/models/race.model';
-import { ScraperService } from '../../services/scraper.service';
+import { ScraperService } from '@services/scraper.service';
 
 class ScraperServiceMock {}
 

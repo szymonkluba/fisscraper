@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--suppress CssMissingSemicolon, CssMissingSemicolon -->
 <svg
    width="171.265"
    height="171.265"
@@ -12,6 +13,7 @@
      data-name="Path 105"
      d="m 144.38658,17.276288 a 6.1292098,6.1123407 0 1 0 8.6667,0 6.1292098,6.1123407 0 0 0 -8.6667,0 z"
      style="display:inline;stroke:currentColor;stroke-width:1.5;stroke-dasharray:none;stroke-opacity:1" />
+  <!--suppress SpellCheckingInspection -->
   <path
      id="Path_106"
      data-name="Path 106"

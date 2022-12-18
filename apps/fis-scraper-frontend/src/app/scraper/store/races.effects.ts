@@ -13,6 +13,7 @@ import { range } from '@shared/utils/range/range';
 
 import * as racesActions from './races.actions';
 
+// noinspection JSUnusedGlobalSymbols
 @Injectable({ providedIn: 'any' })
 export class RacesEffects {
   scrapRace$ = createEffect(() =>
