@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { ScraperService } from '@services/scraper.service';
 import { Router } from '@angular/router';
 import { selectNavMenuState } from './navigation/store/nav-menu.selectors';
@@ -18,6 +19,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { MenuDisplayState } from './navigation/store/nav-menu.reducer';
+import { selectUrl } from '@store/routing/routing.selectors';
 
 const MENU_ANIMATION = [
   state(
@@ -65,7 +67,7 @@ const APP_CONTENT_ANIMATION = [
     trigger('widenShorten', APP_CONTENT_ANIMATION),
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   readonly title = 'FIS Scraper';
@@ -79,4 +81,11 @@ export class AppComponent {
     private readonly scraperService: ScraperService,
     private readonly store: Store
   ) {}
+
+  ngOnInit() {
+    this.store
+      .select(selectUrl)
+      .pipe(take(1))
+      .subscribe(url => this.router.navigate([url]));
+  }
 }

@@ -3,5 +3,6 @@ export enum Feature {
   NOTIFICATIONS = 'notifications',
   RACES = 'races',
   RACE_DETAILS = 'raceDetails',
+  ROUTER = 'router',
   SIDE_RAIL = 'sideRail',
 }

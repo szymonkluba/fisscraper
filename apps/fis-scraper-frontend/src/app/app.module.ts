@@ -20,19 +20,39 @@ import { httpErrorProvider } from '@shared/providers/http-error.provider';
 import { isDevMode, NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Feature } from '@constants/store_constants';
+import {
+  NavigationActionTiming,
+  routerReducer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
+import { RoutingSerializer } from '@store/routing/routing.serializer';
+import {
+  ROUTING_CONFIG_TOKEN,
+  ROUTING_LOCAL_STORAGE_KEY,
+  ROUTING_STORAGE_KEYS,
+} from '@store/routing/routing.tokens';
+import { LocalStorageService } from '@services/local-storage.service';
+import { localStorageMetaReducerFactory } from '@store/localstorage.metareducer';
 
 const MATERIAL_MODULES = [MatSidenavModule, MatToolbarModule];
 
 const STORE_MODULES = [
   EffectsModule.forRoot([RacesEffects]),
+  StoreModule.forFeature(Feature.ROUTER, routerReducer, ROUTING_CONFIG_TOKEN),
+  StoreModule.forRoot(),
+  StoreRouterConnectingModule.forRoot({
+    stateKey: Feature.ROUTER,
+    serializer: RoutingSerializer,
+    navigationActionTiming: NavigationActionTiming.PostActivation,
+  }),
   StoreDevtoolsModule.instrument({
     maxAge: 25,
-    logOnly: !isDevMode(),
+    logOnly: false,
     autoPause: true,
     trace: true,
     traceLimit: 75,
   }),
-  StoreModule.forRoot(),
 ];
 
 const APP_MODULES = [
@@ -67,6 +87,23 @@ const APP_MODULES = [
         touchendHideDelay: 200,
         position: 'after',
       },
+    },
+    {
+      provide: ROUTING_LOCAL_STORAGE_KEY,
+      useValue: '__fis_scraper_routing__',
+    },
+    {
+      provide: ROUTING_STORAGE_KEYS,
+      useValue: ['state'],
+    },
+    {
+      provide: ROUTING_CONFIG_TOKEN,
+      deps: [
+        ROUTING_STORAGE_KEYS,
+        ROUTING_LOCAL_STORAGE_KEY,
+        LocalStorageService,
+      ],
+      useFactory: localStorageMetaReducerFactory,
     },
   ],
   bootstrap: [AppComponent],
