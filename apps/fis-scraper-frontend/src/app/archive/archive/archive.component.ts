@@ -25,6 +25,16 @@ import {
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 import { loadFolders } from '@archive/store/folders.actions';
 
+const ARCHIVE_ICONS_NAMESPACE = 'archive';
+
+enum ArchiveIcon {
+  FOLDER = 'folder',
+  MEN = 'men',
+  WOMEN = 'women',
+  TEAM = 'team',
+  OTHER = 'other',
+}
+
 @Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
@@ -53,6 +63,13 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     'download',
     'expand',
   ];
+  readonly icons = {
+    folder: `${ARCHIVE_ICONS_NAMESPACE}:${ArchiveIcon.FOLDER}`,
+    men: `${ARCHIVE_ICONS_NAMESPACE}:${ArchiveIcon.MEN}`,
+    women: `${ARCHIVE_ICONS_NAMESPACE}:${ArchiveIcon.WOMEN}`,
+    team: `${ARCHIVE_ICONS_NAMESPACE}:${ArchiveIcon.TEAM}`,
+    other: `${ARCHIVE_ICONS_NAMESPACE}:${ArchiveIcon.OTHER}`,
+  };
   private readonly subscriptionEndSubject = new Subject();
   private readonly subscriptionEnd$ =
     this.subscriptionEndSubject.asObservable();
@@ -65,25 +82,30 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private readonly scraperService: ScraperService,
     private readonly store: Store
   ) {
-    this.iconRegistry.addSvgIcon(
-      'folder_icon',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/folder.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_ICONS_NAMESPACE,
+      ArchiveIcon.FOLDER,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/folder.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'men',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/men.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_ICONS_NAMESPACE,
+      ArchiveIcon.MEN,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/men.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'women',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/women.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_ICONS_NAMESPACE,
+      ArchiveIcon.WOMEN,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/women.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'team',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/team.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_ICONS_NAMESPACE,
+      ArchiveIcon.TEAM,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/team.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'other',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/other.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_ICONS_NAMESPACE,
+      ArchiveIcon.OTHER,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/other.svg')
     );
   }
 

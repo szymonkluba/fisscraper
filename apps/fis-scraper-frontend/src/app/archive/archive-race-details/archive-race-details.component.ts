@@ -26,6 +26,13 @@ import { Store } from '@ngrx/store';
 import { selectRaceDetails } from '@archive/store/raceDetails.selectors';
 import { trackByIndex } from '@shared/utils/track-by/track-by';
 
+const ARCHIVE_DETAILS_ICONS_NAMESPACE = 'archive-details';
+
+enum ArchiveDetailsIcon {
+  FINISHED = 'finished',
+  DISQUALIFIED = 'disqualified',
+}
+
 @Component({
   selector: 'app-archive-race-details',
   templateUrl: './archive-race-details.component.html',
@@ -51,6 +58,10 @@ export class ArchiveRaceDetailsComponent
 
   readonly countriesColumns = COUNTRY_TABLE_COLUMNS;
   readonly prefixRegex = new RegExp(/[a-z]*-|jump_\d/gm);
+  readonly icons = {
+    finished: `${ARCHIVE_DETAILS_ICONS_NAMESPACE}:${ArchiveDetailsIcon.FINISHED}`,
+    disqualified: `${ARCHIVE_DETAILS_ICONS_NAMESPACE}:${ArchiveDetailsIcon.DISQUALIFIED}`,
+  };
 
   jumpersColumns = JUMPER_TABLE_COLUMNS;
   wideColumns = ['jumper', 'jump1', 'jump2', 'summary'];
@@ -63,13 +74,15 @@ export class ArchiveRaceDetailsComponent
     private readonly sanitizer: DomSanitizer,
     private readonly store: Store
   ) {
-    this.iconRegistry.addSvgIcon(
-      'finished',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/finished.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_DETAILS_ICONS_NAMESPACE,
+      ArchiveDetailsIcon.FINISHED,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/finished.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'disqualified',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/disqualified.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      ARCHIVE_DETAILS_ICONS_NAMESPACE,
+      ArchiveDetailsIcon.DISQUALIFIED,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/disqualified.svg')
     );
   }
 

@@ -12,7 +12,7 @@
   </ng-container>
   <ng-container *ngSwitchCase="'kind'">
     <mat-icon
-      [svgIcon]="item.kind"
+      [svgIcon]="namespace + item.kind"
       [matTooltip]="item.kind | capitalize"></mat-icon>
   </ng-container>
   <ng-container *ngSwitchCase="'download'">

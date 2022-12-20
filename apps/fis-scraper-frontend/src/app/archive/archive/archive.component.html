@@ -9,7 +9,7 @@
     <mat-expansion-panel *ngFor="let folder of folders; trackBy: trackByIndex">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon svgIcon="folder_icon"></mat-icon>
+          <mat-icon [svgIcon]="icons.folder"></mat-icon>
           <span>
             {{ folder.name }}
           </span>

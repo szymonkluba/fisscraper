@@ -10,7 +10,7 @@ import { RaceDetails } from '@shared/models/race.model';
 @Component({
   selector: 'app-folder-table-cell',
   templateUrl: './folder-table-cell.component.html',
-  styleUrls: ['./folder-table-cell.component.css'],
+  styleUrls: ['./folder-table-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FolderTableCellComponent {
@@ -20,6 +20,8 @@ export class FolderTableCellComponent {
 
   @Output() readonly downloadRaceEvent = new EventEmitter<RaceDetails>();
   @Output() readonly expandEvent = new EventEmitter<RaceDetails | null>();
+
+  readonly namespace = 'archive:';
 
   constructor() {}
 

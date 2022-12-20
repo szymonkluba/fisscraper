@@ -55,13 +55,15 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
     private readonly scraperService: ScraperService,
     private readonly store: Store
   ) {
-    iconRegistry.addSvgIcon(
+    iconRegistry.addSvgIconInNamespace(
+      'fis-scraper',
       'csv_file',
-      sanitizer.bypassSecurityTrustResourceUrl('./assets/csv.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('assets/csv.svg')
     );
-    iconRegistry.addSvgIcon(
+    iconRegistry.addSvgIconInNamespace(
+      'fis-scraper',
       'zip_file',
-      sanitizer.bypassSecurityTrustResourceUrl('./assets/zip.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('assets/zip.svg')
     );
   }
 

@@ -28,6 +28,18 @@ import * as sideRailActions from '@shared/siderail/store/side-rail.actions';
 import * as navMenuSelectors from './store/nav-menu.selectors';
 import * as navMenuActions from './store/nav-menu.actions';
 
+enum NavigationIcon {
+  SCRAPER = 'scraper',
+  ARCHIVE = 'archive',
+  SINGLE_RACE = 'single_race',
+  MULTI_RACE = 'multi_race',
+  RANGE_RACE = 'range_race',
+  RAW_DATA = 'raw_data',
+  SCRAP_TABLE = 'scrap_table',
+}
+
+const NAVIGATION_ICONS_NAMESPACE = 'navigation';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -67,7 +79,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'single_race',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.SINGLE_RACE}`,
     },
     {
       ...routerPaths[Destination.MULTI_RACE],
@@ -82,7 +94,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'multi_race',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.MULTI_RACE}`,
     },
     {
       ...routerPaths[Destination.RANGE_RACE],
@@ -97,7 +109,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'range_race',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.RANGE_RACE}`,
     },
     {
       ...routerPaths[Destination.RAW_DATA],
@@ -112,7 +124,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'raw_data',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.RAW_DATA}`,
     },
     {
       ...routerPaths[Destination.SCRAP_TABLE],
@@ -127,7 +139,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'table',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.SCRAP_TABLE}`,
     },
   ];
   readonly navLinks: RouteInterface[] = [
@@ -144,7 +156,7 @@ export class NavigationComponent {
           })
         );
       },
-      icon: 'scraper',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.SCRAPER}`,
       children: this.scraperNavLinks,
     },
     {
@@ -155,7 +167,7 @@ export class NavigationComponent {
         );
         this.store.dispatch(sideRailActions.closeSideRail());
       },
-      icon: 'archive',
+      icon: `${NAVIGATION_ICONS_NAMESPACE}:${NavigationIcon.ARCHIVE}`,
     },
   ];
   trackByIndex = trackByIndex;
@@ -167,33 +179,40 @@ export class NavigationComponent {
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer
   ) {
-    this.iconRegistry.addSvgIcon(
-      'scraper',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/scraper.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.SCRAPER,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/scraper.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'archive',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/archive.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.ARCHIVE,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/archive.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'single_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/single_race.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.SINGLE_RACE,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/single_race.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'multi_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/multi_race.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.MULTI_RACE,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/multi_race.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'range_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/range_race.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.RANGE_RACE,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/range_race.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'raw_data',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/raw_data.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.RAW_DATA,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/raw_data.svg')
     );
-    this.iconRegistry.addSvgIcon(
-      'table',
-      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/table.svg')
+    this.iconRegistry.addSvgIconInNamespace(
+      NAVIGATION_ICONS_NAMESPACE,
+      NavigationIcon.SCRAP_TABLE,
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/table.svg')
     );
   }
 
