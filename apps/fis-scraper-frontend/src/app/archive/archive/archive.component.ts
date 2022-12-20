@@ -67,23 +67,23 @@ export class ArchiveComponent implements OnInit, OnDestroy {
   ) {
     this.iconRegistry.addSvgIcon(
       'folder_icon',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/folder.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/folder.svg')
     );
     this.iconRegistry.addSvgIcon(
       'men',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/men.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/men.svg')
     );
     this.iconRegistry.addSvgIcon(
       'women',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/women.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/women.svg')
     );
     this.iconRegistry.addSvgIcon(
       'team',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/team.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/team.svg')
     );
     this.iconRegistry.addSvgIcon(
       'other',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/other.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('./assets/other.svg')
     );
   }
 
