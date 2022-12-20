@@ -12,11 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { sideRailReducer } from '@shared/siderail/store/side-rail.reducer';
 import { LocalStorageService } from '@services/local-storage.service';
 import { localStorageMetaReducerFactory } from '@store/localstorage.metareducer';
-import {
-  SIDE_RAIL_CONFIG_TOKEN,
-  SIDE_RAIL_LOCAL_STORAGE_KEY,
-  SIDE_RAIL_STORAGE_KEYS,
-} from '@shared/siderail/side-rail.tokens';
+import * as sideRailTokens from '@shared/siderail/side-rail.tokens';
 
 const MATERIAL_MODULES = [MatButtonModule, MatIconModule, MatSidenavModule];
 
@@ -24,7 +20,7 @@ const STORE_MODULES = [
   StoreModule.forFeature(
     Feature.SIDE_RAIL,
     sideRailReducer,
-    SIDE_RAIL_CONFIG_TOKEN
+    sideRailTokens.SIDE_RAIL_CONFIG_TOKEN
   ),
 ];
 
@@ -40,18 +36,18 @@ const STORE_MODULES = [
   exports: [SideRailComponent],
   providers: [
     {
-      provide: SIDE_RAIL_LOCAL_STORAGE_KEY,
+      provide: sideRailTokens.SIDE_RAIL_LOCAL_STORAGE_KEY,
       useValue: '__fis_scraper_side_rail__',
     },
     {
-      provide: SIDE_RAIL_STORAGE_KEYS,
+      provide: sideRailTokens.SIDE_RAIL_STORAGE_KEYS,
       useValue: ['opened', 'portal'],
     },
     {
-      provide: SIDE_RAIL_CONFIG_TOKEN,
+      provide: sideRailTokens.SIDE_RAIL_CONFIG_TOKEN,
       deps: [
-        SIDE_RAIL_STORAGE_KEYS,
-        SIDE_RAIL_LOCAL_STORAGE_KEY,
+        sideRailTokens.SIDE_RAIL_STORAGE_KEYS,
+        sideRailTokens.SIDE_RAIL_LOCAL_STORAGE_KEY,
         LocalStorageService,
       ],
       useFactory: localStorageMetaReducerFactory,

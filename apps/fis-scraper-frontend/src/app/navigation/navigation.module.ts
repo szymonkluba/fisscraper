@@ -2,11 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './navigation.component';
 import { RouterModule } from '@angular/router';
-import {
-  NAVIGATION_CONFIG_TOKEN,
-  NAVIGATION_LOCAL_STORAGE_KEY,
-  NAVIGATION_STORAGE_KEYS,
-} from './navigation.tokens';
 import { LocalStorageService } from '@services/local-storage.service';
 import { localStorageMetaReducerFactory } from '@store/localstorage.metareducer';
 import { StoreModule } from '@ngrx/store';
@@ -16,6 +11,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+
+import * as navigationTokens from './navigation.tokens';
 
 const MATERIAL_MODULES = [
   MatExpansionModule,
@@ -26,27 +24,37 @@ const MATERIAL_MODULES = [
 ];
 
 const STORE_MODULES = [
-  StoreModule.forFeature('navMenu', navMenuReducer, NAVIGATION_CONFIG_TOKEN),
+  StoreModule.forFeature(
+    'navMenu',
+    navMenuReducer,
+    navigationTokens.NAVIGATION_CONFIG_TOKEN
+  ),
 ];
 
 @NgModule({
   declarations: [NavigationComponent],
-  imports: [CommonModule, MATERIAL_MODULES, RouterModule, STORE_MODULES],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    MATERIAL_MODULES,
+    RouterModule,
+    STORE_MODULES,
+  ],
   exports: [NavigationComponent],
   providers: [
     {
-      provide: NAVIGATION_LOCAL_STORAGE_KEY,
+      provide: navigationTokens.NAVIGATION_LOCAL_STORAGE_KEY,
       useValue: '__fis_scraper_navigation__',
     },
     {
-      provide: NAVIGATION_STORAGE_KEYS,
+      provide: navigationTokens.NAVIGATION_STORAGE_KEYS,
       useValue: ['displayState', 'activeLink', 'expandedGroup'],
     },
     {
-      provide: NAVIGATION_CONFIG_TOKEN,
+      provide: navigationTokens.NAVIGATION_CONFIG_TOKEN,
       deps: [
-        NAVIGATION_STORAGE_KEYS,
-        NAVIGATION_LOCAL_STORAGE_KEY,
+        navigationTokens.NAVIGATION_STORAGE_KEYS,
+        navigationTokens.NAVIGATION_LOCAL_STORAGE_KEY,
         LocalStorageService,
       ],
       useFactory: localStorageMetaReducerFactory,

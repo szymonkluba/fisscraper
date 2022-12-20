@@ -4,7 +4,7 @@ export type Saver = (blob: Blob, filename?: string) => void;
 
 export const SAVER = new InjectionToken<Saver>('saver');
 
-export function getSaver(): Saver {
+export function saverFactory(): Saver {
   return saveAs;
 }
 

@@ -15,7 +15,7 @@ import { SideRailModule } from '@shared/siderail/side-rail.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { csrfTokenProvider } from '@shared/providers/csrf-token.provider';
-import { getSaver, SAVER } from '@shared/providers/saver.provider';
+import { saverFactory, SAVER } from '@shared/providers/saver.provider';
 import { httpErrorProvider } from '@shared/providers/http-error.provider';
 import { isDevMode, NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,19 +27,20 @@ import {
   StoreRouterConnectingModule,
 } from '@ngrx/router-store';
 import { RoutingSerializer } from '@store/routing/routing.serializer';
-import {
-  ROUTING_CONFIG_TOKEN,
-  ROUTING_LOCAL_STORAGE_KEY,
-  ROUTING_STORAGE_KEYS,
-} from '@store/routing/routing.tokens';
 import { LocalStorageService } from '@services/local-storage.service';
 import { localStorageMetaReducerFactory } from '@store/localstorage.metareducer';
+
+import * as routingTokens from '@store/routing/routing.tokens';
 
 const MATERIAL_MODULES = [MatSidenavModule, MatToolbarModule];
 
 const STORE_MODULES = [
   EffectsModule.forRoot([RacesEffects]),
-  StoreModule.forFeature(Feature.ROUTER, routerReducer, ROUTING_CONFIG_TOKEN),
+  StoreModule.forFeature(
+    Feature.ROUTER,
+    routerReducer,
+    routingTokens.ROUTING_CONFIG_TOKEN
+  ),
   StoreModule.forRoot(),
   StoreRouterConnectingModule.forRoot({
     stateKey: Feature.ROUTER,
@@ -48,7 +49,7 @@ const STORE_MODULES = [
   }),
   StoreDevtoolsModule.instrument({
     maxAge: 25,
-    logOnly: false,
+    logOnly: !isDevMode(),
     autoPause: true,
     trace: true,
     traceLimit: 75,
@@ -78,7 +79,7 @@ const APP_MODULES = [
   providers: [
     csrfTokenProvider,
     httpErrorProvider,
-    { provide: SAVER, useFactory: getSaver },
+    { provide: SAVER, useFactory: saverFactory },
     {
       provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
       useValue: {
@@ -89,18 +90,18 @@ const APP_MODULES = [
       },
     },
     {
-      provide: ROUTING_LOCAL_STORAGE_KEY,
+      provide: routingTokens.ROUTING_LOCAL_STORAGE_KEY,
       useValue: '__fis_scraper_routing__',
     },
     {
-      provide: ROUTING_STORAGE_KEYS,
+      provide: routingTokens.ROUTING_STORAGE_KEYS,
       useValue: ['state'],
     },
     {
-      provide: ROUTING_CONFIG_TOKEN,
+      provide: routingTokens.ROUTING_CONFIG_TOKEN,
       deps: [
-        ROUTING_STORAGE_KEYS,
-        ROUTING_LOCAL_STORAGE_KEY,
+        routingTokens.ROUTING_STORAGE_KEYS,
+        routingTokens.ROUTING_LOCAL_STORAGE_KEY,
         LocalStorageService,
       ],
       useFactory: localStorageMetaReducerFactory,

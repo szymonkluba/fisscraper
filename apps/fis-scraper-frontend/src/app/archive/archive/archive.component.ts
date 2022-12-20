@@ -64,16 +64,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
     private readonly sanitizer: DomSanitizer,
     private readonly scraperService: ScraperService,
     private readonly store: Store
-  ) {}
-
-  readonly folders$: Observable<ReadonlyArray<Folder>> =
-    this.store.select(selectFolders);
-  readonly foldersLoadStatus$: Observable<boolean> = this.store.select(
-    selectFoldersLoadStatus
-  );
-  trackByIndex = trackByIndex;
-
-  ngOnInit(): void {
+  ) {
     this.iconRegistry.addSvgIcon(
       'folder_icon',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/folder.svg')
@@ -94,6 +85,16 @@ export class ArchiveComponent implements OnInit, OnDestroy {
       'other',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/other.svg')
     );
+  }
+
+  readonly folders$: Observable<ReadonlyArray<Folder>> =
+    this.store.select(selectFolders);
+  readonly foldersLoadStatus$: Observable<boolean> = this.store.select(
+    selectFoldersLoadStatus
+  );
+  trackByIndex = trackByIndex;
+
+  ngOnInit(): void {
     this.store.dispatch(loadFolders());
   }
 

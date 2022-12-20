@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -42,7 +41,7 @@ import * as navMenuActions from './store/nav-menu.actions';
     ]),
   ],
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
   readonly menuDisplayState$: Observable<MenuDisplayState> = this.store.select(
     navMenuSelectors.selectNavMenuState
   );
@@ -167,27 +166,7 @@ export class NavigationComponent implements OnInit {
     private readonly store: Store,
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer
-  ) {}
-
-  collapseMenu() {
-    this.store.dispatch(navMenuActions.collapseMenu());
-    this.changeDetector.detectChanges();
-  }
-
-  expandMenu() {
-    this.store.dispatch(navMenuActions.expandMenu());
-    this.changeDetector.detectChanges();
-  }
-
-  collapseGroup() {
-    this.store.dispatch(navMenuActions.collapseGroup());
-  }
-
-  expandGroup(expandedGroup: Destination) {
-    this.store.dispatch(navMenuActions.expandGroup({ expandedGroup }));
-  }
-
-  ngOnInit(): void {
+  ) {
     this.iconRegistry.addSvgIcon(
       'scraper',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/scraper.svg')
@@ -216,5 +195,23 @@ export class NavigationComponent implements OnInit {
       'table',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/table.svg')
     );
+  }
+
+  collapseMenu() {
+    this.store.dispatch(navMenuActions.collapseMenu());
+    this.changeDetector.detectChanges();
+  }
+
+  expandMenu() {
+    this.store.dispatch(navMenuActions.expandMenu());
+    this.changeDetector.detectChanges();
+  }
+
+  collapseGroup() {
+    this.store.dispatch(navMenuActions.collapseGroup());
+  }
+
+  expandGroup(expandedGroup: Destination) {
+    this.store.dispatch(navMenuActions.expandGroup({ expandedGroup }));
   }
 }

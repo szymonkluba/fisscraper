@@ -4,7 +4,6 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -44,7 +43,7 @@ import { trackByIndex } from '@shared/utils/track-by/track-by';
   ],
 })
 export class ArchiveRaceDetailsComponent
-  implements OnChanges, OnInit, AfterViewChecked
+  implements OnChanges, AfterViewChecked
 {
   @ViewChild(MatTable) private readonly table?: MatTable<any>;
 
@@ -63,15 +62,7 @@ export class ArchiveRaceDetailsComponent
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
     private readonly store: Store
-  ) {}
-
-  ngAfterViewChecked(): void {
-    if (this.table) {
-      this.table.updateStickyColumnStyles();
-    }
-  }
-
-  ngOnInit(): void {
+  ) {
     this.iconRegistry.addSvgIcon(
       'finished',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/finished.svg')
@@ -80,6 +71,12 @@ export class ArchiveRaceDetailsComponent
       'disqualified',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/disqualified.svg')
     );
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.table) {
+      this.table.updateStickyColumnStyles();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
