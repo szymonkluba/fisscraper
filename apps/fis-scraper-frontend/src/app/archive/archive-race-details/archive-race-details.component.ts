@@ -65,11 +65,11 @@ export class ArchiveRaceDetailsComponent
   ) {
     this.iconRegistry.addSvgIcon(
       'finished',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/finished.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/finished.svg')
     );
     this.iconRegistry.addSvgIcon(
       'disqualified',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/disqualified.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/disqualified.svg')
     );
   }
 

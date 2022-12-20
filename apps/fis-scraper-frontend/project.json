@@ -12,7 +12,7 @@
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "outputPath": "dist/apps/fis-scraper-frontend",
+        "outputPath": "dist",
         "index": "apps/fis-scraper-frontend/src/index.html",
         "main": "apps/fis-scraper-frontend/src/main.ts",
         "polyfills": "apps/fis-scraper-frontend/src/polyfills.ts",

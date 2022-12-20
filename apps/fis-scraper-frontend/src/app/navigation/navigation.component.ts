@@ -169,31 +169,31 @@ export class NavigationComponent {
   ) {
     this.iconRegistry.addSvgIcon(
       'scraper',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/scraper.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/scraper.svg')
     );
     this.iconRegistry.addSvgIcon(
       'archive',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/archive.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/archive.svg')
     );
     this.iconRegistry.addSvgIcon(
       'single_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/single_race.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/single_race.svg')
     );
     this.iconRegistry.addSvgIcon(
       'multi_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/multi_race.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/multi_race.svg')
     );
     this.iconRegistry.addSvgIcon(
       'range_race',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/range_race.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/range_race.svg')
     );
     this.iconRegistry.addSvgIcon(
       'raw_data',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/raw_data.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/raw_data.svg')
     );
     this.iconRegistry.addSvgIcon(
       'table',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/table.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/table.svg')
     );
   }
 

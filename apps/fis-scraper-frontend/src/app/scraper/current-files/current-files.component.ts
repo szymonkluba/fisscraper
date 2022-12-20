@@ -57,11 +57,11 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
   ) {
     iconRegistry.addSvgIcon(
       'csv_file',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/csv.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/csv.svg')
     );
     iconRegistry.addSvgIcon(
       'zip_file',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/zip.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/zip.svg')
     );
   }
 
