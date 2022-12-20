@@ -10,6 +10,7 @@ import { Feature } from '@constants/store_constants';
 import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
 import { FolderTableCellComponent } from './folder-table-cell/folder-table-cell.component';
 import { FoldersEffects } from '@archive/store/folders.effects';
+import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerModule } from '@shared/loading-spinner/loading-spinner.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -50,6 +51,7 @@ const STORE_MODULES = [
     CapitalizeModule,
     CommonModule,
     FileSpinnerModule,
+    HttpClientModule,
     LoadingSpinnerModule,
     MATERIAL_MODULES,
     NestedValueModule,

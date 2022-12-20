@@ -9,6 +9,7 @@ import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
 import { FoldersEffects } from '@archive/store/folders.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HasErrorModule } from '@shared/utils/has-error/has-error.module';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -72,6 +73,7 @@ const STORE_MODULES = [
     FormsModule,
     FormsModule,
     HasErrorModule,
+    HttpClientModule,
     MATERIAL_MODULES,
     ReactiveFormsModule,
     STORE_MODULES,
