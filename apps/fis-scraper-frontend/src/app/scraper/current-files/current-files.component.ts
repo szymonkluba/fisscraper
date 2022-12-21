@@ -19,6 +19,12 @@ import { trackByUuid } from '@shared/utils/track-by/track-by';
 
 import * as racesSelectors from '../store/races.selectors';
 
+const CURRENT_FILES_ICONS_NAMESPACE = 'current-files';
+enum CurrentFilesIcons {
+  CSV = 'csv_file',
+  ZIP = 'zip_file',
+}
+
 @Component({
   selector: 'app-current-files',
   templateUrl: './current-files.component.html',
@@ -49,6 +55,11 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
   destroy$: Observable<unknown> = this.destroySubject$.asObservable();
   trackByUuid = trackByUuid;
 
+  readonly icons = {
+    csv: `${CURRENT_FILES_ICONS_NAMESPACE}:${CurrentFilesIcons.CSV}`,
+    zip: `${CURRENT_FILES_ICONS_NAMESPACE}:${CurrentFilesIcons.ZIP}`,
+  };
+
   constructor(
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
@@ -56,13 +67,13 @@ export class CurrentFilesComponent implements OnInit, OnDestroy {
     private readonly store: Store
   ) {
     iconRegistry.addSvgIconInNamespace(
-      'fis-scraper',
-      'csv_file',
+      CURRENT_FILES_ICONS_NAMESPACE,
+      CurrentFilesIcons.CSV,
       sanitizer.bypassSecurityTrustResourceUrl('assets/csv.svg')
     );
     iconRegistry.addSvgIconInNamespace(
-      'fis-scraper',
-      'zip_file',
+      CURRENT_FILES_ICONS_NAMESPACE,
+      CurrentFilesIcons.ZIP,
       sanitizer.bypassSecurityTrustResourceUrl('assets/zip.svg')
     );
   }

@@ -29,8 +29,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    console.log(request.url);
+
     return next.handle(request).pipe(
       catchError(err => {
+        console.log(err);
         this.notificationService.handleErrorNotification(err);
         throw err;
       })

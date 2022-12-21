@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { FileSpinnerModule } from '@shared/file-spinner/file-spinner.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { NavigationModule } from './navigation/navigation.module';
 import { NotificationsModule } from '@notifications/notifications.module';
@@ -14,8 +14,7 @@ import { ScraperModule } from '@scraper/scraper.module';
 import { SideRailModule } from '@shared/siderail/side-rail.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { csrfTokenProvider } from '@shared/providers/csrf-token.provider';
-import { saverFactory, SAVER } from '@shared/providers/saver.provider';
+import { SAVER, saverFactory } from '@shared/providers/saver.provider';
 import { httpErrorProvider } from '@shared/providers/http-error.provider';
 import { isDevMode, NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -72,12 +71,15 @@ const APP_MODULES = [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken',
+    }),
     MATERIAL_MODULES,
     NotificationsModule,
     STORE_MODULES,
   ],
   providers: [
-    csrfTokenProvider,
     httpErrorProvider,
     { provide: SAVER, useFactory: saverFactory },
     {

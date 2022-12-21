@@ -40,7 +40,7 @@
           <mat-icon
             matListItemIcon
             [svgIcon]="
-              file.kind === 'team' && !file.details ? 'zip_file' : 'csv_file'
+              file.kind === 'team' && !file.details ? icons.zip : icons.csv
             "></mat-icon>
           <div matListItemTitle>{{ file.place }} {{ file.hill_size }}</div>
           <div matListItemLine>{{ file.date | date: 'medium' }}</div>
